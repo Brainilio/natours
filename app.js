@@ -39,6 +39,42 @@ app.post('/api/v1/tours', (req, res) => {
 
 })
 
+app.get('/api/v1/tours/:id', (req, res) => {
+     console.log(req.params);
+     const id = +req.params.id
+     const tour = tours.find(el => el.id === id)
+
+
+     if (!tour) {
+          return res.status(404).json({
+               status: '404',
+               message: 'Not found, invalid ID'
+          })
+     }
+
+
+     res.status(200).json({
+          status: 'success',
+          tour: tour
+     })
+})
+
+app.patch('/api/v1/tours/:id', (req, res) => {
+     if (+req.params.id > tours.length) {
+          return res.status(404).json({
+               status: 'fail',
+               message: 'invalid ID'
+          })
+     }
+
+     res.status(200).json({
+          status: 'success',
+          data: {
+               tour: 'updated tour'
+          }
+     })
+})
+
 
 const port = 3000;
 app.listen(port, () => {

@@ -20,6 +20,10 @@ Docs:
 
 methods that uses fs module:
 
-#### get '/api/v1/tours' gets all the tours from tours-simple.json
+#### get '/api/v1/tours' gets all the tours
 
-#### post '/api/v1/tours' allows you to post to tours-simple.json
+#### post '/api/v1/tours' allows you to post
+
+#### get 'api/v1/tours/:id' gets specific id using req.params.id
+
+#### patch 'api/v1/tours/:id updates specific field
