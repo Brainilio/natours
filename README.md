@@ -17,6 +17,7 @@ Docs:
 - Add express config for port listening
 - Routing
 - Added basic HTTP requests using filesystem to add to local files in /dev-data
+- basic middlewares
 
 #### get '/api/v1/tours' gets all the tours
 
@@ -25,3 +26,7 @@ Docs:
 #### get 'api/v1/tours/:id' gets specific id using req.params.id
 
 #### patch 'api/v1/tours/:id updates specific field
+
+### /routes/...
+
+- contains routes for endpoints in app.js
