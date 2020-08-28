@@ -4,6 +4,7 @@
   "description": "Learning Node, express & mongodb by developing a web app to order tours",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

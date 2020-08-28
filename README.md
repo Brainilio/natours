@@ -12,6 +12,10 @@ Docs:
 
 - templates and stylesheets
 
+### ./server.js
+
+- Starts the server
+
 ### ./app.js
 
 - Add express config for port listening
@@ -22,10 +26,8 @@ Docs:
 
 - contains routes for endpoints in app.js
 - Added basic HTTP requests using filesystem to add to local files in /dev-data
-- #### get '/api/v1/tours' gets all the tours
+- Http requests uses controllers
 
-#### post '/api/v1/tours' allows you to post
+## /controllers/...
 
-#### get 'api/v1/tours/:id' gets specific id using req.params.id
-
-#### patch 'api/v1/tours/:id updates specific field
+- Controllers to handle requests
