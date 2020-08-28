@@ -18,8 +18,6 @@ Docs:
 - Routing
 - Added basic HTTP requests using filesystem to add to local files in /dev-data
 
-methods that uses fs module:
-
 #### get '/api/v1/tours' gets all the tours
 
 #### post '/api/v1/tours' allows you to post

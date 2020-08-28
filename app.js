@@ -1,24 +1,68 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
+
+
+// -------------- GLOBAL VARIABLES ---------- // 
 const app = express();
-app.use(express.json())
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
 
 
-// ------------------- ROUTING ---------------- // 
 
+// ----------- MIDDLEWARES --------------- // 
+app.use(morgan('dev'))
 
+app.use(express.json())
 
-app.get('/api/v1/tours', (req, res) => {
+// ------------ HTTP METHODS ---------------
+
+const getAllTours = (req, res) => {
+     console.log(req.requestTime)
      res.status(200).json({
           status: 'success',
           data: {
                tours
           }
      })
-})
+}
 
-app.post('/api/v1/tours', (req, res) => {
+const getTour = (req, res) => {
+     const id = +req.params.id
+     const tour = tours.find(el => el.id === id)
+
+
+     if (!tour) {
+          return res.status(404).json({
+               status: '404',
+               message: 'Not found, invalid ID'
+          })
+     }
+
+
+     res.status(200).json({
+          status: 'success',
+          tour: tour
+     })
+
+}
+
+const updateTour = (req, res) => {
+     if (+req.params.id > tours.length) {
+          return res.status(404).json({
+               status: 'fail',
+               message: 'invalid ID'
+          })
+     }
+
+     res.status(200).json({
+          status: 'success',
+          data: {
+               tour: 'updated tour'
+          }
+     })
+}
+
+const createTour = (req, res) => {
      // create id
      const newId = tours[tours.length - 1].id + 1;
      // Merge objects together
@@ -37,29 +81,9 @@ app.post('/api/v1/tours', (req, res) => {
           })
      })
 
-})
+}
 
-app.get('/api/v1/tours/:id', (req, res) => {
-     console.log(req.params);
-     const id = +req.params.id
-     const tour = tours.find(el => el.id === id)
-
-
-     if (!tour) {
-          return res.status(404).json({
-               status: '404',
-               message: 'Not found, invalid ID'
-          })
-     }
-
-
-     res.status(200).json({
-          status: 'success',
-          tour: tour
-     })
-})
-
-app.patch('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
      if (+req.params.id > tours.length) {
           return res.status(404).json({
                status: 'fail',
@@ -67,14 +91,28 @@ app.patch('/api/v1/tours/:id', (req, res) => {
           })
      }
 
-     res.status(200).json({
+     res.status(204).json({
           status: 'success',
-          data: {
-               tour: 'updated tour'
-          }
+          data: null
      })
-})
+}
 
+// ------------------- HTTP ROUTING ---------------- // 
+
+app.route('/api/v1/tours')
+     .get(getAllTours)
+     .post(createTour)
+
+
+
+app.route('/api/v1/tours/:id')
+     .get(getTour)
+     .patch(updateTour)
+     .delete(deleteTour)
+
+
+
+// -------------------- LISTENING TO SERVER -------- // 
 
 const port = 3000;
 app.listen(port, () => {
