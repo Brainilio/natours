@@ -56,7 +56,8 @@ Docs:
 
 #### example using mongoose:
 
-`const mongoose = require('mongoose');
+```
+const mongoose = require('mongoose');
 
 //schema to enforce rules for model
 const tourSchema = new mongoose.Schema({
@@ -93,4 +94,5 @@ console.log(`You just saved: ${doc}`);
 })
 .catch((err) => {
 console.log('ERROR! ', +err);
-});`
+});
+```
