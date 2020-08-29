@@ -61,7 +61,7 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-// ADDS DURATIONWEEKS
+// ---------- VIRTUAL METHODS --------- //
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
@@ -72,10 +72,13 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-tourSchema.post('save', function (doc, next) {
-  console.log(doc);
+// ------- QUERY MIDDLEWARE: RUNS BEFORE QUERY CALLS -- //
+// as soon as you hit this route, you can chain a method in between it
+tourSchema.pre('find', function (next) {
   next();
 });
+
+// ------ AGGREGATION MIDDLEWARE -- //
 
 const Tour = mongoose.model('Tour', tourSchema);
 
