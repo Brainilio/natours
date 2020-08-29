@@ -5,23 +5,37 @@ const Tour = require('../models/tourModel');
 
 // ------------ HTTP METHODS --------------- //
 
-exports.getAllTours = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    // data: {
-    //   tours,
-    // },
-  });
+exports.getAllTours = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tours,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
-exports.getTour = (req, res) => {
-  // eslint-disable-next-line no-unused-vars
-  const id = +req.params.id;
-  // const tour = tours.find((el) => el.id === id);
-  // res.status(200).json({
-  //   status: 'success',
-  //   tour: tour,
-  // });
+exports.getTour = async (req, res) => {
+  try {
+    const id = await +req.params.id;
+    const tour = await Tour.findById(id);
+    res.status(200).json({
+      status: 'success',
+      data: tour,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.updateTour = (req, res) => {
