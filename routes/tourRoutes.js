@@ -12,6 +12,12 @@ router.param('id', tourController.checkID);
 // ----------- HTTP ROUTES -------------- //
 
 router
+  .route('/top-5-cheap')
+  .get(tourController.aliasTopTours, tourController.getAllTours);
+
+router.route('/tours-stats').get(tourController.getTourStats);
+
+router
   .route('/')
   .get(tourController.getAllTours)
   .post(tourController.createTour);

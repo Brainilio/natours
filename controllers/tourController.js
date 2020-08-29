@@ -3,28 +3,32 @@ const Tour = require('../models/tourModel');
 // ----------- Middleware METHODS -------------- //
 // Write any middleware functions in here
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage, price';
+  req.query.fields = 'name, price, ratingsAverage, summary, difficulty';
+  next();
+};
+
 // ------------ HTTP METHODS --------------- //
 
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
     // BUILD QUERY
-
     // 1A) Filtering
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const queryObj = { ...req.query };
-    const excludeFields = ['page', 'limit', 'fields'];
-    // filter out the fields from query
-    excludeFields.forEach((el) => delete queryObj[el]);
 
     // 1B) Advanced filtering - change gte to $gte
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (word) => `$${word}`);
 
+    // New parsed variable
     let query = Tour.find(JSON.parse(queryStr));
 
     // 2) Sorting TODO: FIX THIS
     if (req.query.sort) {
+      console.log('sorting..');
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
     } else {
@@ -50,7 +54,13 @@ exports.getAllTours = async (req, res) => {
       if (skip >= numTours) throw new Error('This page does not exist');
     }
 
-    // EXEC QUERY
+    // EXEC QUERY: works because we manipulate the query based on the query that is passed in the class;
+    // const features = new APIFeatures(Tour.find(), req.query)
+    //   .filter()
+    //   .sort()
+    //   .limitFields()
+    //   .paginate();
+
     const tours = await query;
 
     // SEND RESP
@@ -128,6 +138,44 @@ exports.deleteTour = async (req, res) => {
     res.status(204).json({
       status: 'success',
       data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+// ----------- AGGREGATION PIPELINE METHODS ------------ //
+
+exports.getTourStats = async (req, res) => {
+  try {
+    const stats = await Tour.aggregate([
+      {
+        $match: { ratingsAverage: { $gte: 4.5 } },
+      },
+      {
+        $group: {
+          _id: { $toUpper: '$difficulty' },
+          numTours: { $sum: 1 },
+          numRatings: { $sum: '$ratingsQuantity' },
+          avgRating: { $avg: '$ratingsAverage' },
+          avgPrice: { $avg: '$price' },
+          minPrice: { $min: '$price' },
+          maxPrice: { $max: '$price' },
+        },
+      },
+      {
+        $sort: {
+          avgPrice: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      data: stats,
     });
   } catch (err) {
     res.status(400).json({
