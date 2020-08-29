@@ -1,16 +1,7 @@
 const Tour = require('../models/tourModel');
 
 // ----------- Middleware METHODS -------------- //
-
-exports.checkBody = (req, res, next) => {
-  if (!req.body.price || !req.body.name) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Post has no name or price!',
-    });
-  }
-  next();
-};
+// Write any middleware functions in here
 
 // ------------ HTTP METHODS --------------- //
 
@@ -42,13 +33,21 @@ exports.updateTour = (req, res) => {
   });
 };
 
-exports.createTour = (req, res) => {
-  res.status(201).json({
-    status: 'success',
-    // data: {
-    //   tour: newTour,
-    // },
-  });
+exports.createTour = async (req, res) => {
+  try {
+    const newTour = await Tour.create(req.body);
+    res.status(201).json({
+      status: 'success',
+      data: {
+        tour: newTour,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.deleteTour = (req, res) => {
