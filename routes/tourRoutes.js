@@ -3,11 +3,16 @@ const tourController = require('./../controllers/tourController');
 const router = express.Router()
 
 
+// ------- MIDDLEWARE  ------ // 
+router.param('id', tourController.checkID)
+
+
+
 // ----------- HTTP ROUTES -------------- // 
 
 router.route('/')
      .get(tourController.getAllTours)
-     .post(tourController.createTour)
+     .post(tourController.checkBody, tourController.createTour)
 
 router.route('/:id')
      .get(tourController.getTour)
