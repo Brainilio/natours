@@ -4,8 +4,9 @@ const router = express.Router()
 
 
 // ------- MIDDLEWARE  ------ // 
-router.param('id', tourController.checkID)
 
+//checks id on each :id request
+router.param('id', tourController.checkID)
 
 
 // ----------- HTTP ROUTES -------------- // 

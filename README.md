@@ -20,7 +20,7 @@ Docs:
 
 - Add express config for port listening
 - Routing
-- basic middlewares
+- basic middlewares: body parser, morgan for requests & server static files
 
 ### /routes/...
 
@@ -30,4 +30,4 @@ Docs:
 
 ## /controllers/...
 
-- Controllers to handle requests
+- Controllers to handle requests & middleware functions
