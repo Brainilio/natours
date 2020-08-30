@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const validator = require('validator');
 
 //schema to enforce rules for model
 const tourSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: [true, 'A tour must have a name'],
+      require: [true, 'A city must have a name'],
       unique: true,
+      maxlength: [40, 'City must have less or equal then 40 characters'],
+      minlength: [5, 'City must have more than 10 characters'],
+      validate: [validator.isAlpha, 'City name must contain characters only!'],
     },
     duration: {
       type: Number,
@@ -20,10 +24,16 @@ const tourSchema = new mongoose.Schema(
     difficulty: {
       type: String,
       required: [true, 'A tour must have a difficulty'],
+      enum: {
+        values: ['easy', 'medium', 'difficult'],
+        message: 'Difficulty is either: easy, medium or difficult',
+      },
     },
     ratingsAverage: {
       type: Number,
       default: 2.5,
+      min: [1, 'Rating must be above 1.0'],
+      max: [5, 'Rating must be below 5.0'],
     },
     ratingsQuantity: {
       type: Number,
@@ -33,7 +43,16 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'A tour must have a price.'],
     },
-    priceDiscount: Number,
+    priceDiscount: {
+      type: Number,
+      validate: {
+        validator: function (val) {
+          // This only points to current doc on new document creation.
+          return val < this.price; //100 < 200; price discount should be lower
+        },
+        message: 'Discount price ({VALUE}) should be below regular price!',
+      },
+    },
     summary: {
       type: String,
       trim: true,
@@ -79,6 +98,7 @@ tourSchema.pre('find', function (next) {
 });
 
 // ------ AGGREGATION MIDDLEWARE -- //
+//none
 
 const Tour = mongoose.model('Tour', tourSchema);
 
