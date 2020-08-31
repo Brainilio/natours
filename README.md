@@ -39,6 +39,7 @@ Docs:
 - Add express config for port listening
 - Routing
 - basic middlewares: body parser, morgan for requests & server static files
+- Middleware for global errors
 
 ### /routes/...
 
@@ -49,10 +50,13 @@ Docs:
 ## /controllers/...
 
 - Controllers to handle requests & middleware functions
+- Aggregator pipeline methods
+- Errorcontorllers to handle global errors, use the appError class from /utils/... to handle errors, pass in message and errorcode
 
 ## /models/..
 
 - Models enforcing schemas and business logic.
+- Also uses visualization & aggregator middewares
 
 #### example using mongoose:
 
@@ -95,4 +99,21 @@ console.log(`You just saved: ${doc}`);
 .catch((err) => {
 console.log('ERROR! ', +err);
 });
+```
+
+## ./utils/...
+
+- Utility classes that can be globally used.
+- appError.js is a class to use operational errors @params 1: message, 2: statuscode
+
+## Error ?
+
+- Natours uses a middleware to handle errors. You can use the following snippet to create errors and the created middleware in ./app.js will handle it
+- The class that uses the error can be found in utils
+
+```
+const err = new Error(`Error message here!`)
+	err.status = "fail"
+	err.statusCode = 404
+	next(err)
 ```

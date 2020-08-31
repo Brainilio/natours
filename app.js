@@ -1,21 +1,31 @@
-const express = require('express');
-const morgan = require('morgan');
-const tourRouter = require('./routes/tourRoutes');
-const userRouter = require('./routes/userRoutes');
+const express = require("express")
+const morgan = require("morgan")
+const AppError = require("./utils/appError")
+const globalErrorHandler = require("./controllers/errorController")
+const tourRouter = require("./routes/tourRoutes")
+const userRouter = require("./routes/userRoutes")
 
 // -------------- GLOBAL VARIABLES ---------- //
 
-const app = express();
+const app = express()
 
 // ----------- MIDDLEWARES --------------- //
 
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.static(`${__dirname}/public`));
+app.use(morgan("dev"))
+app.use(express.json())
+app.use(express.static(`${__dirname}/public`))
 
 // -------------------  ROUTING ---------------- //
 
-app.use('/api/v1/tours', tourRouter);
-app.use('/api/v1/users', userRouter);
+app.use("/api/v1/tours", tourRouter)
+app.use("/api/v1/users", userRouter)
 
-module.exports = app;
+//operational error using utility class errorhandler
+app.all("*", (req, res, next) => {
+	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404))
+})
+
+// use the globally created errors that are used in other middlewares
+app.use(globalErrorHandler)
+
+module.exports = app
