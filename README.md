@@ -109,6 +109,7 @@ console.log('ERROR! ', +err);
 
 - Natours uses a middleware to handle errors. You can use the following snippet to create errors and the created middleware in ./app.js will handle it
 - The class that uses the error can be found in utils
+- The class uses two different error methods and in production we only want to distinguish between operational errors and unexpected errors which logs to your console.
 
 ```
 // Class method uses this type of function
