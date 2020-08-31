@@ -1,5 +1,6 @@
 const Tour = require('../models/tourModel');
 const AppError = require('../utils/appError');
+
 // ----------- Middleware METHODS -------------- //
 // Write any middleware functions in here
 

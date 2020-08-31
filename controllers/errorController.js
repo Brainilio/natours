@@ -46,8 +46,8 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
-    let error = { ...err };
-    if (error.name === 'CastError') error = handleCastErrorDB(err);
-    sendErrorProd(error, res);
+    //     let error = { ...err };
+    //     if (error.name === 'CastError') error = handleCastErrorDB(err);
+    sendErrorProd(err, res);
   }
 };
