@@ -1,17 +1,17 @@
 const Tour = require('../models/tourModel');
-
+const AppError = require('../utils/appError');
 // ----------- Middleware METHODS -------------- //
 // Write any middleware functions in here
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
+  req.query.sort = '-ratingsAverage';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
-  console.log(req.query);
   next();
 };
 // ------------ HTTP METHODS --------------- //
 
-exports.getAllTours = async (req, res) => {
+exports.getAllTours = async (req, res, next) => {
   try {
     // BUILD QUERY
     // 1A) Filtering
@@ -65,29 +65,24 @@ exports.getAllTours = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't get your tours!`, 404));
   }
 };
 
-exports.getTour = async (req, res) => {
+exports.getTour = async (req, res, next) => {
   try {
     const tour = await Tour.findById(req.params.id);
+
     res.status(200).json({
       status: 'success',
       data: tour,
     });
   } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError('No tour found with that ID', 404));
   }
 };
 
-exports.updateTour = async (req, res) => {
+exports.updateTour = async (req, res, next) => {
   try {
     const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -101,14 +96,11 @@ exports.updateTour = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't update the tour!`, 404));
   }
 };
 
-exports.createTour = async (req, res) => {
+exports.createTour = async (req, res, next) => {
   try {
     const newTour = await Tour.create(req.body);
     res.status(201).json({
@@ -118,14 +110,11 @@ exports.createTour = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't create your tour!`, 404));
   }
 };
 
-exports.deleteTour = async (req, res) => {
+exports.deleteTour = async (req, res, next) => {
   try {
     await Tour.findByIdAndDelete(req.params.id);
 
@@ -134,16 +123,13 @@ exports.deleteTour = async (req, res) => {
       data: null,
     });
   } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't delete the tour!`, 400));
   }
 };
 
 // ----------- AGGREGATION PIPELINE METHODS ------------ //
 
-exports.getTourStats = async (req, res) => {
+exports.getTourStats = async (req, res, next) => {
   try {
     const stats = await Tour.aggregate([
       {
@@ -172,14 +158,11 @@ exports.getTourStats = async (req, res) => {
       data: stats,
     });
   } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't gather data!`, 40));
   }
 };
 
-exports.getMonthlyPlan = async (req, res) => {
+exports.getMonthlyPlan = async (req, res, next) => {
   try {
     const year = +req.params.year; // 2021
     const plan = await Tour.aggregate([
@@ -222,9 +205,6 @@ exports.getMonthlyPlan = async (req, res) => {
       data: plan,
     });
   } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+    return next(new AppError(`Couldn't gather data!`, 40));
   }
 };
