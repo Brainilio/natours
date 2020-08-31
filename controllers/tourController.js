@@ -111,7 +111,7 @@ exports.createTour = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return next(new AppError(`Couldn't create your tour!`, 404));
+    return next(new AppError(`Couldn't create your tour!`, 400));
   }
 };
 

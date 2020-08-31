@@ -1,10 +1,10 @@
-const AppError = require('../utils/appError');
+// const AppError = require('../utils/appError');
 
-//turn error into operational errors with invalid ids
-const handleCastErrorDB = (err) => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
-  return new AppError(message, 400);
-};
+// // turn error into operational errors with invalid ids
+// const handleCastErrorDB = (err) => {
+//   const message = `Invalid ${err.path}: ${err.value}.`;
+//   console.log(err);
+// };
 
 // development error
 const sendErrorDev = (err, res) => {
@@ -46,8 +46,12 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
-    //     let error = { ...err };
-    //     if (error.name === 'CastError') error = handleCastErrorDB(err);
-    sendErrorProd(err, res);
+    const error = { ...err };
+
+    //     if (error.name === 'CastError') {
+
+    //       error = handleCastErrorDB(err);
+    //     }
+    sendErrorProd(error, res);
   }
 };

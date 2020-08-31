@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const validator = require('validator');
+// const validator = require('validator');
 
 //schema to enforce rules for model
 const tourSchema = new mongoose.Schema(
@@ -11,7 +11,8 @@ const tourSchema = new mongoose.Schema(
       unique: true,
       maxlength: [40, 'City must have less or equal then 40 characters'],
       minlength: [5, 'City must have more than 10 characters'],
-      validate: [validator.isAlpha, 'City name must contain characters only!'],
+      // TODO: FIX THIS, THIS VALIDATOR DOESNT WORK
+      // validate: [validator.isAlpha, "City name must contain characters only!"],
     },
     duration: {
       type: Number,
