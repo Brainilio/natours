@@ -38,8 +38,7 @@ Docs:
 
 - Add express config for port listening
 - Routing
-- basic middlewares: body parser, morgan for requests & server static files
-- Middleware for global errors
+- basic middlewares: body parser, morgan for requests, serve static files & error middleware
 
 ### /routes/...
 
@@ -112,8 +111,14 @@ console.log('ERROR! ', +err);
 - The class that uses the error can be found in utils
 
 ```
+// Class method uses this type of function
 const err = new Error(`Error message here!`)
 	err.status = "fail"
 	err.statusCode = 404
 	next(err)
+
+// Using the error handler
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
 ```
