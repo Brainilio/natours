@@ -33,6 +33,7 @@ Docs:
 ### ./server.js
 
 - Starts the server, connect to databases, require app and initializes it here
+- Method to handle unhandled errors.
 
 ### ./app.js
 
@@ -50,7 +51,7 @@ Docs:
 
 - Controllers to handle requests & middleware functions
 - Aggregator pipeline methods
-- Errorcontorllers to handle global errors, use the appError class from /utils/... to handle errors, pass in message and errorcode
+- Errorcontorllers to handle global errors, uses the appError class from /utils/... to handle errors, pass in message and errorcode
 
 ## /models/..
 

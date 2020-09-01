@@ -25,7 +25,7 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-// use the globally created errors that are used in other middlewares
+// use the globally created errors that are used in other middlewares, all error messages will be using these methods
 app.use(globalErrorHandler);
 
 module.exports = app;

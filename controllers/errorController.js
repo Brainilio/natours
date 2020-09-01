@@ -29,7 +29,6 @@ const sendErrorProd = (err, res) => {
   else {
     // 1) Log error
     console.error('ERROR 💥', err);
-
     // 2) Send generic message
     res.status(500).json({
       status: 'error',
@@ -46,7 +45,6 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
-    const error = { ...err };
-    sendErrorProd(error, res);
+    sendErrorProd(err, res);
   }
 };

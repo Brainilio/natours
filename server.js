@@ -31,4 +31,16 @@ app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
+// ---------------- UNHANDLED ERRORS -------------- //
 
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down..');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.mess);
+  console.log('UNHANDLED REJECTION! 💥 Shutting down now...');
+  process.exit(1);
+});
