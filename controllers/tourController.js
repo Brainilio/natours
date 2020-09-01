@@ -31,7 +31,7 @@ exports.getAllTours = async (req, res, next) => {
 
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
-      query = query.sort({ [sortBy]: 1 });
+      query = query.sort(sortBy);
     } else {
       query = query.sort('-createdAt');
     }
@@ -66,7 +66,7 @@ exports.getAllTours = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return next(new AppError(`Couldn't get your tours!`, 404));
+    return next(new AppError(err, 404));
   }
 };
 
@@ -97,7 +97,7 @@ exports.updateTour = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return next(new AppError(`Couldn't update the tour!`, 404));
+    return next(new AppError(err, 404));
   }
 };
 
@@ -111,7 +111,7 @@ exports.createTour = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return next(new AppError(`Couldn't create your tour!`, 400));
+    return next(new AppError(err, 400));
   }
 };
 
@@ -124,7 +124,7 @@ exports.deleteTour = async (req, res, next) => {
       data: null,
     });
   } catch (err) {
-    return next(new AppError(`Couldn't delete the tour!`, 400));
+    return next(new AppError(err, 400));
   }
 };
 
@@ -159,7 +159,7 @@ exports.getTourStats = async (req, res, next) => {
       data: stats,
     });
   } catch (err) {
-    return next(new AppError(`Couldn't gather data!`, 40));
+    return next(new AppError(err, 40));
   }
 };
 
@@ -206,6 +206,6 @@ exports.getMonthlyPlan = async (req, res, next) => {
       data: plan,
     });
   } catch (err) {
-    return next(new AppError(`Couldn't gather data!`, 40));
+    return next(new AppError(err, 40));
   }
 };

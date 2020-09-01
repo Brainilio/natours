@@ -47,11 +47,6 @@ module.exports = (err, req, res, next) => {
   } else if (process.env.NODE_ENV === 'production') {
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const error = { ...err };
-
-    //     if (error.name === 'CastError') {
-
-    //       error = handleCastErrorDB(err);
-    //     }
     sendErrorProd(error, res);
   }
 };
