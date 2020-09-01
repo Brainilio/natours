@@ -11,7 +11,7 @@ const tourSchema = new mongoose.Schema(
       unique: true,
       maxlength: [40, 'City must have less or equal then 40 characters'],
       minlength: [5, 'City must have more than 10 characters'],
-      // TODO: FIX THIS, THIS VALIDATOR DOESNT WORK
+      // FIXME: THIS VALIDATOR DOESNT WORK WITH SPACES ETC
       // validate: [validator.isAlpha, "City name must contain characters only!"],
     },
     duration: {
@@ -82,11 +82,15 @@ const tourSchema = new mongoose.Schema(
 );
 
 // ---------- VIRTUAL METHODS --------- //
+// upon retrieving you'll add this to your json object, you can't touch/manipulate it tho
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
 // -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
+
+//before creating a new tour, add a slug to it
+// FIXME: Doesn't work for updating
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
@@ -94,6 +98,7 @@ tourSchema.pre('save', function (next) {
 
 // ------- QUERY MIDDLEWARE: RUNS BEFORE QUERY CALLS -- //
 // as soon as you hit this route, you can chain a method in between it
+// you can add some methods before finding
 tourSchema.pre('find', function (next) {
   next();
 });
