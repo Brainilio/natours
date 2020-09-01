@@ -22,6 +22,8 @@ I'll try to offload as much logic as possible into the models, and keep the cont
 
 Docs:
 
+## ENTRY POINT: ./SERVER.JS
+
 ### /dev-data
 
 - Contains data that will be used throughout the app
