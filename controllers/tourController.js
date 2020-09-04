@@ -27,7 +27,7 @@ exports.getAllTours = async (req, res, next) => {
 
     let query = Tour.find(JSON.parse(queryStr));
 
-    // 2) Sorting TODO: FIX THIS
+    // 2) Sorting
 
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
