@@ -129,7 +129,7 @@ app.all('*', (req, res, next) => {
 });
 ```
 
-## Authentication
+## Authentication && Security
 
 Files can be found in ./controller/authcontroller , models/usermodel , routes/userRoutes
 
@@ -137,8 +137,17 @@ Files can be found in ./controller/authcontroller , models/usermodel , routes/us
 - Signing people in the controller is going to be made with a custom body, i'm not going to throw the entire body in there, because it can be modified.
 - I use JWT to assign webtokens with my private password in my config file.
 - I use a model method in the userschema to validate and compare the passwrods with bcrypt
+- I also check when an user has changed their password to verify JWT.
 - In my authcontroller i also make use of the .select method on mongoose to still pull the password, despite the fact that i put select on false in my user model, so i still have access to my password in the controller and will be able to compare both passwords in the db.
+
+#### Protect middleware (./controllers/authcontrollers => protect)
+
 - tours/:id is protected by a middleware in authcontroller
+  - The protect middleware uses the verify method on jwt and checks the user.
+- I also make sure to see if the issue date of the token is less than than the issue data of the last time someone changed their password. If this is the case, then I want to throw in an error and tell the user they need to log in again and get a new token.
+- So in short, the protect middleware route makes use of 3 different types of protections: checks the jwt token, checks if you exist as an user, checks if you've changed your password after jwt token was issued to you.
+
+#### User roles & Permissions
 
 # Headers:
 
