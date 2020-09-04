@@ -55,3 +55,20 @@ exports.logIn = async (req, res, next) => {
     return next(new AppError(err, 404));
   }
 };
+
+exports.protect = async (req, res, next) => {
+  try {
+    let token;
+    // 1) Get token and check if it's there
+    if (req.headers.authorization) {
+      token = req.headers.authorization;
+    }
+    console.log(token);
+    // 2) validate token
+    // 3) Check if user still exists
+    // 4) Check if user changed password after the token was issued
+    next();
+  } catch (err) {
+    return next(new AppError('Unauthorized access!', 400));
+  }
+};
