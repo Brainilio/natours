@@ -145,7 +145,8 @@ the protect middleware route makes use of 3 different types of protections: chec
 
 #### User roles & Permissions
 
-- only the admin is allowed delete posts and thats why we will create a middleware called restrictTo, that will only allow the passed user parameter to access this route.
+- Use middleware authController.protect to protect routes from users that aren't logged in
+- Use middleware authController.protect with @params 'user' || 'guide' || 'admin' to restrict routes and only allow the given param to connect to the route.
 
 # Headers:
 
