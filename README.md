@@ -58,6 +58,8 @@ Docs:
 ## /models/..
 
 - Models enforcing schemas and business logic.
+  - User model
+  - Tour model
 - Also uses visualization & aggregator middewares
 
 #### example using mongoose:
