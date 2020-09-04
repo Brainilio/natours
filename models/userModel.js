@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
-const SALT_WORK_FACTOR = 10;
-
 // name, email, photo, password, passwordConfirm
 const userSchema = new mongoose.Schema({
   name: {
@@ -22,26 +20,33 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a password!'],
     minLength: 8,
+    select: false,
   },
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password!'],
+    validate: {
+      validator: function (el) {
+        return this.password === el;
+      },
+      message: 'Passwords are not the same!',
+    },
   },
 });
 
-userSchema.pre('save', async function save(next) {
-  if (this.isModified('password')) return next();
-  try {
-    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-    this.password = await bcrypt.hash(this.password, salt);
-    return next();
-  } catch (err) {
-    return next(err);
-  }
+// -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
+userSchema.pre('save', async function (next) {
+  // ONLY RUN IF PW WAS MODIFIED
+  if (!this.isModified('password')) return next();
+  //HASHING PASSWORD AND GETTING RID OF PWCONFIRM FIELD
+
+  this.password = await bcrypt.hash(this.password, 12);
+  this.passwordConfirm = undefined;
+  next();
 });
 
-userSchema.methods.validatePassword = async function validatePassword(data) {
-  return bcrypt.compare(data, this.password);
+userSchema.methods.validatePassword = async function (formPw, realPw) {
+  return await bcrypt.compare(formPw, realPw);
 };
 
 const User = mongoose.model('User', userSchema);

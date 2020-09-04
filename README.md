@@ -128,3 +128,14 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 ```
+
+## Authentication
+
+Files can be found in ./controller/authcontroller , models/usermodel , routes/userRoutes
+
+- Signing up makes use of the bcrypt library to hash the password using the pre-hook method
+- Signing people in the controller is going to be made with a custom body, i'm not going to throw the entire body in there, because it can be modified.
+- I use JWT to assign webtokens with my private password in my config file.
+- I use a validator method in the userschema to validate and compare the passwrods with bcrypt
+- In my authcontroller i also make use of the .select method on mongoose to still pull the password, despite the fact that i put select on false in my user model, so i still have access to my password in the controller and will be able to compare both passwords in the db.
+-
