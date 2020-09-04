@@ -27,8 +27,12 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect, tourController.getTour) // reference: ../controllers/authcontroller
+  .get(tourController.getTour) // reference: ../controllers/authcontroller
   .patch(tourController.updateTour)
-  .delete(tourController.deleteTour);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    tourController.deleteTour
+  );
 
 module.exports = router;

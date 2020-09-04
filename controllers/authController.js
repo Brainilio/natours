@@ -65,9 +65,11 @@ exports.protect = async (req, res, next) => {
     if (req.headers.authorization) {
       token = req.headers.authorization;
     }
+
     if (!token) {
       return next(new AppError('You are not logged in. Please log in!'));
     }
+
     // 2) validate token
     const decodedData = await promisify(jwt.verify)(
       token,
@@ -93,4 +95,12 @@ exports.protect = async (req, res, next) => {
   } catch (err) {
     return next(new AppError('Unauthorized access!', 401));
   }
+};
+
+exports.restrictTo = (role) => {
+  return (req, res, next) => {
+    if (role !== req.user.role) {
+      return next(new AppError('You do not have permission!', 403));
+    }
+  };
 };
