@@ -7,7 +7,7 @@ const sendEmail = async (options) => {
     port: process.env.EMAIL_PORT,
     auth: {
       user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWROD,
+      pass: process.env.EMAIL_PASSWORD,
     },
     // Activate "less secure app" option in gmail!
   });
@@ -21,7 +21,14 @@ const sendEmail = async (options) => {
     // html:
   };
 
+  console.log(transporter.options.host);
+
   // 3) actually send the email
+  await transporter.verify((err) => {
+    if (err) console.error(err);
+    console.log('Your config is correct');
+  });
+
   await transporter.sendMail(mailoptions);
 };
 

@@ -1,5 +1,6 @@
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
@@ -131,7 +132,7 @@ exports.forgotPassword = async (req, res, next) => {
     await sendEmail({
       email: user.email,
       subject: 'Your password reset token (valid for 10min)',
-      message,
+      body: message,
     });
 
     res.status(200).json({
@@ -139,8 +140,43 @@ exports.forgotPassword = async (req, res, next) => {
       message: 'Token sent to email!',
     });
   } catch (err) {
-    return next(new AppError(err, 400));
+    return next(new AppError(err, 500));
   }
 };
 
-exports.resetPassword = (req, res, next) => {};
+exports.resetPassword = async (req, res, next) => {
+  try {
+    console.log(req.params.token);
+    // 1) get user based ont he token
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(req.params.token)
+      .digest('hex');
+
+    console.log(hashedToken);
+
+    const user = await User.findOne({
+      passwordResetToken: req.params.token,
+      passwordresetExpires: { $gt: Date.now() },
+    });
+
+    // 2) if token has not expired and there is user set new password
+    if (!user) {
+      return next(new AppError('Token is invalid or has expired', 400));
+    }
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    user.passwordResetToken = undefined;
+    user.passwordresetExpires = undefined;
+    await user.save();
+    // 3) update changepasswordat property for the user
+    // 4) log the user in, send JWT
+    const token = signToken(user._id);
+    res.status(200).json({
+      status: 'success',
+      token,
+    });
+  } catch (err) {
+    return next(new AppError(err, 400));
+  }
+};
