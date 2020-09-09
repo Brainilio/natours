@@ -1,6 +1,6 @@
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
@@ -147,13 +147,13 @@ exports.forgotPassword = async (req, res, next) => {
 exports.resetPassword = async (req, res, next) => {
   try {
     console.log(req.params.token);
-    // 1) get user based ont he token
-    const hashedToken = crypto
-      .createHash('sha256')
-      .update(req.params.token)
-      .digest('hex');
+    // 1) get user based ont he token TODO: isn't the same token as the one in db
+    // const hashedToken = crypto
+    //   .createHash('sha256')
+    //   .update(req.params.token)
+    //   .digest('hex');
 
-    console.log(hashedToken);
+    // console.log(hashedToken);
 
     const user = await User.findOne({
       passwordResetToken: req.params.token,

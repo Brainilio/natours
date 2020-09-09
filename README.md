@@ -109,7 +109,7 @@ console.log('ERROR! ', +err);
 
 - Utility classes that can be globally used.
 - appError.js is a class to use operational errors @params 1: message, 2: statuscode
-- Email.js is a nodemailer file
+- Email.js is a file in which i use nodemailer. You can use this utility method everywhere if you want to send emails
 
 ## Error ?
 
@@ -139,7 +139,9 @@ Files can be found in ./controller/authcontroller , models/usermodel , routes/us
 - I use JWT to assign webtokens with my private password in my config file.
 - I use a model method in the userschema to validate and compare the passwrods with bcrypt
 - In my authcontroller i also make use of the .select method on mongoose to still pull the password, despite the fact that i put select on false in my user model, so i still have access to my password in the controller and will be able to compare both passwords in the db.
-- Passwordreset: User schema uses a resettoken & expiration date field for the reset token that you can request if you go to /forgotpassword
+- forgotPassword: User schema uses a resettoken & expiration date field for the reset token that you can request if you go to /forgotpassword , this will set a reset token in your db and also send one to your email, i use mailtrap.io to catch all the emails.
+- resetPassword: In your email you will find the reset-token, you need to paste this as a params "resetPassword/:token". Send this request as a patch with body:
+  password and passwordConfirm to reset your password. After resetting your password, the reset-token and the reset-expires will be gone
 
 #### Protect middleware (./controllers/authcontrollers => protect)
 
