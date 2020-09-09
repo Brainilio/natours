@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const crypto = require('crypto');
 
 // name, email, photo, password, passwordConfirm
 const userSchema = new mongoose.Schema({
@@ -38,6 +39,8 @@ const userSchema = new mongoose.Schema({
     },
   },
   passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordresetExpires: Date,
 });
 
 // -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
@@ -51,11 +54,14 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// --------- SCHEMA METHODS -------------- //
+
+//method for validating password for logging in, compares password given to bcrypt password
 userSchema.methods.validatePassword = async function (formPw, realPw) {
   return await bcrypt.compare(formPw, realPw);
 };
 
-// this function checks if the password
+// this function checks if the password is changed after user has received a jwt timestamp
 userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
   if (this.passwordChangedAt) {
     // change timestamp to parseint so i can compare the jwt time with the current time
@@ -71,6 +77,21 @@ userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
   return false;
 };
 
+//generates reset token for user that expires in 10 minutes
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  //expires in 10 mins
+  this.passwordresetExpires = Date.now() + 10 * 60 * 1000;
+
+  console.log({ resetToken }, this.passwordresetExpires);
+
+  return resetToken;
+};
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

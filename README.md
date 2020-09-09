@@ -109,6 +109,7 @@ console.log('ERROR! ', +err);
 
 - Utility classes that can be globally used.
 - appError.js is a class to use operational errors @params 1: message, 2: statuscode
+- Email.js is a nodemailer file
 
 ## Error ?
 
@@ -138,6 +139,7 @@ Files can be found in ./controller/authcontroller , models/usermodel , routes/us
 - I use JWT to assign webtokens with my private password in my config file.
 - I use a model method in the userschema to validate and compare the passwrods with bcrypt
 - In my authcontroller i also make use of the .select method on mongoose to still pull the password, despite the fact that i put select on false in my user model, so i still have access to my password in the controller and will be able to compare both passwords in the db.
+- Passwordreset: User schema uses a resettoken & expiration date field for the reset token that you can request if you go to /forgotpassword
 
 #### Protect middleware (./controllers/authcontrollers => protect)
 

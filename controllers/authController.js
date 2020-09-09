@@ -2,6 +2,7 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const sendEmail = require('../utils/email');
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -97,6 +98,7 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+//restricts route if role is not the same role as parameter
 exports.restrictTo = (role) => {
   return (req, res, next) => {
     if (role !== req.user.role) {
@@ -105,3 +107,40 @@ exports.restrictTo = (role) => {
     next();
   };
 };
+
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    // 1) Get user based on posted email
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return next(
+        new AppError('There is no user with that email address.', 404)
+      );
+    }
+    // 2) Generate random reset token
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
+
+    // 3) Send it to user's email
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/users/resetPassword/${resetToken}`;
+
+    const message = `Forgot your password? Submit a patch request with your new password and passwordConfirm to ${resetURL}.\nWasn't you? Please contact our support center!`;
+
+    await sendEmail({
+      email: user.email,
+      subject: 'Your password reset token (valid for 10min)',
+      message,
+    });
+
+    res.status(200).json({
+      status: 'Success',
+      message: 'Token sent to email!',
+    });
+  } catch (err) {
+    return next(new AppError(err, 400));
+  }
+};
+
+exports.resetPassword = (req, res, next) => {};
