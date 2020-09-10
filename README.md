@@ -145,6 +145,8 @@ These are some of the authentication & security features I have added in this pr
 - authController.resetPassword: In your email you will find the reset-token, you need to paste this as a params "resetPassword/:token". Send this request as a patch with body:
   password and authController.passwordConfirm to reset your password. After resetting your password, the reset-token and the reset-expires will be gone
 - authController.updatePassword : you can change your password, but we are going to check if the user that is changing the password knows their current password for an extra security measure. I also get the user again by decoding the JWT.
+- UserController.updateMe: updates the profile (only name and email are adjustable)
+- UserController.deleteMe: Sets the active field on false. I also use a pre.find middleware on the model to make sure that whenever you uset he find method on a model anywhere youw ill only get the users that have active on true.
 
 #### Protect middleware (./controllers/authcontrollers => protect)
 

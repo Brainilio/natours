@@ -41,6 +41,11 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordresetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 
 // -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
@@ -60,6 +65,12 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// only send users that are active when you use the 'find' method on the model
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: true });
   next();
 });
 

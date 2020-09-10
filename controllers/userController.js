@@ -2,16 +2,54 @@ const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 // ------------ HTTP METHODS --------------- //
 
-exports.updateMe = (req, res, next) => {
-  // 1) Create error if user posts password data
-  if (req.body.password || req.body.passwordConfirm) {
-    return new AppError("You can't change your password here!", 400);
-  }
-  // 2) Update user doc
+//Updating profile
+exports.updateMe = async (req, res, next) => {
+  try {
+    // 1) Create error if user posts password data
+    if (req.body.password || req.body.passwordConfirm) {
+      return new AppError("You can't change your password here!", 400);
+    }
+    // 2) Update user doc
+    const updatedFields = {
+      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+      ...req.body,
+    };
 
-  res.status(200).json({
-    status: 'success',
-  });
+    const allowedFields = ['name', 'email'];
+
+    //updated doc
+    const newObject = {};
+
+    Object.keys(updatedFields).forEach((el) => {
+      if (allowedFields.includes(el)) newObject[el] = updatedFields[el];
+    });
+
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        updatedUser,
+      },
+    });
+  } catch (error) {
+    return new AppError(error, 400);
+  }
+};
+
+//putting an user inactive
+exports.deleteMe = async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, { active: false });
+    res.status(204).json({
+      status: 'success',
+      message: 'User successfully deactivated',
+    });
+  } catch (error) {
+    return new AppError("Couldn't delete user", 400);
+  }
 };
 
 exports.getAllUsers = async (req, res, next) => {
