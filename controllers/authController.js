@@ -146,7 +146,6 @@ exports.forgotPassword = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
   try {
-    console.log(req.params.token);
     // 1) get user based ont he token TODO: isn't the same token as the one in db
     // const hashedToken = crypto
     //   .createHash('sha256')
@@ -178,5 +177,55 @@ exports.resetPassword = async (req, res, next) => {
     });
   } catch (err) {
     return next(new AppError(err, 400));
+  }
+};
+
+// ask for current password before updating password
+exports.updatePassword = async (req, res, next) => {
+  try {
+    // 1) Get user from collection
+    console.log(req);
+    let token;
+
+    if (req.headers.authorization) {
+      token = req.headers.authorization;
+    }
+
+    if (!token) {
+      return next(new AppError('You are not logged in. Please log in!'));
+    }
+
+    const decodedData = await promisify(jwt.verify)(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    const user = await User.findById(decodedData.id).select('+password');
+
+    if (!user) {
+      return next(new AppError("User doesn't exist!", 401));
+    }
+
+    // 2) Check if POSTed current password is correct
+    const { currentPassword, newPassword, newPasswordConfirm } = req.body;
+
+    if (!(await user.validatePassword(currentPassword, user.password))) {
+      return next(new AppError('Incorrect password', 401));
+    }
+
+    // 3) If password is correct, update password
+    user.password = newPassword;
+    user.passwordConfirm = newPasswordConfirm;
+
+    await user.save();
+
+    // 4) Log user in, send JWT token with new password
+    const newToken = signToken(user._id);
+    res.status(200).json({
+      status: 'success',
+      newToken,
+    });
+  } catch (error) {
+    return next(new AppError(error, 400));
   }
 };
