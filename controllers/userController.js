@@ -2,6 +2,18 @@ const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 // ------------ HTTP METHODS --------------- //
 
+exports.updateMe = (req, res, next) => {
+  // 1) Create error if user posts password data
+  if (req.body.password || req.body.passwordConfirm) {
+    return new AppError("You can't change your password here!", 400);
+  }
+  // 2) Update user doc
+
+  res.status(200).json({
+    status: 'success',
+  });
+};
+
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find();

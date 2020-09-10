@@ -5,12 +5,14 @@ const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 
+// utility function for assigning json webtokens
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
+// sign an user up
 exports.signUp = async (req, res, next) => {
   try {
     const newUser = await User.create({
@@ -35,6 +37,7 @@ exports.signUp = async (req, res, next) => {
   }
 };
 
+// log in an user
 exports.logIn = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -60,6 +63,7 @@ exports.logIn = async (req, res, next) => {
   }
 };
 
+// protects routes against users that aren't logged in
 exports.protect = async (req, res, next) => {
   try {
     let token;
@@ -109,6 +113,7 @@ exports.restrictTo = (role) => {
   };
 };
 
+// sends a token to your mail
 exports.forgotPassword = async (req, res, next) => {
   try {
     // 1) Get user based on posted email
@@ -144,6 +149,7 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 
+//reset password after getting reset token in mail
 exports.resetPassword = async (req, res, next) => {
   try {
     // 1) get user based ont he token TODO: isn't the same token as the one in db
