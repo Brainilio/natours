@@ -190,23 +190,7 @@ exports.resetPassword = async (req, res, next) => {
 exports.updatePassword = async (req, res, next) => {
   try {
     // 1) Get user from collection
-    console.log(req);
-    let token;
-
-    if (req.headers.authorization) {
-      token = req.headers.authorization;
-    }
-
-    if (!token) {
-      return next(new AppError('You are not logged in. Please log in!'));
-    }
-
-    const decodedData = await promisify(jwt.verify)(
-      token,
-      process.env.JWT_SECRET
-    );
-
-    const user = await User.findById(decodedData.id).select('+password');
+    const user = await User.findById(req.user.id).select('+password');
 
     if (!user) {
       return next(new AppError("User doesn't exist!", 401));
