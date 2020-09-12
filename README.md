@@ -165,7 +165,8 @@ the protect middleware route makes use of 3 different types of protections: chec
 
 # API:
 
-TOURS:
+_TOURS_:
+
 GET ALL TOURS: /api/v1/tours/
 PARAMS: LIMIT, PAGE, SORT, GTE, LTE, LT, GT,
 
