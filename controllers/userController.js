@@ -67,6 +67,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
+// ---------- unimplemented controller functions ----------
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
