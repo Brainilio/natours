@@ -41,8 +41,10 @@ Docs:
 
 - Add express config for port listening
 - Routing
-- basic middlewares: body parser, morgan for requests, serve static files & error middleware for global caught errors ( using the utility apperror method)
-- Use rate limiter
+- middlewares: body parser, morgan for requests, serve static files & error middleware for global caught errors ( using the utility apperror method)
+- Use rate limiter to limit api requests from a particular IP
+- use data sanitization middleware to secure against nosql query injections & XSS
+- Prevent http parameter pollution using hpp
 
 ### /routes/...
 
@@ -131,7 +133,7 @@ app.all('*', (req, res, next) => {
 });
 ```
 
-## Authentication && Security
+## AUTH: Authentication && Security
 
 Files can be found in ./controller/authcontroller , models/usermodel , routes/userRoutes
 
@@ -163,7 +165,7 @@ the protect middleware route makes use of 3 different types of protections: chec
 - _authorization_: Please insert your JWT token in here when you sign up or log in! You must be able to send your jwt token with all your requests in this header.
 - Use helmet to
 
-# API:
+# API ENDPOINTS:
 
 _TOURS_:
 
