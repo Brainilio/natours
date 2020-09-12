@@ -41,7 +41,8 @@ Docs:
 
 - Add express config for port listening
 - Routing
-- basic middlewares: body parser, morgan for requests, serve static files & error middleware
+- basic middlewares: body parser, morgan for requests, serve static files & error middleware for global caught errors ( using the utility apperror method)
+- Use rate limiter
 
 ### /routes/...
 

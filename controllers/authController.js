@@ -12,6 +12,33 @@ const signToken = (id) => {
   });
 };
 
+// utility function to send cookie & through cookies
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.secure = true;
+  }
+
+  res.cookie('jwt', token, cookieOptions);
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 // sign an user up
 exports.signUp = async (req, res, next) => {
   try {
@@ -22,16 +49,7 @@ exports.signUp = async (req, res, next) => {
       passwordConfirm: req.body.passwordConfirm,
       passwordChangedAt: req.body.passwordChangedAt,
     });
-
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        user: newUser,
-      },
-    });
+    createSendToken(newUser, 201, res);
   } catch (err) {
     return next(new AppError(err, 404));
   }
