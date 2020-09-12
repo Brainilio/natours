@@ -61,6 +61,7 @@ exports.getAllTours = async (req, res, next) => {
     // SEND RESP
     res.status(200).json({
       status: 'success',
+      results: tours.length,
       data: {
         tours,
       },
@@ -156,6 +157,7 @@ exports.getTourStats = async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
+      results: stats.length,
       data: stats,
     });
   } catch (err) {

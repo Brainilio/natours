@@ -71,11 +71,7 @@ exports.logIn = async (req, res, next) => {
     }
 
     // 3) if everything is okay, send token to client
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     return next(new AppError(err, 404));
   }
@@ -194,11 +190,7 @@ exports.resetPassword = async (req, res, next) => {
     await user.save();
     // 3) update changepasswordat property for the user
     // 4) log the user in, send JWT
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     return next(new AppError(err, 400));
   }
@@ -228,11 +220,7 @@ exports.updatePassword = async (req, res, next) => {
     await user.save();
 
     // 4) Log user in, send JWT token with new password
-    const newToken = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      newToken,
-    });
+    createSendToken(user, 200, res);
   } catch (error) {
     return next(new AppError(error, 400));
   }
