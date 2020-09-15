@@ -10,6 +10,8 @@ Application logic (Code that is concerned about application's implementation, no
 
 Business logic (Code that solves the business problem we set out to solve e.g. validating user input data, password validation, creating new tours etc))
 
+- The database model/structure can be found here: <INSERT DRAW.IO LINK>
+
 ### View:
 
 Presentation logic
