@@ -87,7 +87,13 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
-    guides: Array,
+    //child referencing in mongoose
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
 
   {
@@ -105,11 +111,27 @@ tourSchema.virtual('durationWeeks').get(function () {
 // -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
 
 //before creating a new tour, add a slug to it
-// FIXME: Doesn't work for updating
+// FIXME: Doesn't work for updating models only creating
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt -role',
+  });
+  next();
+});
+
+// when saving a tour, you want to look for the guide on that tour for referencing
+// tourSchema.pre('save', async function (next) {
+//   //look for id of users
+//   const guides = this.guides.map(async (id) => await User.findById(id));
+//   this.guides = await Promise.all(guides);
+//   next();
+// });
 
 // ------- QUERY MIDDLEWARE: RUNS BEFORE QUERY CALLS -- //
 // as soon as you hit this route, you can chain a method in between it

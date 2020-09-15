@@ -73,6 +73,7 @@ exports.getAllTours = async (req, res, next) => {
 
 exports.getTour = async (req, res, next) => {
   try {
+    //POPULATE the field with the users as well
     const tour = await Tour.findById(req.params.id);
 
     res.status(200).json({
