@@ -37,6 +37,9 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
+// indices
+reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
+
 // --------- doc middlewares -----
 // populate the reviews with guides & tours
 reviewSchema.pre(/^find/, function (next) {
