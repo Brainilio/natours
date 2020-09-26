@@ -120,10 +120,11 @@ exports.updateOne = (Model) => async (req, res, next) => {
 exports.createOne = (Model) => async (req, res, next) => {
   try {
     const doc = await Model.create(req.body);
+
     res.status(201).json({
       status: 'success',
       data: {
-        tour: doc,
+        data: doc,
       },
     });
   } catch (err) {

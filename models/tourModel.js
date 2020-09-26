@@ -102,6 +102,9 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+// create new index with price in ascending order and ratingsaverage in descending order
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+
 // ---------- VIRTUAL METHODS --------- //
 // upon retrieving you'll add this to your json object, you can't touch/manipulate it tho
 tourSchema.virtual('durationWeeks').get(function () {

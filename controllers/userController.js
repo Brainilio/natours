@@ -2,9 +2,15 @@ const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
+// --------- middlewares ---------- //
+// Get personal profile;
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+
 // ------------ HTTP METHODS --------------- //
 
-//
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
