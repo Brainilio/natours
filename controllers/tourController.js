@@ -1,5 +1,6 @@
 const Tour = require('../models/tourModel');
 const AppError = require('../utils/appError');
+const factoryHandler = require('../utils/factoryHandler');
 
 // ----------- Middleware METHODS -------------- //
 // Write any middleware functions in here
@@ -73,8 +74,8 @@ exports.getAllTours = async (req, res, next) => {
 
 exports.getTour = async (req, res, next) => {
   try {
-    //POPULATE the field with the users as well
-    const tour = await Tour.findById(req.params.id);
+    //POPULATE the field with the reviews as well
+    const tour = await Tour.findById(req.params.id).populate('reviews');
 
     res.status(200).json({
       status: 'success',
@@ -117,18 +118,8 @@ exports.createTour = async (req, res, next) => {
   }
 };
 
-exports.deleteTour = async (req, res, next) => {
-  try {
-    await Tour.findByIdAndDelete(req.params.id);
-
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
-  } catch (err) {
-    return next(new AppError(err, 400));
-  }
-};
+// delete will be handled by a factory handler in utils/factoryhandler
+exports.deleteTour = factoryHandler.deleteOne(Tour);
 
 // ----------- AGGREGATION PIPELINE METHODS ------------ //
 

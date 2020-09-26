@@ -108,6 +108,13 @@ tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
+//virtual method to reference child instead of doing it in the model
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id',
+});
+
 // -------- DOC MIDDLEWARE: RUNS BEFORE .SAVE() AND .CREATE() //
 
 //before creating a new tour, add a slug to it
@@ -125,15 +132,6 @@ tourSchema.pre(/^find/, function (next) {
   });
   next();
 });
-
-// when saving a tour, you want to look for the guide on that tour for referencing
-// Not using this one tho, since it can be an anti-pattern imo
-// tourSchema.pre('save', async function (next) {
-//   //look for id of users
-//   const guides = this.guides.map(async (id) => await User.findById(id));
-//   this.guides = await Promise.all(guides);
-//   next();
-// });
 
 // ------- QUERY MIDDLEWARE: RUNS BEFORE QUERY CALLS -- //
 // as soon as you hit this route, you can chain a method in between it

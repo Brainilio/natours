@@ -18,6 +18,7 @@ const reviewSchema = mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    // parent referencing
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
@@ -36,21 +37,16 @@ const reviewSchema = mongoose.Schema(
 );
 
 // doc middlewares
-// populate the guides with the guides you find
+// populate the reviews with guides & tours
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: '-__v -passwordChangedAt -role -email',
-  });
-  next();
-});
-
-// populate the guides with the guides you find
-reviewSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'tour',
     select: 'name',
   });
+  //   .populate({
+  //   path: 'tour',
+  //   select: 'name',
+  // });
   next();
 });
 

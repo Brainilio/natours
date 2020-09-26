@@ -118,9 +118,11 @@ console.log('ERROR! ', +err);
 
 ## ./utils/...
 
-- Utility classes that can be globally used.
+#### Utility classes that can be globally used.
+
 - appError.js is a class to use operational errors @params 1: message, 2: statuscode
 - Email.js is a file in which i use nodemailer. You can use this utility method everywhere if you want to send emails
+- Factoryhandler is a file in which i outsource controller methods that are usually generic and repetitive (such as delete, getting one document etc)..
 
 ## Error ?
 
