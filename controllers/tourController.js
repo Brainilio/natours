@@ -86,37 +86,11 @@ exports.getTour = async (req, res, next) => {
   }
 };
 
-exports.updateTour = async (req, res, next) => {
-  try {
-    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+// update tour
+exports.updateTour = factoryHandler.updateOne(Tour);
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour,
-      },
-    });
-  } catch (err) {
-    return next(new AppError(err, 404));
-  }
-};
-
-exports.createTour = async (req, res, next) => {
-  try {
-    const newTour = await Tour.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: newTour,
-      },
-    });
-  } catch (err) {
-    return next(new AppError(err, 400));
-  }
-};
+// create tour
+exports.createTour = factoryHandler.createOne(Tour);
 
 // delete will be handled by a factory handler in utils/factoryhandler
 exports.deleteTour = factoryHandler.deleteOne(Tour);

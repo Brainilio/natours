@@ -2,6 +2,7 @@ const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
+// get all reviews
 exports.getAllReviews = async (req, res, next) => {
   try {
     // filter == for accessed reviews through /tours/{id}/reviews, you wanna
@@ -23,22 +24,19 @@ exports.getAllReviews = async (req, res, next) => {
   }
 };
 
-exports.createReview = async (req, res, next) => {
-  try {
-    // Allow nested routes
-    if (!req.body.tour) req.body.tour = req.params.tourId;
-    if (!req.body.user) req.body.user = req.user.id;
-
-    const newReview = await Review.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        review: newReview,
-      },
-    });
-  } catch (error) {
-    return next(new AppError(error, 404));
-  }
+//middleware for filling up tourid and userid in the reviews, because the factoryhandler is too generic
+exports.setTourUserIds = (req, res, next) => {
+  // Allow nested routes
+  if (!req.body.tour) req.body.tour = req.params.tourId;
+  if (!req.body.user) req.body.user = req.user.id;
+  next();
 };
 
+// create review
+exports.createReview = factoryHandler.createOne(Review);
+
+//delete review
 exports.deleteReview = factoryHandler.deleteOne(Review);
+
+// update review
+exports.updateReview = factoryHandler.updateOne(Review);
