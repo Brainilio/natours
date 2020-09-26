@@ -12,6 +12,12 @@ Business logic (Code that solves the business problem we set out to solve e.g. v
 
 - The database model/structure can be found here: <INSERT DRAW.IO LINK>
 
+Current models:
+
+- Model for all the users
+- Model for reviews
+- Model for tours
+
 ### View:
 
 Presentation logic

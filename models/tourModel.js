@@ -117,6 +117,7 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
+// populate the guides with the guides you find
 tourSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'guides',
@@ -126,6 +127,7 @@ tourSchema.pre(/^find/, function (next) {
 });
 
 // when saving a tour, you want to look for the guide on that tour for referencing
+// Not using this one tho, since it can be an anti-pattern imo
 // tourSchema.pre('save', async function (next) {
 //   //look for id of users
 //   const guides = this.guides.map(async (id) => await User.findById(id));
