@@ -19,7 +19,7 @@ router.param('id', tourController.checkID);
 // GET /tour/{id}/reviews
 // GET /tour/{id}/reviews/{id}
 
-router.use('/:tourId/reviews', reviewRouter);
+router.use('/:tourId/reviews', tourController.setTourId, reviewRouter);
 
 router
   .route('/top-5-cheap')

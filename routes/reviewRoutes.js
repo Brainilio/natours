@@ -5,10 +5,6 @@ const authController = require('../controllers/authController');
 // SET MERGEPARAMS TO TRUE TO GET ACCESS TO :TOURID
 const router = express.Router({ mergeParams: true });
 
-// POST /tour/{id}/reviews
-// POST /reviews
-// get /T
-
 router
   .route('/')
   .get(reviewController.getAllReviews)

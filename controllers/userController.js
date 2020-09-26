@@ -56,20 +56,7 @@ exports.deleteMe = async (req, res, next) => {
 };
 
 // get all users
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find();
-    res.status(200).json({
-      status: 'success',
-      results: users.length,
-      data: {
-        users,
-      },
-    });
-  } catch (err) {
-    return next(new AppError(err, 404));
-  }
-};
+exports.getAllUsers = factoryHandler.getAll(User);
 
 /// - Admin methods, don't update passwords with the updateuser function - //
 

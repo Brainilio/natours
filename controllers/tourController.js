@@ -3,74 +3,25 @@ const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
 // ----------- Middleware METHODS -------------- //
-// Write any middleware functions in here
 
+// Write any middleware functions in here
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
   next();
 };
+
+// to inject tourid into params for nested get
+exports.setTourId = (req, res, next) => {
+  if (req.params.tourId) req.query.tour = req.params.tourId;
+  next();
+};
+
 // ------------ HTTP METHODS --------------- //
 
-exports.getAllTours = async (req, res, next) => {
-  try {
-    // BUILD QUERY
-    // 1A) Filtering
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
-    const queryObj = { ...req.query };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
-    excludedFields.forEach((el) => delete queryObj[el]);
-
-    // 1B) Advanced filtering - change gte to $gte
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (word) => `$${word}`);
-
-    let query = Tour.find(JSON.parse(queryStr));
-
-    // 2) Sorting
-
-    if (req.query.sort) {
-      const sortBy = req.query.sort.split(',').join(' ');
-      query = query.sort(sortBy);
-    } else {
-      query = query.sort('-createdAt');
-    }
-
-    // 3) field limiting
-    if (req.query.fields) {
-      const fields = req.query.fields.split(',').join(' ');
-      query = query.select(fields);
-    } else {
-      query = query.select('-__v');
-    }
-
-    // 4) Pagination
-    const page = +req.query.page || 1;
-    const limit = +req.query.limit || 100;
-    const skip = (page - 1) * limit;
-    query = query.skip(skip).limit(limit);
-
-    if (req.query.page) {
-      const numTours = await Tour.countDocuments();
-      if (skip >= numTours) throw new Error('This page does not exist');
-    }
-
-    // EXEC QUERY
-    const tours = await query;
-
-    // SEND RESP
-    res.status(200).json({
-      status: 'success',
-      results: tours.length,
-      data: {
-        tours,
-      },
-    });
-  } catch (err) {
-    return next(new AppError(err, 404));
-  }
-};
+// get all tours
+exports.getAllTours = factoryHandler.getAll(Tour);
 
 // get tour
 exports.getTour = factoryHandler.getOne(Tour, 'reviews');
