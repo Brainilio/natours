@@ -3,26 +3,37 @@
 // and reference to the user this belongs to
 const mongoose = require('mongoose');
 
-const reviewSchema = mongoose.Schema({
-  text: {
-    type: String,
+const reviewSchema = mongoose.Schema(
+  {
+    text: {
+      type: String,
+      required: [true, 'Review can not be empty!'],
+    },
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Review must belong to a tour.'],
+    },
+    tour: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Tour',
+      required: [true, 'Review must belong to a tour.'],
+    },
   },
-  rating: {
-    type: Number,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-  },
-  tour: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Tour',
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // doc middlewares
 // populate the guides with the guides you find
@@ -38,7 +49,7 @@ reviewSchema.pre(/^find/, function (next) {
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'tour',
-    select: 'id, name',
+    select: 'name',
   });
   next();
 });
