@@ -14,6 +14,11 @@ router.param('id', tourController.checkID);
 // ----------- HTTP ROUTES -------------- //
 
 //merge routes together
+
+// POST /tour/{id}/reviews
+// GET /tour/{id}/reviews
+// GET /tour/{id}/reviews/{id}
+
 router.use('/:tourId/reviews', reviewRouter);
 
 router
@@ -24,10 +29,16 @@ router.route('/tours-stats').get(tourController.getTourStats);
 
 router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
 
+// tours
+
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.createTour);
+  .post(
+    authController.protect,
+    authController.restrictTo('admin'),
+    tourController.createTour
+  );
 
 router
   .route('/:id')
@@ -42,17 +53,5 @@ router
     authController.restrictTo('admin'),
     tourController.deleteTour
   );
-
-// POST /tour/{id}/reviews
-// GET /tour/{id}/reviews
-// GET /tour/{id}/reviews/{id}
-
-// router
-//   .route('/:tourId/reviews')
-//   .post(
-//     authController.protect,
-//     authController.restrictTo('user'),
-//     reviewController.createReview
-//   );
 
 module.exports = router;

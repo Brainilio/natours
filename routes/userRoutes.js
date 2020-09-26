@@ -7,6 +7,7 @@ const authController = require('../controllers/authController');
 
 // ----------- HTTP ROUTES -------------- //
 
+// for users
 router.post('/signup', authController.signUp);
 
 router.post('/login', authController.logIn);
@@ -28,13 +29,20 @@ router.patch(
 // for admins
 router
   .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+  .get(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.getAllUsers
+  );
 
 router
   .route('/:id')
-  .get(userController.getUser)
-  .patch(userController.updateUser)
+  .get(authController.protect, userController.getUser)
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.updateUser
+  )
   .delete(
     authController.protect,
     authController.restrictTo('admin'),

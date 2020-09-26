@@ -4,6 +4,7 @@ const factoryHandler = require('../utils/factoryHandler');
 
 // ------------ HTTP METHODS --------------- //
 
+//
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
@@ -54,6 +55,7 @@ exports.deleteMe = async (req, res, next) => {
   }
 };
 
+// get all users
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find();
@@ -71,23 +73,11 @@ exports.getAllUsers = async (req, res, next) => {
 
 /// - Admin methods, don't update passwords with the updateuser function - //
 
+// getting user
+exports.getUser = factoryHandler.getOne(User);
+
 // deleting user
 exports.deleteUser = factoryHandler.deleteOne(User);
 
 //updating user
 exports.updateUser = factoryHandler.updateOne(User);
-
-// ---------- unimplemented controller functions ----------
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Route is not yet defined',
-  });
-};
-
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Route is not yet defined',
-  });
-};

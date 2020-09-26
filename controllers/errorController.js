@@ -1,11 +1,5 @@
 // const AppError = require('../utils/appError');
 
-// // turn error into operational errors with invalid ids
-// const handleCastErrorDB = (err) => {
-//   const message = `Invalid ${err.path}: ${err.value}.`;
-//   console.log(err);
-// };
-
 // development error
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({

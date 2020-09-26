@@ -32,6 +32,9 @@ exports.setTourUserIds = (req, res, next) => {
   next();
 };
 
+// fetch one review
+exports.getReview = factoryHandler.getOne(Review);
+
 // create review
 exports.createReview = factoryHandler.createOne(Review);
 
