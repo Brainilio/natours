@@ -71,7 +71,8 @@ Docs:
 - Models enforcing schemas and business logic.
   - User model
   - Tour model
-- Also uses visualization & aggregator middewares
+  - Review model
+- Also uses visualization, aggregator middewares & methods.
 
 #### example using mongoose:
 
