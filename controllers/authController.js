@@ -77,7 +77,7 @@ exports.logIn = async (req, res, next) => {
   }
 };
 
-// protects routes against users that aren't logged in
+// protects routes against users that aren't logged in + checks if password was changed after jwt token was sent
 exports.protect = async (req, res, next) => {
   try {
     let token;

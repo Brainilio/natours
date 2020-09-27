@@ -35,6 +35,31 @@ exports.createTour = factoryHandler.createOne(Tour);
 // delete will be handled by a factory handler in utils/factoryhandler
 exports.deleteTour = factoryHandler.deleteOne(Tour);
 
+// '/tours-within/:distance/center/:latlng/unit/:unit'
+exports.getToursWithin = async (req, res, next) => {
+  try {
+    const { distance, latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+
+    const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
+
+    if (!lat || !lng) next(new AppError('Please provide your location', 400));
+
+    const tours = await Tour.find({
+      startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: tours,
+      },
+    });
+  } catch (error) {
+    return next(new AppError(400, error));
+  }
+};
+
 // ----------- AGGREGATION PIPELINE METHODS ------------ //
 
 exports.getTourStats = async (req, res, next) => {
@@ -115,5 +140,44 @@ exports.getMonthlyPlan = async (req, res, next) => {
     });
   } catch (err) {
     return next(new AppError(err, 40));
+  }
+};
+
+exports.getDistances = async (req, res, next) => {
+  try {
+    const { latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+    if (!lat || !lng) {
+      next(new AppError('Please provide location', 400));
+    }
+
+    //CONVERTS TO MILES OR KM
+    const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
+
+    const distances = await Tour.aggregate([
+      {
+        $geoNear: {
+          near: {
+            type: 'Point',
+            coordinates: [+lng, +lat],
+          },
+          distanceField: 'distance',
+          distanceMultiplier: multiplier,
+        },
+      },
+      {
+        $project: {
+          distance: 1,
+          name: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      data: distances,
+    });
+  } catch (error) {
+    return next(new AppError(error, 400));
   }
 };

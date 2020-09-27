@@ -30,6 +30,16 @@ const tourSchema = new mongoose.Schema(
         message: 'Difficulty is either: easy, medium or difficult',
       },
     },
+    startLocation: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
     ratingsAverage: {
       type: Number,
       default: 2.5,
@@ -60,10 +70,6 @@ const tourSchema = new mongoose.Schema(
       trim: true,
       required: [true, 'A tour must have a description'],
     },
-    description: {
-      type: String,
-      trim: true,
-    },
     imageCover: {
       type: String,
       required: [true, 'Add at least one picture!'],
@@ -75,19 +81,6 @@ const tourSchema = new mongoose.Schema(
     },
     startDates: [Date],
     slug: String,
-    locations: [
-      {
-        type: {
-          type: String,
-          default: 'Point',
-          enum: ['Point'],
-        },
-        coordinates: [Number],
-        address: String,
-        description: String,
-        day: Number,
-      },
-    ],
     //child referencing in mongoose
     guides: [
       {
@@ -105,6 +98,7 @@ const tourSchema = new mongoose.Schema(
 
 // create new index with price in ascending order and ratingsaverage in descending order
 tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ startLocation: '2dsphere' });
 
 // ---------- VIRTUAL METHODS --------- //
 // upon retrieving you'll add this to your json object, you can't touch/manipulate it tho

@@ -173,13 +173,7 @@ the protect middleware route makes use of 3 different types of protections: chec
 # Headers:
 
 - _authorization_: Please insert your JWT token in here when you sign up or log in! You must be able to send your jwt token with all your requests in this header.
-- Use helmet to
 
 # API ENDPOINTS:
 
-_TOURS_:
-
-GET ALL TOURS: /api/v1/tours/
-PARAMS: LIMIT, PAGE, SORT, GTE, LTE, LT, GT,
-
-GET SINGLE TOUR: /api/v1/tours/{id}
+https://documenter.getpostman.com/view/12886145/TVKHUb9Z#849e95fa-6b81-497c-bb76-a61e2c6d4b3c
