@@ -1,0 +1,107 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.home-landing {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	background-color: color(primary);
+
+	img {
+		position: absolute;
+		display: block;
+		// filter: grayscale(20%);
+		z-index: -1;
+		opacity: 60%;
+		object-fit: cover;
+		left: 50%;
+		align-self: center;
+		height: 100vh;
+		width: 101%;
+		overflow: hidden;
+		transform: translate(-50%, -50%);
+		top: 50%;
+	}
+
+	.home-landing-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.home-landing-title {
+			font-size: $title;
+			color: color(primary-light);
+		}
+		.home-landing-motto {
+			font-size: $subheading;
+			color: color(primary-light);
+		}
+	}
+
+	.home-landing-cta {
+		transform: translateY(160%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.home-landing-button {
+			background: none;
+			cursor: pointer;
+			color: color(primary-light);
+			width: 170px;
+			height: 50px;
+			font-size: $subheading;
+			border: 3px solid white;
+		}
+		.home-landing-button-pointer {
+			width: 3px;
+			height: 30px;
+			margin-top: 10px;
+			background-color: white;
+		}
+	}
+}
+
+.home-top-tours {
+	.explore-title {
+		font-size: $title;
+		color: color(primary);
+	}
+
+	.explore-search-bar {
+		text-align: left;
+		padding-left: 20px;
+		font-size: $body;
+		width: 80%;
+		height: 40px;
+		background-color: color(primary-dark);
+		border: none;
+	}
+
+	.tab-bar {
+		display: flex;
+		list-style: none;
+		align-items: center;
+		justify-content: space-between;
+
+		.filter span {
+			cursor: pointer;
+			font-size: $body;
+			color: color(primary);
+			margin: 0 15px;
+		}
+
+		.filter span.active {
+			color: color(secondary);
+		}
+
+		.clickable {
+			font-size: $body;
+			color: color(secondary);
+			margin: 0 15px;
+		}
+	}
+}

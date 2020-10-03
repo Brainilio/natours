@@ -1,0 +1,16 @@
+// Color variables
+
+$colors: (
+	primary: #494947,
+	primary-light: #ffffff,
+	primary-dark: #b4b4b4,
+	secondary: #7494ea,
+	positive: #66c37e,
+	negative: #d8396a,
+	accent: rgb(22, 22, 22),
+);
+
+// Function: getter for color
+@function color($color-name) {
+	@return map-get($colors, $color-name);
+}

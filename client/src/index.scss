@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap");
+
+body {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	height: 100%;
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+#root {
+	position: absolute;
+	z-index: -3;
+}
+
+section {
+	z-index: -2;
+	position: relative;
+	overflow-x: hidden;
+	min-height: 100vh;
+	width: 100vw;
+}
