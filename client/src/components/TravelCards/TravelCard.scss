@@ -1,0 +1,49 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.home-cards-layout-section {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+
+	.travel-card {
+		margin: 1rem;
+		width: 90%;
+		justify-self: center;
+		height: 190px;
+		border-radius: 15%;
+		background-color: rgb(129, 129, 129);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
+		cursor: pointer;
+
+		.travel-card-upper-row {
+			display: flex;
+			justify-content: space-between;
+			margin: 1rem;
+
+			.travel-card-price {
+				color: color(primary-light);
+				font-size: $body;
+			}
+			.travel-card-rating {
+				font-size: $body;
+			}
+		}
+
+		.travel-card-lower-row {
+			margin-bottom: 1rem;
+			width: 96%;
+			text-align: Center;
+			span {
+				color: color(primary-light);
+				font-size: $body2;
+			}
+		}
+	}
+}

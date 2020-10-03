@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import TravelCard from "../../../components/TravelCards/TravelCard"
 import Search from "./Search"
 import Tab from "./Tab"
 
@@ -27,6 +28,14 @@ const Explore = (props) => {
 				submit={formSubmitHandler}
 			/>
 			<Tab click={filterHandler} />
+			<div className="home-cards-layout-section">
+				<TravelCard />
+				<TravelCard />
+				<TravelCard />
+				<TravelCard />
+				<TravelCard />
+				<TravelCard />
+			</div>
 		</section>
 	)
 }
