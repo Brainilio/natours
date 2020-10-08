@@ -8,6 +8,7 @@
 	align-items: center;
 	justify-content: space-around;
 	background-color: color(primary);
+	min-height: 100vh;
 
 	img {
 		position: absolute;
@@ -114,6 +115,7 @@
 }
 
 .about-us {
+	margin-top: 2em;
 	.about-us-title {
 		font-size: $title;
 		color: color(primary);
@@ -145,6 +147,129 @@
 			width: 200px;
 			height: 200px;
 			background-color: red;
+		}
+	}
+}
+
+.banner-hero-image-2 {
+	width: 100%;
+	height: 300px;
+	background-color: red;
+	clip-path: polygon(0 40%, 100% 10%, 100% 70%, 0 100%);
+	transform: scaleX(-1);
+}
+
+.meet-the-team {
+	color: color(primary);
+	min-height: auto;
+	margin-bottom: 5em;
+	.meet-the-team-title {
+		color: color(primary);
+		font-size: $title;
+	}
+
+	p {
+		font-size: $body;
+	}
+
+	.meet-the-team-group {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		margin: auto;
+
+		.meet-the-team-section-two {
+		}
+
+		.single-team-mate {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+
+			.single-team-photo {
+				width: 140px;
+				height: 185px;
+				background-color: red;
+
+				.single-team-name {
+					font-size: $body;
+				}
+			}
+		}
+	}
+}
+
+.contact-us {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: red;
+	color: color(primary);
+	height: 70vh;
+
+	.form-contact-us {
+		width: 90%;
+		height: 80%;
+		background-color: color(primary-light);
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: space-around;
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			.form-contact-us-title {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin-top: 2em;
+				width: 85%;
+
+				.contact-us-title {
+					font-size: $heading;
+				}
+			}
+
+			.input-items-contact {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-top: 2em;
+				width: 100%;
+
+				input[type="text"] {
+					border: 1px solid color(primary);
+					width: 85%;
+					margin: 1em 0;
+					height: 20px;
+					outline: none;
+				}
+
+				textarea {
+					width: 85%;
+					height: 120px;
+					text-align: start;
+					border: 1px solid color(primary);
+					margin: 1em 0;
+					resize: none;
+					outline: none;
+				}
+
+				button {
+					cursor: pointer;
+					height: 35px;
+					border: none;
+					width: 85%;
+					outline: none;
+					color: color(primary-light);
+					background-color: color(secondary);
+					box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+				}
+			}
 		}
 	}
 }

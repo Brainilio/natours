@@ -1,0 +1,101 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+footer {
+	background-color: color(primary);
+	color: color(primary-light);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	.footer-content {
+		display: flex;
+		justify-content: space-between;
+		height: 100%;
+		padding: 1em;
+		min-height: 20vh;
+
+		.footer-first-half {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.footer-first-half-brand {
+				ul {
+					list-style: none;
+					margin: 0;
+					padding: 0;
+					li {
+						font-size: $body;
+
+						span {
+							font-size: $subheading;
+						}
+					}
+				}
+			}
+			.footer-first-half-socials {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+
+				span {
+					font-size: $body2;
+				}
+
+				ul {
+					list-style: none;
+					display: flex;
+					align-items: flex-start;
+					justify-content: center;
+					margin: 0;
+					padding: 0;
+
+					li {
+						margin-right: 10px;
+					}
+				}
+			}
+		}
+
+		.footer-second-half {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.footer-second-half-address {
+				p {
+					text-align: right;
+					font-size: $body;
+				}
+			}
+			.footer-second-half-company {
+				display: flex;
+				flex-direction: column;
+
+				span {
+					text-align: right;
+					font-size: $body2;
+				}
+
+				ul {
+					margin: 0;
+					right: 0;
+					list-style: none;
+
+					li {
+						text-align: right;
+						font-size: $body;
+					}
+				}
+			}
+		}
+	}
+
+	.developed-by {
+		margin-top: 2em;
+		font-size: $body;
+		text-align: center;
+	}
+}
