@@ -4,10 +4,144 @@
 
 .login-page {
 	height: 100vh;
+	min-height: 100vh;
+	max-height: 100vh;
 	width: 100vw;
 	background: url("../../resource/loginscreen.jpg");
-
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.auth-content {
+		width: 85%;
+		height: auto;
+		min-height: 60%;
+		background-color: color(primary-light);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+
+		.login-up-form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			width: 85%;
+
+			.login-title {
+				font-size: $heading;
+				text-align: center;
+				color: color(primary);
+				margin-bottom: 2em;
+			}
+
+			input {
+				border: 1px solid color(primary);
+				background: none;
+				margin: 1em 0;
+				height: 20px;
+				font-size: $body;
+				padding-left: 10px;
+			}
+
+			button {
+				height: 35px;
+				border: none;
+				width: 100%;
+				outline: none;
+				margin-top: 4em;
+				font-size: $body;
+				color: color(primary-light);
+				background-color: color(secondary);
+				box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+				align-self: center;
+			}
+
+			.switch-login {
+				cursor: pointer;
+				margin-top: 1em;
+				font-size: $body;
+				color: color(primary);
+				text-align: center;
+			}
+		}
+
+		.sign-up-form {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 85%;
+			margin-top: 2em;
+
+			.signup-title {
+				font-size: $heading;
+				text-align: center;
+				color: color(primary);
+				margin: 1em 0;
+			}
+
+			label {
+				margin-top: 20px;
+				color: color(primary);
+				font-size: $body;
+			}
+
+			input {
+				border: 1px solid color(primary);
+				background: none;
+				margin: 1em 0;
+				height: 20px;
+				font-size: $body;
+				padding-left: 10px;
+			}
+
+			input[type="file"] {
+				border: none;
+				background: none;
+			}
+
+			button {
+				height: 35px;
+				border: none;
+				width: 100%;
+				outline: none;
+				margin-top: 4em;
+				font-size: $body;
+				color: color(primary-light);
+				background-color: color(secondary);
+				box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+				align-self: center;
+			}
+
+			.switch-login {
+				cursor: pointer;
+				margin: 1em 0;
+				font-size: $body;
+				color: color(primary);
+				text-align: center;
+			}
+		}
+	}
+
+	.login-page-text {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 5em;
+
+		.login-page-title {
+			font-size: $title;
+			color: color(primary-light);
+		}
+
+		.login-page-motto {
+			font-size: $subheading;
+			color: color(primary-light);
+		}
+	}
 }
