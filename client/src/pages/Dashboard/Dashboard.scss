@@ -1,0 +1,136 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.dashboard-page {
+	height: 40vh auto;
+	width: 100vw;
+	background: url("../../resource/venice.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: color(primary);
+	background-blend-mode: soft-light;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	.dashboard-actions {
+		margin-top: 3em;
+		margin-left: 1em;
+		align-self: baseline;
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				color: color(primary-light);
+				font-size: $body2;
+				margin: 10px 0;
+			}
+		}
+	}
+
+	.dashboard-user {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 2em;
+
+		img {
+			width: 120px;
+			height: 120px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+
+		span {
+			margin-top: 1rem;
+			color: color(primary-light);
+			font-size: $subheading;
+		}
+	}
+}
+
+.dashboard-page-upcoming-tours {
+	margin: 3em 0;
+
+	.upcoming-tours-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1em;
+		margin-left: 1em;
+		margin-right: 1em;
+
+		.dashboard-title-header {
+			font-size: $subheading;
+			color: color(secondary);
+		}
+
+		.dashboard-title-view {
+			font-size: $body2;
+			color: color(primary);
+			cursor: pointer;
+		}
+	}
+
+	.upcoming-tour {
+		cursor: pointer;
+		background-color: color(primary);
+		margin: 0 auto;
+		background: url("../../resource/sorasak-_UIN-pFfJ7c-unsplash.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-blend-mode: soft-light;
+		width: 95%;
+		height: 50px;
+		margin-bottom: 1em;
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		span {
+			font-size: $body2;
+			color: color(primary-light);
+		}
+	}
+}
+
+.dashboard-page-reviews {
+	margin: 3em 0;
+
+	.dashboard-title-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1em;
+		margin-left: 1em;
+		margin-right: 1em;
+		font-size: $subheading;
+		color: color(secondary);
+	}
+
+	.user-review {
+		margin: 0 auto;
+		width: 95%;
+		height: 50px;
+		margin-bottom: 1em;
+		display: flex;
+		border: 1px solid color(primary);
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+
+		span {
+			margin: 0 2em;
+			font-size: $body2;
+			text-align: center;
+		}
+	}
+}
