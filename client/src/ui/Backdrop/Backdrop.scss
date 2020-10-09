@@ -1,0 +1,12 @@
+.backdrop {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 5;
+	top: 0;
+	opacity: 1;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	box-sizing: border-box;
+	transition: all 0.3s ease-in-out;
+}

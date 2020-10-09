@@ -4,26 +4,22 @@
 
 .home-landing {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
 	background-color: color(primary);
-	min-height: 100vh;
 
 	img {
-		position: absolute;
+		position: sticky;
 		display: block;
 		// filter: grayscale(20%);
 		z-index: -1;
 		opacity: 60%;
 		object-fit: cover;
-		left: 50%;
 		align-self: center;
-		height: 100vh;
-		width: 101%;
-		overflow: hidden;
-		transform: translate(-50%, -50%);
-		top: 50%;
+		width: 100vw;
+		min-height: 100vh;
 	}
 
 	.home-landing-text {
@@ -31,6 +27,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		position: absolute;
+		top: 10%;
 		.home-landing-title {
 			font-size: $title;
 			color: color(primary-light);
@@ -42,7 +40,8 @@
 	}
 
 	.home-landing-cta {
-		transform: translateY(160%);
+		position: absolute;
+		bottom: 5%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -67,6 +66,10 @@
 }
 
 .home-top-tours {
+	padding: 1em 0;
+	min-height: 20vh;
+	width: 100vw;
+
 	.explore-title {
 		font-size: $title;
 		color: color(primary);
@@ -74,9 +77,10 @@
 
 	.explore-search-bar {
 		text-align: left;
+		align-self: center;
 		padding-left: 20px;
 		font-size: $body;
-		width: 80%;
+		width: 95%;
 		height: 40px;
 		background-color: color(primary-dark);
 		border: none;
@@ -163,6 +167,7 @@
 	color: color(primary);
 	min-height: auto;
 	margin-bottom: 5em;
+
 	.meet-the-team-title {
 		color: color(primary);
 		font-size: $title;
@@ -176,9 +181,10 @@
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
-		margin: auto;
+		margin: 5em 0;
 
 		.meet-the-team-section-two {
+			transform: translateY(35px);
 		}
 
 		.single-team-mate {
@@ -200,19 +206,18 @@
 	}
 }
 
-// TODO: Fix on height
 .contact-us {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: red;
 	color: color(primary);
-	height: 70vh;
-	min-height: 70vh;
+
+	padding: 1em;
+	min-height: 20vh;
 
 	.form-contact-us {
 		width: 90%;
-		height: 80%;
 		background-color: color(primary-light);
 		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 		display: flex;
@@ -222,6 +227,8 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			height: 100%;
+			width: 100%;
 
 			.form-contact-us-title {
 				display: flex;
@@ -264,6 +271,7 @@
 				button {
 					cursor: pointer;
 					height: 35px;
+					margin: 2em;
 					border: none;
 					width: 85%;
 					outline: none;

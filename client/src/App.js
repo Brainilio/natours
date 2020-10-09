@@ -9,7 +9,7 @@ import Login from "./pages/Login/Login"
 const App = () => {
 	return (
 		<>
-			{/* <Navbar /> */}
+			<Navbar />
 			<Switch>
 				<Route path="/Login" component={Login} />
 				<Route path="/" exact component={Home} />
