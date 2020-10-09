@@ -19,7 +19,9 @@ const Navbar = () => {
 		<>
 			<nav>
 				<div className="nav-title">
-					<span>NATOURS</span>
+					<NavLink to="/">
+						<span>NATOURS</span>
+					</NavLink>
 				</div>
 
 				<div className="hamburger-menu" onClick={handleSideClicker}>

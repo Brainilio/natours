@@ -19,7 +19,7 @@ const Traveldetail = (props) => {
 				<span className="go-back">
 					<NavLink to="/"> &lt;</NavLink>
 				</span>
-				<span className="detail-page-tour-name">YOSEMITE, USA</span>
+				<span className="detail-page-tour-name">RIO DE JANEIRO, BRAZIL</span>
 			</section>
 			<section className="detail-page-information">
 				<div className="detail-page-information-left">

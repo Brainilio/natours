@@ -76,9 +76,9 @@ const Home = () => {
 							</span>
 						</div>
 						<div className="input-items-contact">
-							<input type="text"></input>
-							<input type="text"></input>
-							<textarea></textarea>
+							<input placeholder="Your name.." type="text"></input>
+							<input placeholder="Your email.." type="text"></input>
+							<textarea placeholder="Your message.."></textarea>
 							<button type="submit">SUBMIT</button>
 						</div>
 					</form>

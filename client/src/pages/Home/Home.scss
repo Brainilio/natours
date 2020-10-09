@@ -268,20 +268,23 @@
 
 				input[type="text"] {
 					border: 1px solid color(primary);
-					width: 85%;
+					width: 80%;
 					margin: 1em 0;
 					height: 20px;
 					outline: none;
+					padding-left: 1em;
 				}
 
 				textarea {
-					width: 85%;
+					width: 80%;
 					height: 120px;
 					text-align: start;
 					border: 1px solid color(primary);
 					margin: 1em 0;
 					resize: none;
 					outline: none;
+					padding-left: 1em;
+					padding-top: 1em;
 				}
 
 				button {
