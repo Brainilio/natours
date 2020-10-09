@@ -3,13 +3,19 @@ import Explore from "./Explore/Explore"
 import "./Home.scss"
 import Landing from "./Landing/Landing"
 
+//photos
+import personOne from "../../resource/person-1.jpg"
+import personTwo from "../../resource/person-2.jpg"
+import personThree from "../../resource/person-3.jpg"
+import personFour from "../../resource/person-4.jpg"
+
 const Home = () => {
 	return (
 		<>
 			<Landing />
 			<Explore />
 			<div className="banner-hero-image-1"></div>
-			<section className="about-us">
+			<section id="about-us" className="about-us">
 				<span className="about-us-title">WHO ARE WE</span>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -29,7 +35,7 @@ const Home = () => {
 				</div>
 			</section>
 			<div className="banner-hero-image-2"></div>
-			<section className="meet-the-team">
+			<section id="our-team" className="meet-the-team">
 				<span className="meet-the-team-title">MEET THE TEAM</span>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -38,28 +44,28 @@ const Home = () => {
 				<div className="meet-the-team-group">
 					<div className="meet-the-team-section-one">
 						<div className="single-team-mate">
-							<div className="single-team-photo"></div>
+							<img src={personOne} className="single-team-photo"></img>
 							<span className="single-team-name">TAYLOR DOE</span>
 						</div>
 						<div className="single-team-mate">
-							<div className="single-team-photo"></div>
+							<img src={personTwo} className="single-team-photo"></img>
 							<span className="single-team-name">TAYLOR DOE</span>
 						</div>
 					</div>
 
 					<div className="meet-the-team-section-two">
 						<div className="single-team-mate">
-							<div className="single-team-photo"></div>
+							<img src={personThree} className="single-team-photo"></img>
 							<span className="single-team-name">TAYLOR DOE</span>
 						</div>
 						<div className="single-team-mate">
-							<div className="single-team-photo"></div>
+							<img src={personFour} className="single-team-photo"></img>
 							<span className="single-team-name">TAYLOR DOE</span>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section className="contact-us">
+			<section id="contact" className="contact-us">
 				<div className="form-contact-us">
 					<form onSubmit={() => console.log("boom!")}>
 						<div className="form-contact-us-title">

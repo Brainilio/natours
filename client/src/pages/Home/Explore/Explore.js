@@ -20,7 +20,7 @@ const Explore = (props) => {
 	}
 
 	return (
-		<section className="home-top-tours">
+		<section id="tours" className="home-top-tours">
 			<span className="explore-title">EXPLORE</span>
 			<Search
 				value={formData}

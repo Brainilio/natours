@@ -2,7 +2,7 @@ import React from "react"
 import "./Login.scss"
 
 const Login = () => {
-	return <div>Login</div>
+	return <section className="login-page"></section>
 }
 
 export default Login

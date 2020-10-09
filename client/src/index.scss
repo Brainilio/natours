@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap");
+@import "./styles/breakpoints.scss";
+@import "./styles/colors.scss";
+@import "./styles/fontSizes.scss";
 
+html {
+	scroll-behavior: smooth;
+}
 body {
 	padding: 0;
 	margin: 0;
@@ -20,4 +26,13 @@ section {
 	overflow: hidden;
 	max-width: 100vw;
 	min-height: auto;
+}
+
+a {
+	text-decoration: none;
+	color: color(primary-light);
+}
+
+button {
+	cursor: pointer;
 }
