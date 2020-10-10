@@ -10,13 +10,20 @@
 	height: 100%;
 
 	.travel-card {
-		margin: 1rem;
+		margin: 1rem auto;
 		width: 90%;
 		justify-self: center;
 		height: 190px;
 		border-radius: 15%;
 		background-color: rgb(129, 129, 129);
 		display: flex;
+		background: url("../../resource/monumentvalley.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: color(primary);
+		background-blend-mode: soft-light;
+		background-color: rgb(48, 48, 48);
 		flex-direction: column;
 		justify-content: space-between;
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -25,14 +32,30 @@
 		.travel-card-upper-row {
 			display: flex;
 			justify-content: space-between;
-			margin: 1rem;
+			align-items: center;
+			position: relative;
+			height: 50%;
 
 			.travel-card-price {
 				color: color(primary-light);
+				position: absolute;
+				border-top-left-radius: 15px;
+				border-bottom-right-radius: 15px;
+				top: 0%;
+				width: 50px;
+				height: 30px;
+				background-color: color(secondary);
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				font-size: $body;
 			}
 			.travel-card-rating {
+				position: absolute;
 				font-size: $body;
+				color: yellow;
+				top: 5%;
+				right: 10%;
 			}
 		}
 
@@ -41,6 +64,7 @@
 			width: 96%;
 			text-align: Center;
 			span {
+				font-family: Playfair;
 				color: color(primary-light);
 				font-size: $body2;
 			}

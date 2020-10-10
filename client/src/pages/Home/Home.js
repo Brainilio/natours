@@ -36,7 +36,7 @@ const Home = () => {
 			</section>
 			<div className="banner-hero-image-2"></div>
 			<section id="our-team" className="meet-the-team">
-				<span className="meet-the-team-title">MEET THE TEAM</span>
+				<span className="meet-the-team-title">THE TEAM</span>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
 					tristique tempor porta.

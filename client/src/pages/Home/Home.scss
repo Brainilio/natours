@@ -31,6 +31,7 @@
 		position: absolute;
 		top: 10%;
 		.home-landing-title {
+			font-family: Playfair;
 			font-size: $title;
 			color: color(primary-light);
 		}
@@ -74,6 +75,8 @@
 	.explore-title {
 		font-size: $title;
 		color: color(primary);
+		margin-left: 1rem;
+		font-family: Playfair;
 	}
 
 	.explore-search-bar {
@@ -81,7 +84,9 @@
 		align-self: center;
 		padding-left: 20px;
 		font-size: $body;
-		width: 95%;
+		width: 90%;
+		margin: 0 auto;
+		display: block;
 		height: 40px;
 		background-color: color(primary-dark);
 		border: none;
@@ -92,6 +97,7 @@
 		list-style: none;
 		align-items: center;
 		justify-content: space-between;
+		margin-top: 15px;
 
 		.filter span {
 			cursor: pointer;
@@ -124,12 +130,17 @@
 
 .about-us {
 	margin-top: 2em;
+
 	.about-us-title {
+		margin-left: 1rem;
 		font-size: $title;
 		color: color(primary);
+		font-family: Playfair;
 	}
 
 	p {
+		margin: 1rem;
+		text-align: justify;
 		font-size: $body;
 		color: color(primary);
 	}
@@ -185,9 +196,12 @@
 	.meet-the-team-title {
 		color: color(primary);
 		font-size: $title;
+		margin-left: 1rem;
+		font-family: Playfair;
 	}
 
 	p {
+		margin-left: 1rem;
 		font-size: $body;
 	}
 
@@ -212,10 +226,11 @@
 				height: 185px;
 				object-fit: cover;
 				margin: 10px;
+			}
 
-				.single-team-name {
-					font-size: $body;
-				}
+			.single-team-name {
+				font-size: $body;
+				font-family: Playfair;
 			}
 		}
 	}
@@ -257,6 +272,7 @@
 
 				.contact-us-title {
 					font-size: $heading;
+					font-family: Playfair;
 				}
 			}
 
@@ -268,7 +284,7 @@
 				width: 100%;
 
 				input[type="text"] {
-					border: 1px solid color(primary);
+					border: 1px solid rgba(color(primary), 0.5);
 					width: 80%;
 					margin: 1em 0;
 					height: 20px;
@@ -280,7 +296,7 @@
 					width: 80%;
 					height: 120px;
 					text-align: start;
-					border: 1px solid color(primary);
+					border: 1px solid rgba(color(primary), 0.5);
 					margin: 1em 0;
 					resize: none;
 					outline: none;

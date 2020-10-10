@@ -5,6 +5,7 @@
 .header-detail {
 	font-size: $subheading;
 	color: color(secondary);
+	margin-left: 1rem;
 }
 
 .detail-page-cta {
@@ -51,6 +52,7 @@
 		position: absolute;
 		bottom: 5%;
 		width: 100%;
+		font-family: Playfair;
 	}
 }
 
@@ -94,6 +96,7 @@
 		color: color(secondary);
 	}
 	.detail-page-description-description {
+		margin: 1rem;
 		font-size: $body2;
 		color: color(primary);
 	}

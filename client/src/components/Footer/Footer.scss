@@ -9,6 +9,7 @@ footer {
 	flex-direction: column;
 	width: 100vw;
 	justify-content: center;
+	z-index: 200;
 	bottom: 0;
 
 	.footer-content {
@@ -33,6 +34,7 @@ footer {
 
 						span {
 							font-size: $subheading;
+							font-family: Playfair;
 						}
 					}
 				}

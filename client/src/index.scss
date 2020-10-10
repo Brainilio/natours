@@ -13,6 +13,7 @@ body {
 	height: 100%;
 	max-width: 100vw;
 	overflow-x: hidden;
+	font-family: Trebuchet;
 }
 
 #root {
@@ -35,4 +36,14 @@ a {
 
 button {
 	cursor: pointer;
+}
+
+@font-face {
+	font-family: Playfair;
+	src: url("./resource/fonts/PlayfairDisplaySC-Regular.ttf");
+}
+
+@font-face {
+	font-family: Trebuchet;
+	src: url("./resource/fonts/trebuc.ttf");
 }
