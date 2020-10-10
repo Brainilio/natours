@@ -7,7 +7,23 @@ const TravelCard = () => {
 		<div className="travel-card">
 			<div className="travel-card-upper-row">
 				<div className="travel-card-price">$430,-</div>
-				<div className="travel-card-rating">X X X X</div>
+				<div className="travel-card-rating">
+					<span aria-hidden className="material-icons">
+						grade
+					</span>
+					<span aria-hidden className="material-icons">
+						grade
+					</span>
+					<span aria-hidden className="material-icons">
+						grade
+					</span>
+					<span aria-hidden className="material-icons">
+						grade
+					</span>
+					<span aria-hidden className="material-icons">
+						grade
+					</span>
+				</div>
 			</div>
 			<NavLink to="/tour/2">
 				<div className="travel-card-lower-row">

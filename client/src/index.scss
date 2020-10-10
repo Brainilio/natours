@@ -38,6 +38,13 @@ button {
 	cursor: pointer;
 }
 
+.material-icons {
+	margin: 0 2px;
+}
+
+.rating {
+	color: color(rating);
+}
 @font-face {
 	font-family: Playfair;
 	src: url("./resource/fonts/PlayfairDisplaySC-Regular.ttf");

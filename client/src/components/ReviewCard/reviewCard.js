@@ -4,7 +4,23 @@ import person from "../../resource/person.jpg"
 const reviewCard = () => {
 	return (
 		<div className="review-card">
-			<div className="review-stars"> **** </div>
+			<div className="review-stars">
+				<span aria-hidden className="material-icons rating">
+					grade
+				</span>
+				<span aria-hidden className="material-icons rating">
+					grade
+				</span>
+				<span aria-hidden className="material-icons rating">
+					grade
+				</span>
+				<span aria-hidden className="material-icons rating">
+					grade
+				</span>
+				<span aria-hidden className="material-icons rating">
+					grade
+				</span>
+			</div>
 			<div className="review-personal">
 				<img src={person} />
 				<span>John Doe</span>

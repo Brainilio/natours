@@ -21,10 +21,26 @@ const Footer = () => {
 						<span>Find us on</span>
 						<div>
 							<ul>
-								<li>IN</li>
-								<li>TA</li>
-								<li>FB</li>
-								<li>TW</li>
+								<li>
+									<span aria-hidden className="material-icons">
+										facebook
+									</span>
+								</li>
+								<li>
+									<span aria-hidden className="material-icons">
+										facebook
+									</span>
+								</li>
+								<li>
+									<span aria-hidden className="material-icons">
+										facebook
+									</span>
+								</li>
+								<li>
+									<span aria-hidden className="material-icons">
+										facebook
+									</span>
+								</li>
 							</ul>
 						</div>
 					</div>

@@ -33,24 +33,54 @@ const Dashboard = () => {
 				</div>
 
 				<div className="upcoming-tour">
-					<span>Yosemite USA</span>
-					<span>October 15, 2020</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							location_on
+						</span>
+						Yosemite USA
+					</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							event
+						</span>
+						October 15, 2020
+					</span>
 					<span>
 						<NavLink to="/"> &gt;</NavLink>
 					</span>
 				</div>
 
 				<div className="upcoming-tour">
-					<span>Yosemite USA</span>
-					<span>October 15, 2020</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							location_on
+						</span>
+						Yosemite USA
+					</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							event
+						</span>
+						October 15, 2020
+					</span>
 					<span>
 						<NavLink to="/"> &gt;</NavLink>
 					</span>
 				</div>
 
 				<div className="upcoming-tour">
-					<span>Yosemite USA</span>
-					<span>October 15, 2020</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							location_on
+						</span>
+						Yosemite USA
+					</span>
+					<span>
+						<span aria-hidden className="material-icons">
+							event
+						</span>
+						October 15, 2020
+					</span>
 					<span>
 						<NavLink to="/"> &gt;</NavLink>
 					</span>
@@ -60,12 +90,48 @@ const Dashboard = () => {
 			<section className="dashboard-page-reviews">
 				<span className="dashboard-title-header">My Reviews</span>
 				<div className="user-review">
-					<span>Pitburger, Austria</span>
-					<span>* * * *</span>
+					<span className="user-review-tour-name">
+						<span aria-hidden className="material-icons">
+							location_on
+						</span>
+						Pitburger, Austria
+					</span>
+					<span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+					</span>
 				</div>
 				<div className="user-review">
-					<span>Pitburger, Austria</span>
-					<span>* * * *</span>
+					<span className="user-review-tour-name">
+						<span aria-hidden className="material-icons">
+							location_on
+						</span>
+						Pitburger, Austria
+					</span>
+					<span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+						<span aria-hidden className="material-icons rating">
+							grade
+						</span>
+					</span>
 				</div>
 			</section>
 		</>

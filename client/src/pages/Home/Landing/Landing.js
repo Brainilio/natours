@@ -10,7 +10,7 @@ const Landing = () => {
 				<span className="home-landing-motto">Tour Agency</span>
 			</div>
 			<div className="home-landing-cta">
-				<button className="home-landing-button">View tours</button>
+				<button className="home-landing-button">Explore</button>
 				<span className="home-landing-button-pointer"></span>
 			</div>
 		</section>

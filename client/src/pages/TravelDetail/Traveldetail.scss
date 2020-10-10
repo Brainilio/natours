@@ -70,6 +70,18 @@
 			li {
 				font-size: $body2;
 				color: color(primary);
+				display: flex;
+				align-items: center;
+				justify-content: left;
+
+				span {
+					color: color(secondary);
+					margin-right: 1rem;
+				}
+
+				.rating {
+					color: color(rating);
+				}
 			}
 		}
 	}
@@ -179,5 +191,15 @@
 			font-size: $body;
 			color: color(primary);
 		}
+	}
+
+	.review-clicker {
+		width: 100px;
+		height: 25px;
+		margin-left: 2em;
+		border: none;
+		color: color(primary-light);
+		background-color: color(secondary);
+		box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 	}
 }

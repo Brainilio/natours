@@ -8,9 +8,13 @@ import "./Traveldetail.scss"
 import AliceCarousel from "react-alice-carousel"
 import "react-alice-carousel/lib/alice-carousel.css"
 import ReviewCard from "../../components/ReviewCard/reviewCard"
+import Modal from "../../ui/Modal/Modal"
+import ReviewForm from "../../components/ReviewForm/ReviewForm"
 
 const Traveldetail = (props) => {
-	const [reviewForm, setreviewForm] = useState(false)
+	const [reviewForm, setreviewForm] = useState(true)
+
+	const toggleReviewForm = () => setreviewForm((prevState) => !prevState)
 
 	return (
 		<>
@@ -24,10 +28,30 @@ const Traveldetail = (props) => {
 			<section className="detail-page-information">
 				<div className="detail-page-information-left">
 					<ul>
-						<li>X: August 21, 2021</li>
-						<li>X: 25 People</li>
-						<li>X: Medium</li>
-						<li>X: 4.5 (35)</li>
+						<li>
+							<span aria-hidden className="material-icons">
+								event
+							</span>
+							August 21, 2021
+						</li>
+						<li>
+							<span aria-hidden className="material-icons">
+								group
+							</span>
+							25 People
+						</li>
+						<li>
+							<span aria-hidden className="material-icons">
+								trending_up
+							</span>
+							Medium
+						</li>
+						<li>
+							<span aria-hidden className="material-icons rating">
+								grade
+							</span>
+							4.5 (35)
+						</li>
 					</ul>
 				</div>
 				<div className="detail-page-information-right">$800</div>
@@ -69,9 +93,19 @@ const Traveldetail = (props) => {
 			</section>
 			<section className="detail-page-reviews">
 				<span className="header-detail detail-page-map-reviews">Reviews</span>
+
+				{/* Limit reviews to 3 and then add an "view all reviews" */}
 				<ReviewCard />
 				<ReviewCard />
+				{/* If auth: */}
+				<button className="review-clicker" onClick={toggleReviewForm}>
+					Write review
+				</button>
 			</section>
+
+			{reviewForm ? (
+				<ReviewForm clicked={toggleReviewForm} show={reviewForm} />
+			) : null}
 		</>
 	)
 }

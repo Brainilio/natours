@@ -54,8 +54,12 @@
 				position: absolute;
 				font-size: $body;
 				color: yellow;
-				top: 5%;
-				right: 10%;
+				top: 6%;
+				right: 8%;
+
+				span {
+					font-size: 10px;
+				}
 			}
 		}
 

@@ -49,6 +49,7 @@ const Login = (props) => {
 				{isSignUp ? (
 					<form className="sign-up-form">
 						<span className="signup-title">Sign Up</span>
+
 						<input
 							type="text"
 							value={information.email}
@@ -56,6 +57,7 @@ const Login = (props) => {
 							name="email"
 							placeholder="Email.."
 						></input>
+
 						<input
 							type="password"
 							value={information.password}
