@@ -12,7 +12,7 @@ import Modal from "../../ui/Modal/Modal"
 import ReviewForm from "../../components/ReviewForm/ReviewForm"
 
 const Traveldetail = (props) => {
-	const [reviewForm, setreviewForm] = useState(true)
+	const [reviewForm, setreviewForm] = useState(false)
 
 	const toggleReviewForm = () => setreviewForm((prevState) => !prevState)
 
