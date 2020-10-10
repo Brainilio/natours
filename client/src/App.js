@@ -13,7 +13,6 @@ const App = () => {
 	return (
 		<>
 			<Navbar />
-
 			<Switch>
 				<Route path="/Login" component={Login} />
 				<Route path="/tour/:id" exact component={TravelDetail} />
@@ -22,7 +21,6 @@ const App = () => {
 				<Route path="/" exact component={Home} />
 				<Route render={ErrorPage} />
 			</Switch>
-
 			<Footer />
 		</>
 	)

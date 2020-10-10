@@ -1,0 +1,44 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 85%;
+	margin-top: 2em;
+
+	label {
+		margin-top: 20px;
+		color: color(primary);
+		font-size: $body;
+	}
+
+	input {
+		border: 1px solid rgba(color(primary), 0.5);
+		background: none;
+		margin: 1em 0;
+		height: 20px;
+		font-size: $body;
+		padding-left: 10px;
+	}
+
+	input[type="file"] {
+		border: none;
+		background: none;
+	}
+
+	button {
+		height: 35px;
+		border: none;
+		width: 100%;
+		outline: none;
+		margin-top: 4em;
+		font-size: $body;
+		color: color(primary-light);
+		background-color: color(secondary);
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		align-self: center;
+	}
+}
