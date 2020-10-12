@@ -8,15 +8,8 @@ import ErrorPage from "./pages/Error/Error"
 import TravelDetail from "./pages/TravelDetail/Traveldetail"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Settings from "./pages/Settings/Settings"
-import axios from "axios"
 
 const App = () => {
-	React.useEffect(() => {
-		axios
-			.get("http://159.89.101.212:8000/api/v1/tours/")
-			.then((data) => console.log(data))
-			.catch((err) => console.log(err))
-	}, [])
 	return (
 		<>
 			<Navbar />
