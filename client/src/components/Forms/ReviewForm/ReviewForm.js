@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Modal from "../../ui/Modal/Modal"
+import Modal from "../../../ui/Modal/Modal"
 
 const ReviewForm = (props) => {
 	const [review, setReview] = useState({

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { NavLink, Redirect } from "react-router-dom"
-import Loginform from "../../components/Loginform/loginForm"
-import SignupForm from "../../components/Signupform/signupForm"
+import Loginform from "../../components/Forms/Loginform/loginForm"
+import SignupForm from "../../components/Forms/Signupform/signupForm"
 import "./Login.scss"
 
 const Login = (props) => {

@@ -3,14 +3,34 @@ import ReactDOM from "react-dom"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter } from "react-router-dom"
+import { createStore, applyMiddleware, compose, combineReducers } from "redux"
+import thunk from "redux-thunk"
+import { Provider } from "react-redux"
+import tourReducer from "./store/reducers/tours"
 import "./index.scss"
 
+//redux tools
+const composeEnhancers =
+	process.env.NODE_ENV === "development"
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		: null || compose
+
+//combine reducers
+const rootReducer = combineReducers({
+	tours: tourReducer,
+})
+
+//create store and compose applymiddleware + devtools
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+
 ReactDOM.render(
-	<BrowserRouter>
+	<Provider store={store}>
 		<React.StrictMode>
-			<App />
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
 		</React.StrictMode>
-	</BrowserRouter>,
+	</Provider>,
 	document.getElementById("root")
 )
 

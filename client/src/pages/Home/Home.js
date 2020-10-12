@@ -1,7 +1,5 @@
-import React, { useEffect } from "react"
+import React from "react"
 import "./Home.scss"
-import axios from "axios"
-
 import Landing from "./Landing/Landing"
 import Explore from "./Explore/Explore"
 import About from "./About/About"

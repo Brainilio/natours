@@ -1,0 +1,71 @@
+import { fetchTours } from "../actions"
+import * as actionTypes from "../actions/actiontypes"
+
+const initialState = {
+	loadTours: false,
+	allTours: null,
+	currentTour: null,
+	currentReviews: null,
+	loadCurrentTour: false,
+	loadBooking: false,
+	isBooking: false,
+	error: null,
+}
+
+// all tours loading
+
+const loadToursStart = (state, action) => {
+	return { ...state, loadTours: true }
+}
+
+const loadToursSuccess = (state, action) => {
+	return {
+		...state,
+		loadTours: false,
+		allTours: action.tours,
+	}
+}
+
+const loadTourFailed = (state, action) => {
+	return { ...state, loadTours: false, error: action.error }
+}
+
+// single tour loading
+
+const loadSingleTourStart = (state, action) => {
+	return { ...state }
+}
+
+const loadSingleTourSuccess = (state, action) => {
+	return {
+		...state,
+		loadCurrentTour: false,
+		currentTour: action.tour,
+		currentReviews: action.reviews,
+	}
+}
+
+const loadSingleTourFailed = (state, action) => {
+	return { ...state, loadCurrentTour: false, error: action.error }
+}
+
+const reducer = (state = initialState, action) => {
+	switch (action.type) {
+		case actionTypes.LOAD_TOURS_START:
+			return loadToursStart(state, action)
+		case actionTypes.LOAD_TOURS_SUCCESS:
+			return loadToursSuccess(state, action)
+		case actionTypes.LOAD_TOURS_FAIL:
+			return loadTourFailed(state, action)
+		case actionTypes.LOAD_SINGLE_TOUR_START:
+			return loadSingleTourStart(state, action)
+		case actionTypes.LOAD_SINGLE_TOUR_SUCCESS:
+			return loadSingleTourSuccess(state, action)
+		case actionTypes.LOAD_SINGLE_TOUR_FAIL:
+			return loadSingleTourFailed(state, action)
+		default:
+			return state
+	}
+}
+
+export default reducer

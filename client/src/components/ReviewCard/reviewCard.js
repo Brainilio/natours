@@ -1,37 +1,25 @@
 import React from "react"
 import person from "../../resource/person.jpg"
 
-const reviewCard = () => {
+const ReviewCard = (props) => {
+	let reviews = []
+	for (let i = 0; i < props.rating; i++) {
+		reviews.push(
+			<span key={i} aria-hidden className="material-icons rating">
+				grade
+			</span>
+		)
+	}
 	return (
 		<div className="review-card">
-			<div className="review-stars">
-				<span aria-hidden className="material-icons rating">
-					grade
-				</span>
-				<span aria-hidden className="material-icons rating">
-					grade
-				</span>
-				<span aria-hidden className="material-icons rating">
-					grade
-				</span>
-				<span aria-hidden className="material-icons rating">
-					grade
-				</span>
-				<span aria-hidden className="material-icons rating">
-					grade
-				</span>
-			</div>
+			<div className="review-stars">{reviews.map((review) => review)}</div>
 			<div className="review-personal">
 				<img src={person} />
-				<span>John Doe</span>
+				<span>{props.user.name}</span>
 			</div>
-			<p>
-				eleifend consectetur lorem. Nullam nec diam lectus. Mauris vitae
-				convallis neque. Orci varius natoque penatibus et magnis dis parturient
-				montes.
-			</p>
+			<p>{props.message}</p>
 		</div>
 	)
 }
 
-export default reviewCard
+export default ReviewCard
