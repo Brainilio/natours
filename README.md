@@ -1,5 +1,11 @@
 # natours
 
+Server is hosted on: http://159.89.101.212:8000/api/v1/
+
+# API ENDPOINTS:
+
+https://documenter.getpostman.com/view/12886145/TVKHUb9Z#849e95fa-6b81-497c-bb76-a61e2c6d4b3c
+
 NodeJS, Express & MongoDB application for booking tours with MVC architecture
 
 #### Contoller:
@@ -175,7 +181,5 @@ the protect middleware route makes use of 3 different types of protections: chec
 
 - _authorization_: Please insert your JWT token in here when you sign up or log in! You must be able to send your jwt token with all your requests in this header.
 - _helmet_: To ensure secure HTTP.
+- _Allow-access-origin_: You're allowed to access the server from multiple devices
 
-# API ENDPOINTS:
-
-https://documenter.getpostman.com/view/12886145/TVKHUb9Z#849e95fa-6b81-497c-bb76-a61e2c6d4b3c
