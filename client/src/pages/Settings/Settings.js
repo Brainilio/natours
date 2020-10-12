@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import "./Settings.scss"
-import person from "../../resource/person.jpg"
 import { NavLink } from "react-router-dom"
+import EditProfileForm from "../../components/Forms/EditProfileform/editProfileForm"
+import ChangePasswordForm from "../../components/Forms/ChangePasswordForm/changePasswordForm"
+import person from "../../resource/person.jpg"
 
 const Settings = () => {
 	const [newSettings, setNewSettings] = useState({
@@ -57,37 +59,24 @@ const Settings = () => {
 			</section>
 			<section className="edit-profile-section">
 				<span className="header-title-page-settings">Edit Profile</span>
-				<form>
-					<input
-						type="text"
-						value={newSettings.name}
-						onChange={(e) => formHandler(e)}
-						name="name"
-						placeholder="Name.."
-					></input>
-					<input
-						type="text"
-						value={newSettings.email}
-						onChange={(e) => formHandler(e)}
-						name="email"
-						placeholder="Email.."
-					></input>
-					<div>
-						<img src={person} />
-						<input
-							type="file"
-							name="image"
-							accept="image/png, image/jpeg"
-						></input>
-					</div>
-					<button onClick={(e) => formSubmitHandler(e)} type="submit">
-						Save settings
-					</button>
-				</form>
+				<EditProfileForm
+					name={newSettings.name}
+					email={newSettings.email}
+					image={newSettings.image}
+					formHandler={formHandler}
+					submitHandler={formSubmitHandler}
+				/>
 			</section>
 			<hr className="solid" style={{ width: "95%" }} />
 			<section className="changepassword-profile-section">
 				<span className="header-title-page-settings">Change Password</span>
+				<ChangePasswordForm
+					currentPassword={newSettings.currentPassword}
+					password={newSettings.password}
+					passwordConfirm={newSettings.passwordConfirm}
+					formHandler={formHandler}
+					submitHandler={formSubmitHandler}
+				/>
 				<form>
 					<input
 						type="password"

@@ -8,7 +8,6 @@ import "./Traveldetail.scss"
 import AliceCarousel from "react-alice-carousel"
 import "react-alice-carousel/lib/alice-carousel.css"
 import ReviewCard from "../../components/ReviewCard/reviewCard"
-import Modal from "../../ui/Modal/Modal"
 import ReviewForm from "../../components/ReviewForm/ReviewForm"
 
 const Traveldetail = (props) => {
@@ -95,8 +94,9 @@ const Traveldetail = (props) => {
 				<span className="header-detail detail-page-map-reviews">Reviews</span>
 
 				{/* Limit reviews to 3 and then add an "view all reviews" */}
+				<ReviewCard rating={null} message={null} />
 				<ReviewCard />
-				<ReviewCard />
+
 				{/* If auth: */}
 				<button className="review-clicker" onClick={toggleReviewForm}>
 					Write review

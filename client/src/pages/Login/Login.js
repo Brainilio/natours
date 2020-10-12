@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { NavLink, Redirect } from "react-router-dom"
+import Loginform from "../../components/Loginform/loginForm"
+import SignupForm from "../../components/Signupform/signupForm"
 import "./Login.scss"
 
 const Login = (props) => {
@@ -14,9 +16,9 @@ const Login = (props) => {
 
 	const toggleContent = () => setIsSignUp((prevState) => !prevState)
 
-	const formHandler = (e) => {
-		let label = e.target.name
-		let value = e.target.value
+	const formHandler = (event) => {
+		let label = event.target.name
+		let value = event.target.value
 
 		setInformation({
 			...information,
@@ -24,8 +26,8 @@ const Login = (props) => {
 		})
 	}
 
-	const formSubmitHandler = (e) => {
-		e.preventDefault()
+	const formSubmitHandler = (event) => {
+		event.preventDefault()
 		let toSend = {}
 
 		// for cleanness: don't send empty labels, just send what contains value
@@ -47,70 +49,23 @@ const Login = (props) => {
 			{authRedirect}
 			<div className="auth-content">
 				{isSignUp ? (
-					<form className="sign-up-form">
-						<span className="signup-title">Sign Up</span>
-
-						<input
-							type="text"
-							value={information.email}
-							onChange={(e) => formHandler(e)}
-							name="email"
-							placeholder="Email.."
-						></input>
-
-						<input
-							type="password"
-							value={information.password}
-							onChange={(e) => formHandler(e)}
-							name="password"
-							placeholder="Password.."
-						></input>
-						<input
-							type="password"
-							value={information.passwordConfirm}
-							onChange={(e) => formHandler(e)}
-							name="passwordConfirm"
-							placeholder="Confirm password.."
-						></input>
-						<label htmlFor="image">Choose a profile picture:</label>
-
-						<input
-							type="file"
-							name="image"
-							accept="image/png, image/jpeg"
-						></input>
-
-						<button onClick={(e) => formSubmitHandler(e)} type="submit">
-							Sign up..
-						</button>
-						<span onClick={toggleContent} className="switch-login">
-							or Login..
-						</span>
-					</form>
+					<SignupForm
+						email={information.email}
+						password={information.password}
+						passwordConfirm={information.passwordConfirm}
+						image={information.image}
+						formHandler={formHandler}
+						submitHandler={formSubmitHandler}
+						toggle={toggleContent}
+					/>
 				) : (
-					<form className="login-up-form">
-						<span className="login-title">Login</span>
-						<input
-							type="text"
-							value={information.email}
-							onChange={(e) => formHandler(e)}
-							name="email"
-							placeholder="Email.."
-						></input>
-						<input
-							type="password"
-							value={information.password}
-							onChange={(e) => formHandler(e)}
-							name="password"
-							placeholder="Password.."
-						></input>
-						<button onClick={(e) => formSubmitHandler(e)} type="submit">
-							Log in
-						</button>
-						<span onClick={toggleContent} className="switch-login">
-							or Sign Up..
-						</span>
-					</form>
+					<Loginform
+						email={information.email}
+						password={information.password}
+						formHandler={formHandler}
+						submitHandler={formSubmitHandler}
+						toggle={toggleContent}
+					/>
 				)}
 			</div>
 			<div className="login-page-text">
