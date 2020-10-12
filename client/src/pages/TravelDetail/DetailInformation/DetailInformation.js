@@ -1,4 +1,5 @@
 import React from "react"
+import dayjs from "dayjs"
 
 const DetailInformation = (props) => {
 	return (
@@ -9,7 +10,7 @@ const DetailInformation = (props) => {
 						<span aria-hidden className="material-icons">
 							event
 						</span>
-						{props.startDate}
+						{dayjs(props.startDate).format("D MMMM, YYYY")}
 					</li>
 					<li>
 						<span aria-hidden className="material-icons">
