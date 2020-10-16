@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux"
 import thunk from "redux-thunk"
 import { Provider } from "react-redux"
 import tourReducer from "./store/reducers/tours"
+import authReducer from "./store/reducers/auth"
 import "./index.scss"
 
 //redux tools
@@ -18,6 +19,7 @@ const composeEnhancers =
 //combine reducers
 const rootReducer = combineReducers({
 	tours: tourReducer,
+	auth: authReducer,
 })
 
 //create store and compose applymiddleware + devtools

@@ -3,6 +3,8 @@ import { NavLink, Redirect } from "react-router-dom"
 import Loginform from "../../components/Forms/Loginform/loginForm"
 import SignupForm from "../../components/Forms/Signupform/signupForm"
 import "./Login.scss"
+import * as actions from "../../store/actions/index"
+import { connect } from "react-redux"
 
 const Login = (props) => {
 	const [isSignUp, setIsSignUp] = useState(false)
@@ -29,6 +31,7 @@ const Login = (props) => {
 	const formSubmitHandler = (event) => {
 		event.preventDefault()
 		let toSend = {}
+		toSend[isSignUp] = isSignUp
 
 		// for cleanness: don't send empty labels, just send what contains value
 		for (const name in information) {
@@ -37,8 +40,7 @@ const Login = (props) => {
 			}
 		}
 
-		console.log(toSend, isSignUp)
-		setAuthredirect(true)
+		props.onAuthentication(toSend)
 	}
 
 	let authRedirect = null
@@ -76,4 +78,17 @@ const Login = (props) => {
 	)
 }
 
-export default Login
+const mapStateToProps = (state) => {
+	return {
+		loading: state.auth.loading,
+		error: state.auth.error,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onAuthentication: (userData) => dispatch(actions.auth(userData)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
