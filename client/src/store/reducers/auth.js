@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actiontypes"
 const initialState = {
 	token: null,
 	userId: null,
+	name: null,
 	loading: false,
 	error: null,
 	redirect: false,
@@ -19,6 +20,7 @@ const authSuccess = (state, action) => {
 		...state,
 		token: action.token,
 		userId: action.userId,
+		name: action.name,
 		error: null,
 		loading: false,
 	}
@@ -31,7 +33,7 @@ const authFail = (state, action) => {
 
 //auth logout
 const authLogout = (state, action) => {
-	return { ...state, token: null, userId: null }
+	return { ...state, token: null, userId: null, name: null }
 }
 
 const reducer = (state = initialState, action) => {

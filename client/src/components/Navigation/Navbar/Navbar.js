@@ -2,8 +2,10 @@ import React, { useState } from "react"
 import Backdrop from "../../../ui/Backdrop/Backdrop"
 import { NavLink } from "react-router-dom"
 import "./Navbar.scss"
+import * as actions from "../../../store/actions/index"
+import { connect } from "react-redux"
 
-const Navbar = () => {
+const Navbar = (props) => {
 	const [showSideDrawer, setSideDrawer] = useState(false)
 
 	const handleSideClicker = () => setSideDrawer((prevState) => !prevState)
@@ -14,6 +16,29 @@ const Navbar = () => {
 	if (showSideDrawer) {
 		navSideDrawerClasses = ["nav-sidedrawer", "open"]
 	}
+
+	let authContent = (
+		<div className="side-login">
+			<NavLink to="/login">
+				<button className="side-login-button">Log in</button>
+			</NavLink>
+
+			<NavLink to="/login">
+				<button className="side-signup-button">or Sign up</button>
+			</NavLink>
+		</div>
+	)
+
+	if (props.isAuthenticated)
+		authContent = (
+			<div className="side-profile-user">
+				<span onClick={() => props.onLogOut()}>Log out</span>
+				<NavLink to="/login">
+					<div className="side-profile-user-image"></div>
+				</NavLink>
+				<span className="side-profile-name">Safe travels, {props.name}</span>
+			</div>
+		)
 
 	return (
 		<>
@@ -37,23 +62,7 @@ const Navbar = () => {
 				className={navSideDrawerClasses.join(" ")}
 			>
 				<div className="side-top-content">
-					{/* <div className="side-profile-user">
-						<NavLink to="/login">
-							<div className="side-profile-user-image"></div>
-						</NavLink>
-						<span className="side-profile-name">Safe travels, John</span>
-					</div> */}
-
-					<div className="side-login">
-						<NavLink to="/login">
-							<button className="side-login-button">Log in</button>
-						</NavLink>
-
-						<NavLink to="/login">
-							<button className="side-signup-button">or Sign up</button>
-						</NavLink>
-					</div>
-
+					{authContent}
 					<ul className="side-nav-items">
 						<NavLink to="/#tours">
 							<li className="tour-cta">Tours</li>
@@ -91,4 +100,17 @@ const Navbar = () => {
 	)
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+	return {
+		name: state.auth.name,
+		isAuthenticated: state.auth.token !== null,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onLogOut: () => dispatch(actions.authLogout()),
+	}
+}
+
+export default connect(null, mapDispatchToProps)(Navbar)

@@ -31,7 +31,6 @@ const Login = (props) => {
 	const formSubmitHandler = (event) => {
 		event.preventDefault()
 		let toSend = {}
-		toSend[isSignUp] = isSignUp
 
 		// for cleanness: don't send empty labels, just send what contains value
 		for (const name in information) {
@@ -40,11 +39,11 @@ const Login = (props) => {
 			}
 		}
 
-		props.onAuthentication(toSend)
+		props.onAuthentication(toSend, isSignUp)
 	}
 
 	let authRedirect = null
-	if (isauthRedirect) authRedirect = <Redirect to="/dashboard" />
+	if (props.authRedirect) authRedirect = <Redirect to="/dashboard" />
 
 	return (
 		<section className="login-page">
@@ -82,12 +81,14 @@ const mapStateToProps = (state) => {
 	return {
 		loading: state.auth.loading,
 		error: state.auth.error,
+		authRedirect: state.auth.token !== null,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onAuthentication: (userData) => dispatch(actions.auth(userData)),
+		onAuthentication: (userData, isSignUp) =>
+			dispatch(actions.auth(userData, isSignUp)),
 	}
 }
 
