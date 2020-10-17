@@ -32,7 +32,7 @@ const Navbar = (props) => {
 	if (props.isAuthenticated)
 		authContent = (
 			<div className="side-profile-user">
-				<span onClick={() => props.onLogOut()}>Log out</span>
+				<NavLink to="/logout">Log out</NavLink>
 				<NavLink to="/login">
 					<div className="side-profile-user-image"></div>
 				</NavLink>

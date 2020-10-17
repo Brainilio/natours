@@ -8,6 +8,7 @@ import ErrorPage from "./pages/Error/Error"
 import TravelDetail from "./pages/TravelDetail/Traveldetail"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Settings from "./pages/Settings/Settings"
+import Logout from "./pages/Login/Logout"
 import * as actions from "./store/actions/index"
 import { connect } from "react-redux"
 
@@ -29,6 +30,7 @@ const App = (props) => {
 		routes = (
 			<>
 				<Route path="/Login" component={Login} />
+				<Route path="/logout" component={Logout} />
 				<Route path="/tour/:id" exact component={TravelDetail} />
 				<Route path="/dashboard" exact component={Dashboard} />
 				<Route path="/settings" exact component={Settings} />
