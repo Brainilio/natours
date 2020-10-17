@@ -6,22 +6,21 @@ const Reviews = (props) => {
 		<section className="detail-page-reviews">
 			<span className="header-detail detail-page-map-reviews">Reviews</span>
 			{props.reviews
-				? props.reviews
-						//.slice(0, 3)
-						.map((review) => (
-							<ReviewCard
-								key={review._id}
-								user={review.user}
-								message={review.text}
-								rating={review.rating}
-							/>
-						))
+				? props.reviews.map((review) => (
+						<ReviewCard
+							key={review._id}
+							user={review.user}
+							message={review.text}
+							rating={review.rating}
+						/>
+				  ))
 				: null}
 
-			{/* If auth: */}
-			<button className="review-clicker" onClick={props.clicked}>
-				Write review
-			</button>
+			{props.authenticated ? (
+				<button className="review-clicker" onClick={props.clicked}>
+					Write review
+				</button>
+			) : null}
 		</section>
 	)
 }

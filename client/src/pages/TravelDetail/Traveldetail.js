@@ -42,6 +42,7 @@ const Traveldetail = (props) => {
 						reviews={props.reviews}
 						clicked={toggleReviewForm}
 						tourid={props.match.params.id}
+						authenticated={props.isAuthenticated}
 					/>
 					{reviewForm ? (
 						<ReviewForm
@@ -60,6 +61,7 @@ const Traveldetail = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
+		isAuthenticated: state.auth.token !== null,
 		tour: state.tours.currentTour,
 		error: state.tours.error,
 		reviews: state.tours.currentReviews,
