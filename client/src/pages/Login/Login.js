@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { NavLink, Redirect } from "react-router-dom"
 import Loginform from "../../components/Forms/Loginform/loginForm"
 import SignupForm from "../../components/Forms/Signupform/signupForm"
@@ -7,6 +7,10 @@ import * as actions from "../../store/actions/index"
 import { connect } from "react-redux"
 
 const Login = (props) => {
+	// useEffect(() => {
+	// 	props.tryAutoSignUp()
+	// }, [])
+
 	const [isSignUp, setIsSignUp] = useState(false)
 	const [information, setInformation] = useState({
 		email: "",
@@ -87,6 +91,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		tryAutoSignUp: () => dispatch(actions.checkAuth()),
 		onAuthentication: (userData, isSignUp) =>
 			dispatch(actions.auth(userData, isSignUp)),
 	}

@@ -29,11 +29,11 @@ const App = (props) => {
 	if (props.isAuthenticated) {
 		routes = (
 			<>
-				<Route path="/Login" component={Login} />
-				<Route path="/logout" component={Logout} />
+				<Route path="/Login" exact component={Login} />
 				<Route path="/tour/:id" exact component={TravelDetail} />
 				<Route path="/dashboard" exact component={Dashboard} />
 				<Route path="/settings" exact component={Settings} />
+				<Route path="/logout" exact component={Logout} />
 				<Route path="/" exact component={Home} />
 				<Route render={ErrorPage} />
 			</>
