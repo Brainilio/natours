@@ -42,9 +42,10 @@ export const auth = (userData, isSignUp) => {
 		dispatch(authStart())
 
 		userData = {
-			...userData,
 			name: "Brainilio",
+			...userData,
 		}
+
 		console.log(userData)
 		let url = "users/login"
 		if (isSignUp) url = "users/signup"
@@ -58,7 +59,7 @@ export const auth = (userData, isSignUp) => {
 				const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
 
 				localStorage.setItem("token", token)
-				localStorage.setItem("userId", userId)
+				localStorage.setItem("userid", userId)
 				localStorage.setItem("expirationDate", expirationDate)
 
 				dispatch(checkAuthTimeOut(3600))

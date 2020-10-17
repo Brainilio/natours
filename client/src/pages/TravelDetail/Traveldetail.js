@@ -38,9 +38,17 @@ const Traveldetail = (props) => {
 					<Guides />
 					<ImageCarousel />
 					<Location location={props.tour.startLocation} />
-					<Reviews reviews={props.reviews} clicked={toggleReviewForm} />
+					<Reviews
+						reviews={props.reviews}
+						clicked={toggleReviewForm}
+						tourid={props.match.params.id}
+					/>
 					{reviewForm ? (
-						<ReviewForm clicked={toggleReviewForm} show={reviewForm} />
+						<ReviewForm
+							clicked={toggleReviewForm}
+							show={reviewForm}
+							tourid={props.match.params.id}
+						/>
 					) : null}
 				</>
 			) : (

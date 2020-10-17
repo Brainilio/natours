@@ -49,6 +49,15 @@ const loadSingleTourFailed = (state, action) => {
 	return { ...state, loadCurrentTour: false, error: action.error }
 }
 
+const newReview = (state, action) => {
+	let reviews = [...state.currentReviews]
+	reviews.push(action.review)
+
+	console.log("Going to add..." + action.review)
+
+	return { ...state, currentReviews: reviews }
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_TOURS_START:
@@ -63,6 +72,8 @@ const reducer = (state = initialState, action) => {
 			return loadSingleTourSuccess(state, action)
 		case actionTypes.LOAD_SINGLE_TOUR_FAIL:
 			return loadSingleTourFailed(state, action)
+		case actionTypes.SUBMIT_REVIEW:
+			return newReview(state, action)
 		default:
 			return state
 	}

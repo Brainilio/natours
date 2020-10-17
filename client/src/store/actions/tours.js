@@ -74,7 +74,9 @@ export const fetchSingleTour = (id) => {
 				return response
 			})
 			.then(async (response) => {
-				let newResponse = await axios.get(`tours/${id}/reviews`)
+				let newResponse = await axios.get(
+					`tours/${id}/reviews/?sort=createdAt&limit=3`
+				)
 				dispatch(
 					loadSingleTourSuccess(response.data.data, newResponse.data.data.doc)
 				)

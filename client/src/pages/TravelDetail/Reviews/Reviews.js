@@ -7,7 +7,7 @@ const Reviews = (props) => {
 			<span className="header-detail detail-page-map-reviews">Reviews</span>
 			{props.reviews
 				? props.reviews
-						.slice(0, 3)
+						//.slice(0, 3)
 						.map((review) => (
 							<ReviewCard
 								key={review._id}

@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import Modal from "../../../ui/Modal/Modal"
+import * as actions from "../../../store/actions/index"
+import { connect } from "react-redux"
 
 const ReviewForm = (props) => {
 	const [review, setReview] = useState({
-		user: "John Doe",
-		rating: "",
-		message: "",
+		rating: 1,
+		text: "",
 	})
 
 	const formHandler = (e) => {
@@ -16,13 +17,14 @@ const ReviewForm = (props) => {
 			...review,
 			[name]: value,
 		})
-
-		console.log(review)
 	}
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
 		console.log(review)
+
+		console.log(props.tourid)
+		props.submitReview(review, props.tourid)
 		props.clicked()
 	}
 
@@ -33,9 +35,9 @@ const ReviewForm = (props) => {
 
 				<input
 					type="text"
-					value={review.message}
+					value={review.text}
 					onChange={(e) => formHandler(e)}
-					name="message"
+					name="text"
 					placeholder="Write your review.."
 				></input>
 				<select name="rating" onChange={(e) => formHandler(e)}>
@@ -53,4 +55,15 @@ const ReviewForm = (props) => {
 	)
 }
 
-export default ReviewForm
+const mapStateToProps = (state) => {
+	return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		submitReview: (body, tourid) =>
+			dispatch(actions.submitReviews(body, tourid)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm)
