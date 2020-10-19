@@ -1,5 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
+import Logout from "../../pages/Login/Logout"
 
 export const authStart = () => {
 	return {
@@ -14,6 +15,13 @@ export const authSuccess = (token, userId, name, email) => {
 		userId: userId,
 		email: email,
 		name: name,
+	}
+}
+
+export const authEdit = (newData) => {
+	return {
+		type: actionTypes.AUTH_EDIT,
+		newData: newData,
 	}
 }
 
@@ -83,7 +91,7 @@ export const authChangeProfile = (userdata) => {
 
 			data.currentPassword = userdata.currentPassword
 			data.newPassword = userdata.password
-			data.confirmNewPassword = userdata.passwordConfirm
+			data.newPasswordConfirm = userdata.passwordConfirm
 
 			console.log(data)
 
@@ -93,12 +101,23 @@ export const authChangeProfile = (userdata) => {
 						Authorization: localStorage.getItem("token"),
 					},
 				})
-				.then((response) => console.log(response))
+				.then((response) => {
+					dispatch(authLogout())
+				})
 				.catch((error) => console.log(error))
 		} else {
 			let data = {}
 			data.name = userdata.name
 			data.email = userdata.email
+
+			axios
+				.patch("users/updateProfile", data, {
+					headers: {
+						Authorization: localStorage.getItem("token"),
+					},
+				})
+				.then((response) => dispatch(authEdit(response)))
+				.catch((error) => console.log(error))
 		}
 	}
 }

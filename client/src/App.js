@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Route, Switch } from "react-router"
+import { Route, Switch, Redirect } from "react-router"
 import Footer from "./components/Footer/Footer"
 import Navbar from "./components/Navigation/Navbar/Navbar"
 import Home from "./pages/Home/Home"
@@ -22,6 +22,7 @@ const App = (props) => {
 			<Route path="/Login" component={Login} />
 			<Route path="/tour/:id" exact component={TravelDetail} />
 			<Route path="/" exact component={Home} />
+			<Route to="*" component={ErrorPage} />
 		</>
 	)
 
@@ -34,6 +35,7 @@ const App = (props) => {
 				<Route path="/settings" exact component={Settings} />
 				<Route path="/logout" exact component={Logout} />
 				<Route path="/" exact component={Home} />
+				<Route to="*" component={ErrorPage} />
 			</>
 		)
 	}
@@ -42,7 +44,6 @@ const App = (props) => {
 		<>
 			<Navbar name={props.name} isAuthenticated={props.isAuthenticated} />
 			<Switch>{routes}</Switch>
-			<Route render={ErrorPage} />
 			<Footer />
 		</>
 	)

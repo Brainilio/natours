@@ -38,6 +38,12 @@ const authLogout = (state, action) => {
 	return { ...state, token: null, userId: null, name: null }
 }
 
+//change profile
+const authEdit = (state, action) => {
+	console.log(action.newData)
+	return { ...state }
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.AUTH_START:
@@ -48,7 +54,8 @@ const reducer = (state = initialState, action) => {
 			return authFail(state, action)
 		case actionTypes.AUTH_LOGOUT:
 			return authLogout(state, action)
-
+		case actionTypes.AUTH_EDIT:
+			return authEdit(state, action)
 		default:
 			return state
 	}
