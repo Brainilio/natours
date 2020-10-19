@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actiontypes"
 const initialState = {
 	token: null,
 	userId: null,
+	fullUser: null,
 	name: null,
 	loading: false,
 	error: null,
@@ -21,6 +22,7 @@ const authSuccess = (state, action) => {
 		token: action.token,
 		userId: action.userId,
 		name: action.name,
+		email: action.email,
 		error: null,
 		loading: false,
 	}

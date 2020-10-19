@@ -22,7 +22,6 @@ const App = (props) => {
 			<Route path="/Login" component={Login} />
 			<Route path="/tour/:id" exact component={TravelDetail} />
 			<Route path="/" exact component={Home} />
-			<Route render={ErrorPage} />
 		</>
 	)
 
@@ -35,7 +34,6 @@ const App = (props) => {
 				<Route path="/settings" exact component={Settings} />
 				<Route path="/logout" exact component={Logout} />
 				<Route path="/" exact component={Home} />
-				<Route render={ErrorPage} />
 			</>
 		)
 	}
@@ -44,6 +42,7 @@ const App = (props) => {
 		<>
 			<Navbar name={props.name} isAuthenticated={props.isAuthenticated} />
 			<Switch>{routes}</Switch>
+			<Route render={ErrorPage} />
 			<Footer />
 		</>
 	)

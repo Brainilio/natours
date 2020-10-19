@@ -4,20 +4,22 @@ import { NavLink } from "react-router-dom"
 import EditProfileForm from "../../components/Forms/EditProfileform/editProfileForm"
 import ChangePasswordForm from "../../components/Forms/ChangePasswordForm/changePasswordForm"
 import person from "../../resource/person.jpg"
+import * as actions from "../../store/actions"
+import { connect } from "react-redux"
 
-const Settings = () => {
+const Settings = (props) => {
 	const [newSettings, setNewSettings] = useState({
-		name: "",
-		email: "",
+		name: props.currentUser,
+		email: props.currentUser,
 		currentPassword: "",
 		password: "",
 		passwordConfirm: "",
 		image: "",
 	})
 
-	const formHandler = (e) => {
-		let label = e.target.name
-		let value = e.target.value
+	const formHandler = (event) => {
+		let label = event.target.name
+		let value = event.target.value
 
 		setNewSettings({
 			...newSettings,
@@ -25,9 +27,8 @@ const Settings = () => {
 		})
 	}
 
-	const formSubmitHandler = (e) => {
-		e.preventDefault()
-		e.preventDefault()
+	const formSubmitHandler = (event) => {
+		event.preventDefault()
 		let toSend = {}
 
 		// for cleanness: don't send empty labels, just send what contains value
@@ -37,7 +38,16 @@ const Settings = () => {
 			}
 		}
 
-		console.log(toSend)
+		props.onSubmitForm(toSend)
+
+		setNewSettings({
+			name: "",
+			email: "",
+			currentPassword: "",
+			password: "",
+			passwordConfirm: "",
+			image: "",
+		})
 	}
 
 	const deactivateAccount = (e) => console.log("Deactivating account...")
@@ -77,33 +87,6 @@ const Settings = () => {
 					formHandler={formHandler}
 					submitHandler={formSubmitHandler}
 				/>
-				<form>
-					<input
-						type="password"
-						value={newSettings.currentPassword}
-						onChange={(e) => formHandler(e)}
-						name="currentPassword"
-						placeholder="Current Password"
-					></input>
-					<input
-						type="password"
-						value={newSettings.password}
-						onChange={(e) => formHandler(e)}
-						name="password"
-						placeholder="New Password.."
-					></input>
-					<input
-						type="password"
-						value={newSettings.passwordCOnfirm}
-						onChange={(e) => formHandler(e)}
-						name="passwordCOnfirm"
-						placeholder="Confirm new password.."
-					></input>
-
-					<button onClick={(e) => formSubmitHandler(e)} type="submit">
-						Submit
-					</button>
-				</form>
 			</section>
 			<hr className="solid" style={{ width: "95%" }} />
 			<section className="deactivate-profile-section">
@@ -116,4 +99,17 @@ const Settings = () => {
 	)
 }
 
-export default Settings
+const mapStateToProps = (state) => {
+	return {
+		currentUser: state.auth.user,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onSubmitForm: (dataToChange) =>
+			dispatch(actions.authChangeProfile(dataToChange)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)

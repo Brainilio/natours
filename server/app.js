@@ -32,6 +32,8 @@ app.use(function (req, res, next) {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Origin, Authorization'
   );
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+  res.header('Allow', 'GET, PATCH, PUT, DELETE, OPTIONS');
 
   if (req.accepts('json' || 'xml' || 'x-www-form-urlencoded')) {
     next();

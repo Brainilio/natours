@@ -7,11 +7,12 @@ export const authStart = () => {
 	}
 }
 
-export const authSuccess = (token, userId, name) => {
+export const authSuccess = (token, userId, name, email) => {
 	return {
 		type: actionTypes.AUTH_SUCCESS,
 		token: token,
 		userId: userId,
+		email: email,
 		name: name,
 	}
 }
@@ -54,6 +55,7 @@ export const auth = (userData, isSignUp) => {
 			.post(url, userData)
 			.then((response) => {
 				let name = response.data.data.user.name
+				let email = response.data.data.user.email
 				let token = response.data.token
 				let userId = response.data.data.user._id
 				const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
@@ -63,9 +65,41 @@ export const auth = (userData, isSignUp) => {
 				localStorage.setItem("expirationDate", expirationDate)
 
 				dispatch(checkAuthTimeOut(3600))
-				dispatch(authSuccess(token, userId, name))
+				dispatch(authSuccess(token, userId, name, email))
 			})
 			.catch((error) => dispatch(authFailed(error)))
+	}
+}
+
+//edit profile
+
+export const authChangeProfile = (userdata) => {
+	return (dispatch) => {
+		if (userdata.password) {
+			// perform password change
+			console.log("changing password...")
+
+			let data = {}
+
+			data.currentPassword = userdata.currentPassword
+			data.newPassword = userdata.password
+			data.confirmNewPassword = userdata.passwordConfirm
+
+			console.log(data)
+
+			axios
+				.patch("users/updatePassword", data, {
+					headers: {
+						Authorization: localStorage.getItem("token"),
+					},
+				})
+				.then((response) => console.log(response))
+				.catch((error) => console.log(error))
+		} else {
+			let data = {}
+			data.name = userdata.name
+			data.email = userdata.email
+		}
 	}
 }
 

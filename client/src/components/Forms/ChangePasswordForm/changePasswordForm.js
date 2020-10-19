@@ -19,9 +19,9 @@ const ChangePasswordForm = (props) => {
 			></input>
 			<input
 				type="password"
-				value={props.passwordCOnfirm}
+				value={props.passwordConfirm}
 				onChange={props.formHandler}
-				name="passwordCOnfirm"
+				name="passwordConfirm"
 				placeholder="Confirm new password.."
 			></input>
 
