@@ -19,23 +19,27 @@ const App = (props) => {
 
 	let routes = (
 		<>
-			<Route path="/Login" component={Login} />
-			<Route path="/tour/:id" exact component={TravelDetail} />
-			<Route path="/" exact component={Home} />
-			<Route to="*" component={ErrorPage} />
+			<Switch>
+				<Route path="/" exact component={Home} />
+				<Route path="/Login" component={Login} />
+				<Route path="/tour/:id" component={TravelDetail} />
+				<Route path="*" component={ErrorPage} />
+			</Switch>
 		</>
 	)
 
 	if (props.isAuthenticated) {
 		routes = (
 			<>
-				<Route path="/Login" exact component={Login} />
-				<Route path="/tour/:id" exact component={TravelDetail} />
-				<Route path="/dashboard" exact component={Dashboard} />
-				<Route path="/settings" exact component={Settings} />
-				<Route path="/logout" exact component={Logout} />
-				<Route path="/" exact component={Home} />
-				<Route to="*" component={ErrorPage} />
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/Login" component={Login} />
+					<Route path="/tour/:id" component={TravelDetail} />
+					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/settings" component={Settings} />
+					<Route path="/logout" component={Logout} />
+					<Route path="*" component={ErrorPage} />
+				</Switch>
 			</>
 		)
 	}
@@ -43,7 +47,7 @@ const App = (props) => {
 	return (
 		<>
 			<Navbar name={props.name} isAuthenticated={props.isAuthenticated} />
-			<Switch>{routes}</Switch>
+			{routes}
 			<Footer />
 		</>
 	)
