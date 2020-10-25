@@ -1,6 +1,6 @@
 # natours
 
-Server is hosted on: http://159.89.101.212:8000/api/v1/
+Server is hosted on: http://ec2-18-192-13-45.eu-central-1.compute.amazonaws.com:8000/api/v1/tours
 
 # API ENDPOINTS:
 
