@@ -18,6 +18,13 @@ const Dashboard = () => {
 						<NavLink to="/myreviews">
 							<li>My Reviews</li>
 						</NavLink>
+						{/* If admin:  */}
+						{/* <NavLink to="/reviews">
+							<li>All tours</li>
+						</NavLink>
+						<NavLink to="/users">
+							<li>All users</li>
+						</NavLink> */}
 					</ul>
 				</div>
 				<div className="dashboard-user">
@@ -134,6 +141,9 @@ const Dashboard = () => {
 					</span>
 				</div>
 			</section>
+
+			{/* Add condition to check if user.role === admin */}
+			{/* <AdminDashboard /> */}
 		</>
 	)
 }
