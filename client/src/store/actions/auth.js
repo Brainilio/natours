@@ -8,13 +8,14 @@ export const authStart = () => {
 	}
 }
 
-export const authSuccess = (token, userId, name, email) => {
+export const authSuccess = (token, userId, name, email, role) => {
 	return {
 		type: actionTypes.AUTH_SUCCESS,
 		token: token,
 		userId: userId,
 		email: email,
 		name: name,
+		role: role,
 	}
 }
 
@@ -65,7 +66,9 @@ export const auth = (userData, isSignUp) => {
 				let name = response.data.data.user.name
 				let email = response.data.data.user.email
 				let token = response.data.token
+				let role = response.data.data.user.role
 				let userId = response.data.data.user._id
+
 				const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
 
 				localStorage.setItem("token", token)
@@ -73,7 +76,7 @@ export const auth = (userData, isSignUp) => {
 				localStorage.setItem("expirationDate", expirationDate)
 
 				dispatch(checkAuthTimeOut(3600))
-				dispatch(authSuccess(token, userId, name, email))
+				dispatch(authSuccess(token, userId, name, email, role))
 			})
 			.catch((error) => dispatch(authFailed(error)))
 	}
