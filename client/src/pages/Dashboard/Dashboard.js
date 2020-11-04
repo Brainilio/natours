@@ -2,8 +2,11 @@ import React from "react"
 import "./Dashboard.scss"
 import person from "../../resource/person.jpg"
 import { NavLink } from "react-router-dom"
+import * as actions from "../../store/actions/index"
+import { connect } from "react-redux"
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+	console.log(props.role)
 	return (
 		<>
 			<section className="dashboard-page">
@@ -19,12 +22,16 @@ const Dashboard = () => {
 							<li>My Reviews</li>
 						</NavLink>
 						{/* If admin:  */}
-						{/* <NavLink to="/reviews">
-							<li>All tours</li>
-						</NavLink>
-						<NavLink to="/users">
-							<li>All users</li>
-						</NavLink> */}
+						{props.role === "admin" ? (
+							<>
+								<NavLink to="/reviews">
+									<li>All tours</li>
+								</NavLink>
+								<NavLink to="/users">
+									<li>All users</li>
+								</NavLink>
+							</>
+						) : null}
 					</ul>
 				</div>
 				<div className="dashboard-user">
@@ -148,4 +155,10 @@ const Dashboard = () => {
 	)
 }
 
-export default Dashboard
+const mapStateToProps = (state) => {
+	return {
+		role: state.auth.role,
+	}
+}
+
+export default connect(mapStateToProps, null)(Dashboard)
