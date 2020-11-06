@@ -14,13 +14,13 @@ const Users = (props) => {
 	if (props.users) {
 		data = props.users.map((user) => (
 			<>
-				<tr>
-					<th>{user._id}</th>
-					<th>{user.name}</th>
-					<th>{user.role}</th>
-					<th>Add function here</th>
-					<th>Add toggle here</th>
-					<th>Add function here</th>
+				<tr key={user._id}>
+					<td>{user._id}</td>
+					<td>{user.name}</td>
+					<td>{user.role}</td>
+					<td>Add function here</td>
+					<td>{user.active ? "active" : "not active"}</td>
+					<td>Add function here</td>
 				</tr>
 			</>
 		))
@@ -42,14 +42,14 @@ const Users = (props) => {
 				</div>
 			</section>
 			<table>
-				<tr>
+				<thead>
 					<th>ID</th>
 					<th>Name</th>
 					<th>Role</th>
 					<th>Update</th>
 					<th>Status</th>
 					<th>Delete</th>
-				</tr>
+				</thead>
 				{data}
 			</table>
 		</>

@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
-    select: false,
+    select: true,
   },
 });
 
@@ -69,10 +69,10 @@ userSchema.pre('save', function (next) {
 });
 
 // only send users that are active when you use the 'find' method on the model
-userSchema.pre(/^find/, function (next) {
-  this.find({ active: true });
-  next();
-});
+// userSchema.pre(/^find/, function (next) {
+//   this.find({ active: true });
+//   next();
+// });
 
 // --------- SCHEMA METHODS -------------- //
 
