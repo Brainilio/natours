@@ -74,6 +74,9 @@ export const auth = (userData, isSignUp) => {
 				localStorage.setItem("token", token)
 				localStorage.setItem("userid", userId)
 				localStorage.setItem("expirationDate", expirationDate)
+				localStorage.setItem("email", email)
+				localStorage.setItem("role", role)
+				localStorage.setItem("name", name)
 
 				dispatch(checkAuthTimeOut(3600))
 				dispatch(authSuccess(token, userId, name, email, role))
@@ -135,7 +138,10 @@ export const checkAuth = () => {
 			if (expirationDate < new Date()) dispatch(authLogout())
 			else {
 				const userId = localStorage.getItem("userid")
-				dispatch(authSuccess(token, userId))
+				const role = localStorage.getItem("role")
+				const email = localStorage.getItem("email")
+				const name = localStorage.getItem("name")
+				dispatch(authSuccess(token, userId, name, email, role))
 				dispatch(
 					checkAuthTimeOut(
 						expirationDate.getTime() - new Date().getTime() / 1000
