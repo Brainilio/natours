@@ -33,8 +33,8 @@ export const fetchUsers = () => {
 		axios
 			.get("users", settings)
 			.then((response) => {
-				console.log(response)
+				dispatch(loadUsersSuccess(response.data.data.doc))
 			})
-			.catch((error) => loadUsersFail(error))
+			.catch((error) => dispatch(loadUsersFail(error)))
 	}
 }
