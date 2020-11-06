@@ -11,6 +11,8 @@ import Settings from "./pages/Settings/Settings"
 import Logout from "./pages/Login/Logout"
 import * as actions from "./store/actions/index"
 import { connect } from "react-redux"
+import Users from "./components/Admin/Users/Users"
+import Tours from "./components/Admin/Tours/Tours"
 
 const App = (props) => {
 	useEffect(() => {
@@ -44,6 +46,24 @@ const App = (props) => {
 		)
 	}
 
+	if (props.isAuthenticated && props.role === "admin") {
+		routes = (
+			<>
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/Login" component={Login} />
+					<Route path="/tour/:id" component={TravelDetail} />
+					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/users" component={Users} />
+					<Route path="/tours" component={Tours} />
+					<Route path="/settings" component={Settings} />
+					<Route path="/logout" component={Logout} />
+					<Route path="*" component={ErrorPage} />
+				</Switch>
+			</>
+		)
+	}
+
 	return (
 		<>
 			<Navbar name={props.name} isAuthenticated={props.isAuthenticated} />
@@ -56,6 +76,7 @@ const App = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		name: state.auth.name,
+		role: state.auth.role,
 		isAuthenticated: state.auth.token !== null,
 	}
 }

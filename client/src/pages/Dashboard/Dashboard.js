@@ -12,7 +12,7 @@ const Dashboard = (props) => {
 	if (props.role === "admin") {
 		adminFunctionalities = (
 			<>
-				<NavLink to="/reviews">
+				<NavLink to="/tours">
 					<li>All tours</li>
 				</NavLink>
 				<NavLink to="/users">

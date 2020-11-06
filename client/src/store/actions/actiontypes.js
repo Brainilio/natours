@@ -13,3 +13,7 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT"
 export const AUTH_EDIT = "AUTH_EDIT"
 
 export const SUBMIT_REVIEW = "SUBMIT_REVIEW"
+
+export const LOAD_USERS_START = "LOAD_USERS_START"
+export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS"
+export const LOAD_USERS_FAIL = "LOAD_USERS_FAIL"
