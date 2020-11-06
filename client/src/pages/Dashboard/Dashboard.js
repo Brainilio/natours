@@ -7,6 +7,20 @@ import { connect } from "react-redux"
 
 const Dashboard = (props) => {
 	console.log(props.role)
+
+	let adminFunctionalities = null
+	if (props.role === "admin") {
+		adminFunctionalities = (
+			<>
+				<NavLink to="/reviews">
+					<li>All tours</li>
+				</NavLink>
+				<NavLink to="/users">
+					<li>All users</li>
+				</NavLink>
+			</>
+		)
+	}
 	return (
 		<>
 			<section className="dashboard-page">
@@ -21,17 +35,7 @@ const Dashboard = (props) => {
 						<NavLink to="/myreviews">
 							<li>My Reviews</li>
 						</NavLink>
-						{/* If admin:  */}
-						{props.role === "admin" ? (
-							<>
-								<NavLink to="/reviews">
-									<li>All tours</li>
-								</NavLink>
-								<NavLink to="/users">
-									<li>All users</li>
-								</NavLink>
-							</>
-						) : null}
+						{adminFunctionalities}
 					</ul>
 				</div>
 				<div className="dashboard-user">
