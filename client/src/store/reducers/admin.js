@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actiontypes"
+import { deleteUser, statuteUser } from "../actions/admin"
 
 const initialState = {
 	error: null,
@@ -19,6 +20,20 @@ const fetchFail = (state, action) => {
 	return { ...state, error: action.error }
 }
 
+// TODO: set up all these actions
+
+const deleteUser = (state, action) => {
+	return { ...state }
+}
+
+const editUser = (state, action) => {
+	return { ...state }
+}
+
+const statuteUser = (state, action) => {
+	return { ...state }
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_USERS_START:
@@ -27,6 +42,12 @@ const reducer = (state = initialState, action) => {
 			return fetchSuccess(state, action)
 		case actionTypes.LOAD_USERS_FAIL:
 			return fetchFail(state, action)
+		case actionTypes.DELETE_USER:
+			return deleteUser(state, action)
+		case actionTypes.EDIT_USER:
+			return editUser(state, action)
+		case actionTypes.STATUTE_USER:
+			return statuteUser(state, action)
 		default:
 			return state
 	}

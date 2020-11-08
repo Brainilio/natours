@@ -17,3 +17,13 @@ export const SUBMIT_REVIEW = "SUBMIT_REVIEW"
 export const LOAD_USERS_START = "LOAD_USERS_START"
 export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS"
 export const LOAD_USERS_FAIL = "LOAD_USERS_FAIL"
+
+// TODO: actiontypes to add
+
+export const DELETE_USER = "DELETE_USER"
+export const EDIT_USER = "EDIT_USER"
+export const STATUTE_USER = "STATUTE_USER"
+
+export const ADD_TOUR = "ADD_TOUR"
+export const DELETE_TOUR = "DELETE_TOUR"
+export const EDIT_TOUR = "EDIT_TOUR"

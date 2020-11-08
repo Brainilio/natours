@@ -58,6 +58,19 @@ const newReview = (state, action) => {
 	return { ...state, currentReviews: reviews }
 }
 
+// TODO: set up all these actions
+const addTour = (state, action) => {
+	return { ...state }
+}
+
+const deleteTour = (state, action) => {
+	return { ...state }
+}
+
+const editTour = (state, action) => {
+	return { ...state }
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_TOURS_START:
@@ -74,6 +87,12 @@ const reducer = (state = initialState, action) => {
 			return loadSingleTourFailed(state, action)
 		case actionTypes.SUBMIT_REVIEW:
 			return newReview(state, action)
+		case actionTypes.ADD_TOUR:
+			return addTour(state, action)
+		case actionTypes.DELETE_TOUR:
+			return deleteTour(state, action)
+		case actionTypes.EDIT_TOUR:
+			return editTour(state, action)
 		default:
 			return state
 	}

@@ -27,6 +27,48 @@ export const loadUsersFail = (error) => {
 	}
 }
 
+export const userEdit = (data) => {
+	return {
+		type: actionTypes.EDIT_USER,
+		data: data,
+	}
+}
+
+export const userStatute = (status) => {
+	return {
+		type: actionTypes.STATUTE_USER,
+		status: status,
+	}
+}
+
+export const userDelete = (user) => {
+	return {
+		type: actionTypes.DELETE_USER,
+		user: user,
+	}
+}
+
+export const tourAdd = (tour) => {
+	return {
+		type: actionTypes.ADD_TOUR,
+		tour: tour,
+	}
+}
+
+export const tourDelete = (tour) => {
+	return {
+		type: actionTypes.DELETE_TOUR,
+		tour: tour,
+	}
+}
+
+export const tourEdit = (data) => {
+	return {
+		type: actionTypes.EDIT_TOUR,
+		data: data,
+	}
+}
+
 export const fetchUsers = () => {
 	return (dispatch) => {
 		dispatch(loadUsersStart())
@@ -37,4 +79,30 @@ export const fetchUsers = () => {
 			})
 			.catch((error) => dispatch(loadUsersFail(error)))
 	}
+}
+
+// TODO: IMPLEMENT ACTIONS
+
+export const editUser = (data) => {
+	return (dispatch) => {}
+}
+
+export const statuteUser = (status) => {
+	return (dispatch) => {}
+}
+
+export const deleteUser = (user) => {
+	return (dispatch) => {}
+}
+
+export const addTour = (tour) => {
+	return (dispatch) => {}
+}
+
+export const deleteTour = (tour) => {
+	return (dispatch) => {}
+}
+
+export const editTour = (data) => {
+	return (dispatch) => {}
 }
