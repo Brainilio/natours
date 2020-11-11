@@ -22,7 +22,6 @@ export const LOAD_USERS_FAIL = "LOAD_USERS_FAIL"
 
 export const DELETE_USER = "DELETE_USER"
 export const EDIT_USER = "EDIT_USER"
-export const STATUTE_USER = "STATUTE_USER"
 
 export const ADD_TOUR = "ADD_TOUR"
 export const DELETE_TOUR = "DELETE_TOUR"

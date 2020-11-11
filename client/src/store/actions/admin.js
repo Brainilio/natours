@@ -29,14 +29,6 @@ export const userEdit = (data, user) => {
 	}
 }
 
-export const userStatute = (status, user) => {
-	return {
-		type: actionTypes.STATUTE_USER,
-		status: status,
-		user: user,
-	}
-}
-
 export const userDelete = (user) => {
 	return {
 		type: actionTypes.DELETE_USER,
@@ -96,6 +88,23 @@ export const editUser = (data, user) => {
 
 export const statuteUser = (status, user) => {
 	return (dispatch) => {
+		// PATCH /users/userid , active: status
+
+		const token = localStorage.getItem("token")
+		axios
+			.patch(
+				`users/${user}`,
+				{
+					active: status,
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				}
+			)
+			.then((response) => console.log(response))
+			.catch((error) => console.log(error))
 		console.log("switching " + user + " status to " + status)
 	}
 }

@@ -29,10 +29,6 @@ const editUser = (state, action) => {
 	return { ...state }
 }
 
-const statuteUser = (state, action) => {
-	return { ...state }
-}
-
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.LOAD_USERS_START:
@@ -45,8 +41,7 @@ const reducer = (state = initialState, action) => {
 			return deleteUser(state, action)
 		case actionTypes.EDIT_USER:
 			return editUser(state, action)
-		case actionTypes.STATUTE_USER:
-			return statuteUser(state, action)
+
 		default:
 			return state
 	}
