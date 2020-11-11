@@ -18,9 +18,29 @@ const Users = (props) => {
 				<tr key={user._id}>
 					<td>{user.name}</td>
 					<td>{user.role}</td>
-					<td>Add function here</td>
-					<td>{user.active ? "active" : "not active"}</td>
-					<td>Add function here</td>
+					<td>
+						<button
+							onClick={() => props.editUser({ name: "newname" }, user._id)}
+						>
+							Edit user
+						</button>
+					</td>
+					<td>
+						<label class="switch">
+							<input
+								type="checkbox"
+								value={props.active}
+								onChange={() => props.statuteUser(!user.active)}
+								checked={user.active}
+							/>
+							<span class="slider round"></span>
+						</label>
+					</td>
+					<td>
+						<button onClick={() => props.deleteUser(user._id)}>
+							Delete user
+						</button>
+					</td>
 				</tr>
 			</>
 		))
@@ -41,16 +61,18 @@ const Users = (props) => {
 					<span>Hi, Christian!</span>
 				</div>
 			</section>
-			<table>
-				<thead>
-					<th>Name</th>
-					<th>Role</th>
-					<th>Update</th>
-					<th>Status</th>
-					<th>Delete</th>
-				</thead>
-				{data}
-			</table>
+			<section className="admin-user-section">
+				<table>
+					<thead>
+						<th>Name</th>
+						<th>Role</th>
+						<th>Update</th>
+						<th>Status</th>
+						<th>Delete</th>
+					</thead>
+					{data}
+				</table>
+			</section>
 		</>
 	)
 }
