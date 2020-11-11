@@ -70,6 +70,11 @@ exports.logIn = async (req, res, next) => {
       return next(new AppError('Incorrect email or password', 401));
     }
 
+    //2.5) Check if user is activated
+    if (user.active === false) {
+      return next(new AppError(`User doesn't exist!`, 401));
+    }
+
     // 3) if everything is okay, send token to client
     createSendToken(user, 200, res);
   } catch (err) {
@@ -107,7 +112,20 @@ exports.protect = async (req, res, next) => {
     // 4) Check if user changed password after the token was issued
     if (freshUser.changedPasswordAfter(decodedData.iat)) {
       return next(
-        new AppError('User recently changed password, please log in again!')
+        new AppError(
+          'User recently changed password, please log in again!',
+          401
+        )
+      );
+    }
+
+    // 5) Checks if user is active or not
+    if (freshUser.active === false) {
+      return next(
+        new AppError(
+          'This account has been deactivated, contact an admin to reactivate your account!',
+          401
+        )
       );
     }
 

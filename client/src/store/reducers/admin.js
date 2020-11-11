@@ -12,7 +12,8 @@ const fetchStart = (state, action) => {
 
 const fetchSuccess = (state, action) => {
 	console.log(action.users)
-	return { ...state, loading: false, users: action.users }
+	let freshUsers = action.users.filter((user) => user.role !== "admin")
+	return { ...state, loading: false, users: freshUsers }
 }
 
 const fetchFail = (state, action) => {
@@ -22,7 +23,8 @@ const fetchFail = (state, action) => {
 // TODO: set up all these actions
 
 const deleteUser = (state, action) => {
-	return { ...state }
+	let users = state.users.filter((user) => user.id !== action.user)
+	return { ...state, users: users }
 }
 
 const editUser = (state, action) => {

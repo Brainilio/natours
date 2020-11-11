@@ -111,7 +111,18 @@ export const statuteUser = (status, user) => {
 
 export const deleteUser = (id) => {
 	return (dispatch) => {
+		const token = localStorage.getItem("token")
+
 		console.log("deleting .." + id)
+		dispatch(userDelete(id))
+		axios
+			.delete(`users/${id}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => console.log(response))
+			.catch((error) => console.log(error))
 	}
 }
 

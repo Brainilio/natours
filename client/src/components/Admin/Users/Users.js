@@ -44,7 +44,12 @@ const Users = (props) => {
 						</label>
 					</td>
 					<td>
-						<button onClick={() => props.deleteUser(user._id)}>
+						<button
+							onClick={(event) => {
+								event.preventDefault()
+								props.deleteUser(user._id)
+							}}
+						>
 							Delete user
 						</button>
 					</td>
