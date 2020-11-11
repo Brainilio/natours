@@ -85,16 +85,22 @@ export const fetchUsers = () => {
 
 // TODO: IMPLEMENT ACTIONS
 
-export const editUser = (data) => {
-	return (dispatch) => {}
+export const editUser = (data, user) => {
+	return (dispatch) => {
+		console.log(`Editing ${user} with the following data: ${data}`)
+	}
 }
 
-export const statuteUser = (status) => {
-	return (dispatch) => {}
+export const statuteUser = (status, user) => {
+	return (dispatch) => {
+		console.log("switching " + user + " status to " + status)
+	}
 }
 
-export const deleteUser = (user) => {
-	return (dispatch) => {}
+export const deleteUser = (id) => {
+	return (dispatch) => {
+		console.log("deleting .." + id)
+	}
 }
 
 export const addTour = (tour) => {

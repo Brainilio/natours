@@ -11,11 +11,11 @@ const Users = (props) => {
 	}, [])
 
 	let data = null
+
 	if (props.users) {
 		data = props.users.map((user) => (
 			<>
 				<tr key={user._id}>
-					<td>{user._id}</td>
 					<td>{user.name}</td>
 					<td>{user.role}</td>
 					<td>Add function here</td>
@@ -43,7 +43,6 @@ const Users = (props) => {
 			</section>
 			<table>
 				<thead>
-					<th>ID</th>
 					<th>Name</th>
 					<th>Role</th>
 					<th>Update</th>
@@ -65,6 +64,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchUsers: () => dispatch(actions.fetchUsers()),
+		deleteUser: (id) => dispatch(actions.deleteUser(id)),
+		statuteUser: (status, user) => dispatch(actions.statuteUser(status, user)),
+		editUser: (data, user) => dispatch(actions.editUser(data, user)),
 	}
 }
 

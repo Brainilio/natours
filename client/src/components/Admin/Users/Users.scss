@@ -1,0 +1,27 @@
+@import "../../../styles/breakpoints.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/fontSizes.scss";
+
+table {
+	max-width: 100vw;
+}
+
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 15px;
+}
+
+th {
+	text-align: left;
+}
+
+table {
+	border-spacing: 5px;
+}
