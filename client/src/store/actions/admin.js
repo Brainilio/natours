@@ -1,12 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
 
-const settings = {
-	headers: {
-		Authorization: localStorage.getItem("token"),
-	},
-}
-
 export const loadUsersStart = () => {
 	return {
 		type: actionTypes.LOAD_USERS_START,
@@ -72,6 +66,14 @@ export const tourEdit = (data) => {
 export const fetchUsers = () => {
 	return (dispatch) => {
 		dispatch(loadUsersStart())
+		const token = localStorage.getItem("token")
+
+		const settings = {
+			headers: {
+				Authorization: token,
+			},
+		}
+		console.log(settings)
 		axios
 			.get("users", settings)
 			.then((response) => {

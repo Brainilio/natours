@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/actiontypes"
-import { deleteUser, statuteUser } from "../actions/admin"
 
 const initialState = {
 	error: null,

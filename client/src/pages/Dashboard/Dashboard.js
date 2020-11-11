@@ -4,11 +4,15 @@ import person from "../../resource/person.jpg"
 import { NavLink } from "react-router-dom"
 import * as actions from "../../store/actions/index"
 import { connect } from "react-redux"
+// import regular from "../../resource/venice.jpg"
+// import admin from "../../resource/admin.jpg"
 
 const Dashboard = (props) => {
 	console.log(props.role)
 
 	let adminFunctionalities = null
+	let adminPanels = null
+
 	if (props.role === "admin") {
 		adminFunctionalities = (
 			<>
@@ -20,7 +24,13 @@ const Dashboard = (props) => {
 				</NavLink>
 			</>
 		)
+		adminPanels = (
+			<section className="dashboard-page-admin-panels">
+				Admin: statistics, payments, create new tour, view tours
+			</section>
+		)
 	}
+
 	return (
 		<>
 			<section className="dashboard-page">
@@ -43,6 +53,8 @@ const Dashboard = (props) => {
 					<span>Hi, Christian!</span>
 				</div>
 			</section>
+
+			{adminPanels}
 
 			<section className="dashboard-page-upcoming-tours">
 				<div className="upcoming-tours-title">
