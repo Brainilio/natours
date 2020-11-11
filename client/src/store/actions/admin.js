@@ -21,17 +21,19 @@ export const loadUsersFail = (error) => {
 	}
 }
 
-export const userEdit = (data) => {
+export const userEdit = (data, user) => {
 	return {
 		type: actionTypes.EDIT_USER,
 		data: data,
+		user: user,
 	}
 }
 
-export const userStatute = (status) => {
+export const userStatute = (status, user) => {
 	return {
 		type: actionTypes.STATUTE_USER,
 		status: status,
+		user: user,
 	}
 }
 
@@ -56,10 +58,11 @@ export const tourDelete = (tour) => {
 	}
 }
 
-export const tourEdit = (data) => {
+export const tourEdit = (data, tour) => {
 	return {
 		type: actionTypes.EDIT_TOUR,
 		data: data,
+		tour: tour,
 	}
 }
 

@@ -1,16 +1,23 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./Users.scss"
 import { NavLink } from "react-router-dom"
 import person from "../../../resource/person.jpg"
 import * as actions from "../../../store/actions/"
 import { connect } from "react-redux"
+import Toggle from "../../../ui/Toggle/Toggle"
 
 const Users = (props) => {
 	useEffect(() => {
 		props.fetchUsers()
 	}, [])
 
+	let [active, setActive] = useState()
+
 	let data = null
+
+	const changeToggle = (active) => {
+		return !active
+	}
 
 	if (props.users) {
 		data = props.users.map((user) => (
@@ -27,12 +34,12 @@ const Users = (props) => {
 					</td>
 					<td>
 						<label class="switch">
-							<input
-								type="checkbox"
-								value={props.active}
-								onChange={() => props.statuteUser(!user.active)}
+							<Toggle
 								checked={user.active}
+								handleChange={props.statuteUser}
+								user={user._id}
 							/>
+
 							<span class="slider round"></span>
 						</label>
 					</td>
