@@ -23,7 +23,8 @@ const fetchFail = (state, action) => {
 // TODO: set up all these actions
 
 const deleteUser = (state, action) => {
-	let users = state.users.filter((user) => user.id !== action.user)
+	let currentUsers = [...state.users]
+	let users = currentUsers.filter((user) => user._id !== action.user)
 	return { ...state, users: users }
 }
 
