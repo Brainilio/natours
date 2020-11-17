@@ -1,0 +1,38 @@
+@import "../../../styles/breakpoints.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/fontSizes.scss";
+
+.admin-tours-section {
+	margin: 3em 0;
+
+	.admin-tours-title {
+		margin-left: 1em;
+		margin-bottom: 2em;
+		color: color(secondary);
+		font-size: $subheading;
+	}
+
+	.admin-dashboard-tour {
+		margin: 3em 0;
+		cursor: pointer;
+		background-color: color(primary);
+		margin: 0 auto;
+		background: url("../../../resource/sorasak-_UIN-pFfJ7c-unsplash.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-blend-mode: soft-light;
+		width: 95%;
+		height: 50px;
+		margin-bottom: 1em;
+		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		span {
+			font-size: $body2;
+			color: color(primary-light);
+		}
+	}
+}

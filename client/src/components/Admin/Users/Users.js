@@ -10,14 +10,12 @@ const Users = (props) => {
 		props.fetchUsers()
 	}, [])
 
-	let [active, setActive] = useState()
-
 	let data = null
 
 	if (props.users) {
 		data = props.users.map((user) => (
-			<>
-				<tr key={user._id}>
+			<tbody key={user._id}>
+				<tr>
 					<td>{user.name}</td>
 					<td>{user.role}</td>
 					<td>
@@ -28,14 +26,14 @@ const Users = (props) => {
 						</button>
 					</td>
 					<td>
-						<label class="switch">
+						<label className="switch">
 							<Toggle
 								checked={user.active}
 								handleChange={props.statuteUser}
 								user={user._id}
 							/>
 
-							<span class="slider round"></span>
+							<span className="slider round"></span>
 						</label>
 					</td>
 					<td>
@@ -49,7 +47,7 @@ const Users = (props) => {
 						</button>
 					</td>
 				</tr>
-			</>
+			</tbody>
 		))
 	}
 

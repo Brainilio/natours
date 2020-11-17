@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import "./Tours.scss"
+import * as actions from "../../../store/actions/"
+
 import DashboardBanner from "../../DashboardBanner/DashboardBanner"
+import TourBar from "./TourBar"
 
 /*
 TODO: 
@@ -12,20 +15,37 @@ TODO:
 */
 
 const Tours = (props) => {
+	useEffect(() => {
+		props.fetchTours()
+	}, [])
+
+	let tours = null
+
+	if (props.allTours) {
+		tours = props.allTours.map((tour) => <TourBar key={tour._id} tour={tour} />)
+	}
+
 	return (
 		<>
 			<DashboardBanner />
-			<section className="admin-tours-section"></section>
+			<section className="admin-tours-section">
+				<span className="admin-tours-title">All tours</span>
+				{tours ? tours : null}
+			</section>
 		</>
 	)
 }
 
 const mapStateToProps = (state) => {
-	return {}
+	return {
+		allTours: state.tours.allTours,
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {}
+	return {
+		fetchTours: () => dispatch(actions.fetchTours()),
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Tours))
