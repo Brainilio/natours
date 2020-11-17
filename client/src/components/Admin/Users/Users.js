@@ -15,10 +15,6 @@ const Users = (props) => {
 
 	let data = null
 
-	const changeToggle = (active) => {
-		return !active
-	}
-
 	if (props.users) {
 		data = props.users.map((user) => (
 			<>
