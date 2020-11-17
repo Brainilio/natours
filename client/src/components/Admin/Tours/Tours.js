@@ -1,7 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import "./Tours.scss"
 import * as actions from "../../../store/actions/"
+import Modal from "../../../ui/Modal/Modal"
+import CreateTours from "./CreateTours"
+import TourDetail from "./TourDetail"
+import TourEdit from "./TourEdit"
 
 import DashboardBanner from "../../DashboardBanner/DashboardBanner"
 import TourBar from "./TourBar"
@@ -19,10 +23,27 @@ const Tours = (props) => {
 		props.fetchTours()
 	}, [])
 
+	const [detail, setDetail] = useState(false)
+	const [edit, setEdit] = useState(false)
+	const [add, setAdd] = useState(false)
+
+	const detailHandler = () => setDetail((prevstate) => !prevstate)
+	const addHandler = () => setAdd((prevstate) => !prevstate)
+	const editHandler = () => setEdit((prevstate) => !prevstate)
+
 	let tours = null
 
 	if (props.allTours) {
-		tours = props.allTours.map((tour) => <TourBar key={tour._id} tour={tour} />)
+		tours = props.allTours.map((tour) => (
+			<TourBar
+				key={tour._id}
+				tour={tour}
+				detail={detail}
+				edit={edit}
+				detailHandler={detailHandler}
+				editHandler={editHandler}
+			/>
+		))
 	}
 
 	return (
@@ -30,8 +51,30 @@ const Tours = (props) => {
 			<DashboardBanner />
 			<section className="admin-tours-section">
 				<span className="admin-tours-title">All tours</span>
+				<button
+					className="admin-add-tour"
+					onClick={() => addHandler((prevState) => !prevState)}
+				>
+					Add Tour
+				</button>
 				{tours ? tours : null}
 			</section>
+
+			{add ? (
+				<Modal clicked={addHandler}>
+					<CreateTours />
+				</Modal>
+			) : null}
+			{detail ? (
+				<Modal clicked={detailHandler}>
+					<TourDetail />
+				</Modal>
+			) : null}
+			{edit ? (
+				<Modal clicked={editHandler}>
+					<TourEdit />
+				</Modal>
+			) : null}
 		</>
 	)
 }

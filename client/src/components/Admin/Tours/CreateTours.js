@@ -1,7 +1,7 @@
 import React from "react"
 
 const CreateTours = () => {
-	return <div></div>
+	return <div>add</div>
 }
 
 export default CreateTours

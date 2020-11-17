@@ -11,6 +11,16 @@
 		font-size: $subheading;
 	}
 
+	.admin-add-tour {
+		width: 100px;
+		height: 25px;
+		margin-left: 2em;
+		border: none;
+		color: color(primary-light);
+		background-color: color(secondary);
+		box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+	}
+
 	.admin-dashboard-tour {
 		background-color: color(primary);
 		margin: 0 auto;
