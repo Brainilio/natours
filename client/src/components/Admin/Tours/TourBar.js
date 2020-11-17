@@ -8,23 +8,22 @@ import image from "../../../resource/admin.jpg"
 const TourBar = (props) => {
 	return (
 		<div className="admin-dashboard-tour">
-			<span>
+			<span>{props.tour.name}</span>
+			<span className="admin-crud-operations">
 				<span aria-hidden className="material-icons">
-					location_on
+					pageview
 				</span>
-				{props.tour.name}
-			</span>
-			<span>
 				<span aria-hidden className="material-icons">
-					event
+					create
+				</span>
+				<span aria-hidden className="material-icons">
+					delete
 				</span>
 
-				{/* add following: detail, edit, delete */}
-				{dayjs(props.tour.startDate).format("D MMM, YYYY")}
+				{/* add following: detail, edit, delete
+				{dayjs(props.tour.startDate).format("D MMM, YYYY")} */}
 			</span>
-			<span>
-				<NavLink to="/"> &gt;</NavLink>
-			</span>
+
 			<img src={image} />
 		</div>
 	)
