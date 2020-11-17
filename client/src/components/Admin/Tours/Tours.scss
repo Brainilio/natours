@@ -17,10 +17,7 @@
 		cursor: pointer;
 		background-color: color(primary);
 		margin: 0 auto;
-		background: url("../../../resource/sorasak-_UIN-pFfJ7c-unsplash.jpg");
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
+
 		background-blend-mode: soft-light;
 		width: 95%;
 		height: 50px;
@@ -30,7 +27,15 @@
 		justify-content: space-around;
 		align-items: center;
 
+		img {
+			position: absolute;
+			object-fit: cover;
+			width: inherit;
+			height: inherit;
+		}
+
 		span {
+			z-index: 20;
 			font-size: $body2;
 			color: color(primary-light);
 		}
