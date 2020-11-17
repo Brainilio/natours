@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
 import "./Users.scss"
-import { NavLink } from "react-router-dom"
-import person from "../../../resource/person.jpg"
 import * as actions from "../../../store/actions/"
 import { connect } from "react-redux"
 import Toggle from "../../../ui/Toggle/Toggle"
+import DashboardBanner from "../../DashboardBanner/DashboardBanner"
 
 const Users = (props) => {
 	useEffect(() => {
@@ -56,19 +55,7 @@ const Users = (props) => {
 
 	return (
 		<>
-			<section className="dashboard-page">
-				<div className="dashboard-actions">
-					<ul>
-						<NavLink to="/dashboard">
-							<li>&lt;</li>
-						</NavLink>
-					</ul>
-				</div>
-				<div className="dashboard-user">
-					<img src={person} />
-					<span>Hi, Christian!</span>
-				</div>
-			</section>
+			<DashboardBanner />
 			<section className="admin-user-section">
 				<table>
 					<thead>

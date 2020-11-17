@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 import "./Settings.scss"
-import { NavLink } from "react-router-dom"
 import EditProfileForm from "../../components/Forms/EditProfileform/editProfileForm"
 import ChangePasswordForm from "../../components/Forms/ChangePasswordForm/changePasswordForm"
-import person from "../../resource/person.jpg"
 import * as actions from "../../store/actions"
 import { connect } from "react-redux"
+import DashboardBanner from "../../components/DashboardBanner/DashboardBanner"
 
 const Settings = (props) => {
 	const [newSettings, setNewSettings] = useState({
@@ -54,19 +53,7 @@ const Settings = (props) => {
 
 	return (
 		<>
-			<section className="dashboard-page">
-				<div className="dashboard-actions">
-					<ul>
-						<NavLink to="/dashboard">
-							<li>&lt;</li>
-						</NavLink>
-					</ul>
-				</div>
-				<div className="dashboard-user">
-					<img src={person} />
-					<span>Hi, Christian!</span>
-				</div>
-			</section>
+			<DashboardBanner />
 			<section className="edit-profile-section">
 				<span className="header-title-page-settings">Edit Profile</span>
 				<EditProfileForm
