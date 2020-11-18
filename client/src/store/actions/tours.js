@@ -11,8 +11,6 @@ export const loadToursStart = () => {
 }
 
 export const loadToursSuccess = (tours) => {
-	console.log("going to the reducers! ")
-
 	return {
 		tours: tours,
 		type: actionTypes.LOAD_TOURS_SUCCESS,
@@ -51,7 +49,7 @@ export const loadSingleTourFail = (error) => {
 
 // dispatch functions
 
-export const fetchTours = () => {
+export const fetchTours = (config = " ") => {
 	return (dispatch) => {
 		dispatch(loadToursStart())
 		axios
