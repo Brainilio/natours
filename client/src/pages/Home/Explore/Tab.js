@@ -33,7 +33,7 @@ const Tab = (props) => {
 					Top 5 Tours
 				</span>
 			</div>
-			<span className="clickable">Click on tour for more info</span>
+			<span className="clickable">Click on a tour for more info</span>
 		</div>
 	)
 }

@@ -20,6 +20,7 @@ const Explore = (props) => {
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
 		console.log("You're searching for:  " + formData)
+		props.onFetchTours(formData)
 	}
 
 	const filterHandler = (value) => {
@@ -63,7 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFetchTours: () => dispatch(actions.fetchTours()),
+		onFetchTours: (data) => dispatch(actions.fetchTours(data)),
 		onFetchTopFive: () => dispatch(actions.fetchTopFive()),
 	}
 }

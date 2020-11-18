@@ -49,15 +49,25 @@ export const loadSingleTourFail = (error) => {
 
 // dispatch functions
 
-export const fetchTours = (config = " ") => {
+export const fetchTours = (config) => {
 	return (dispatch) => {
 		dispatch(loadToursStart())
-		axios
-			.get("tours")
-			.then((response) => {
-				dispatch(loadToursSuccess(response.data.data.doc))
-			})
-			.catch((error) => dispatch(loadToursFail(error)))
+
+		if (config) {
+			axios
+				.get(`tours/?name=${config}`)
+				.then((response) => {
+					dispatch(loadToursSuccess(response.data.data.doc))
+				})
+				.catch((error) => dispatch(loadToursFail(error)))
+		} else {
+			axios
+				.get("tours")
+				.then((response) => {
+					dispatch(loadToursSuccess(response.data.data.doc))
+				})
+				.catch((error) => dispatch(loadToursFail(error)))
+		}
 	}
 }
 
