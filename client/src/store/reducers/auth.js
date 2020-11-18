@@ -9,6 +9,7 @@ const initialState = {
 	loading: false,
 	error: null,
 	redirect: false,
+	reviews: null,
 }
 
 //method for starting auth, loader.
@@ -46,6 +47,18 @@ const authEdit = (state, action) => {
 	return { ...state }
 }
 
+// TODO: implement reducer methods
+
+//pull reviews
+const getReviews = (state, action) => {
+	return { ...state }
+}
+
+//delete reviews
+const deleteReview = (state, action) => {
+	return { ...state }
+}
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.AUTH_START:
@@ -58,6 +71,10 @@ const reducer = (state = initialState, action) => {
 			return authLogout(state, action)
 		case actionTypes.AUTH_EDIT:
 			return authEdit(state, action)
+		case actionTypes.GET_REVIEW:
+			return getReviews(state, action)
+		case actionTypes.DELETE_REVIEW:
+			return deleteReview(state, action)
 		default:
 			return state
 	}

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./Dashboard.scss"
 import person from "../../resource/person.jpg"
 import { NavLink } from "react-router-dom"
@@ -9,6 +9,10 @@ import { connect } from "react-redux"
 
 const Dashboard = (props) => {
 	console.log(props.role)
+
+	useEffect(() => {
+		props.getUserSpecificReview()
+	}, [])
 
 	let adminFunctionalities = null
 	let adminPanels = null
@@ -119,6 +123,8 @@ const Dashboard = (props) => {
 
 			<section className="dashboard-page-reviews">
 				<span className="dashboard-title-header">My Reviews</span>
+
+				{/* TODO: IMPLEMENT GET REVIEWS & DELETE REVIEWS */}
 				<div className="user-review">
 					<span className="user-review-tour-name">
 						<span aria-hidden className="material-icons">
@@ -141,6 +147,7 @@ const Dashboard = (props) => {
 						</span>
 					</span>
 				</div>
+
 				<div className="user-review">
 					<span className="user-review-tour-name">
 						<span aria-hidden className="material-icons">
@@ -174,7 +181,15 @@ const Dashboard = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		role: state.auth.role,
+		reviews: state.auth.reviews,
 	}
 }
 
-export default connect(mapStateToProps, null)(Dashboard)
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchReviews: () => dispatch(actions.getUserSpecificReview()),
+		deleteReview: (id) => dispatch(actions.deleteUserSpecificReview(id)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

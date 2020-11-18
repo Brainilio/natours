@@ -13,6 +13,8 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT"
 export const AUTH_EDIT = "AUTH_EDIT"
 
 export const SUBMIT_REVIEW = "SUBMIT_REVIEW"
+export const GET_REVIEW = "GET_REVIEW"
+export const DELETE_REVIEW = "DELETE_REVIEW"
 
 export const LOAD_USERS_START = "LOAD_USERS_START"
 export const LOAD_USERS_SUCCESS = "LOAD_USERS_SUCCESS"
