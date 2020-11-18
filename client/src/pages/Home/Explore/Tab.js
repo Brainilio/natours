@@ -1,6 +1,8 @@
 import React from "react"
 
 const Tab = (props) => {
+	//add if click: add classname to current classnames to change color
+
 	return (
 		<div className="tab-bar">
 			<div className="filter">

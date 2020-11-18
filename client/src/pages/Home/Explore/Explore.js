@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 
 const Explore = (props) => {
 	const [formData, setFormData] = useState("")
+	const [select, setSelect] = useState("")
 
 	useEffect(() => {
 		props.onFetchTours()
@@ -22,7 +23,14 @@ const Explore = (props) => {
 	}
 
 	const filterHandler = (value) => {
-		console.log("Filtering on.. " + value)
+		setSelect(value)
+		if (value === "Top 5 Tours") {
+			props.onFetchTopFive()
+		}
+		if (value === "All Tours") {
+			props.onFetchTours()
+		}
+		console.log(value)
 	}
 
 	return (
@@ -56,6 +64,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onFetchTours: () => dispatch(actions.fetchTours()),
+		onFetchTopFive: () => dispatch(actions.fetchTopFive()),
 	}
 }
 

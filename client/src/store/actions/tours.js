@@ -57,7 +57,19 @@ export const fetchTours = () => {
 		axios
 			.get("tours")
 			.then((response) => {
-				console.log("going to dispatch loadtourssuccess now..")
+				dispatch(loadToursSuccess(response.data.data.doc))
+			})
+			.catch((error) => dispatch(loadToursFail(error)))
+	}
+}
+
+export const fetchTopFive = () => {
+	return (dispatch) => {
+		dispatch(loadToursStart())
+		axios
+			.get("/tours/?sort=ratingsAverage&limit=5")
+			.then((response) => {
+				console.log(response)
 				dispatch(loadToursSuccess(response.data.data.doc))
 			})
 			.catch((error) => dispatch(loadToursFail(error)))

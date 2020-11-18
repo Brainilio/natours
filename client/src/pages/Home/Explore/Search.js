@@ -4,6 +4,7 @@ const Search = (props) => {
 	return (
 		<form onSubmit={(e) => props.submit(e)}>
 			<input
+				type="search"
 				className="explore-search-bar"
 				placeholder="Search for your tour.."
 				value={props.value}
