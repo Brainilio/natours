@@ -127,13 +127,21 @@ export const deleteUser = (id) => {
 }
 
 export const addTour = (tour) => {
-	return (dispatch) => {}
+	return (dispatch) => {
+		console.log("adding tour..." + tour)
+	}
 }
 
-export const deleteTour = (tour) => {
-	return (dispatch) => {}
+export const deleteTour = (id) => {
+	return (dispatch) => {
+		console.log("deleting tour... with ID of " + id)
+	}
 }
 
-export const editTour = (data) => {
-	return (dispatch) => {}
+export const editTour = (id, data) => {
+	return (dispatch) => {
+		console.log(
+			`Editing tour with id of ${id} with the following data: ${data}`
+		)
+	}
 }

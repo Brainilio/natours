@@ -3,12 +3,11 @@ import { connect } from "react-redux"
 import "./Tours.scss"
 import * as actions from "../../../store/actions/"
 import Modal from "../../../ui/Modal/Modal"
-import CreateTours from "./CreateTours"
 import TourDetail from "./TourDetail"
 import TourEdit from "./TourEdit"
-
 import DashboardBanner from "../../DashboardBanner/DashboardBanner"
 import TourBar from "./TourBar"
+import CreateTourForm from "../../Forms/CreateTourForm/CreateTourForm"
 
 /*
 TODO: 
@@ -42,6 +41,7 @@ const Tours = (props) => {
 				edit={edit}
 				detailHandler={detailHandler}
 				editHandler={editHandler}
+				deleteTour={props.deleteTour}
 			/>
 		))
 	}
@@ -62,7 +62,7 @@ const Tours = (props) => {
 
 			{add ? (
 				<Modal clicked={addHandler}>
-					<CreateTours />
+					<CreateTourForm />
 				</Modal>
 			) : null}
 			{detail ? (
@@ -88,6 +88,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchTours: () => dispatch(actions.fetchTours()),
+		deleteTour: (id) => dispatch(actions.deleteTour(id)),
 	}
 }
 

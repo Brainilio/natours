@@ -21,9 +21,6 @@ const ReviewForm = (props) => {
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
-		console.log(review)
-
-		console.log(props.tourid)
 		props.submitReview(review, props.tourid)
 		props.clicked()
 	}

@@ -59,6 +59,7 @@ const newReview = (state, action) => {
 }
 
 // TODO: set up all these actions
+
 const addTour = (state, action) => {
 	return { ...state }
 }

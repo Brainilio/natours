@@ -34,7 +34,11 @@ const TourBar = (props) => {
 				>
 					create
 				</span>
-				<span aria-hidden className="material-icons">
+				<span
+					aria-hidden
+					className="material-icons"
+					onClick={() => props.deleteTour(props.tour._id)}
+				>
 					delete
 				</span>
 
