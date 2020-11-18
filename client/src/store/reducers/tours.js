@@ -61,7 +61,10 @@ const newReview = (state, action) => {
 // TODO: set up all these actions
 
 const addTour = (state, action) => {
-	return { ...state }
+	let tours = [...state.allTours]
+	let newTour = tours.concat(action.tour)
+
+	return { ...state, allTours: newTour }
 }
 
 const deleteTour = (state, action) => {

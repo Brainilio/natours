@@ -2,19 +2,22 @@ import React, { useState } from "react"
 import * as actions from "../../../store/actions/index"
 import { connect } from "react-redux"
 
+// WHEN THIS WORKS: REMOVE DEFAULT STATE !!!!!!!!!!!!!!!
 const CreateTourForm = (props) => {
 	const [tour, setTour] = useState({
-		name: "Fortaleza",
-		duration: "",
-		groupSize: "",
+		name: "",
+		duration: 8,
+		groupSize: 25,
 		difficulty: "easy",
 		startLocation: {
-			description: "",
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia pellentesque erat et faucibus.",
 			coordinates: [28.978043, -81.598384],
-			address: "",
+			address: "10TH LOREM IPSUM STREET, 201012",
 		},
-		price: "",
-		summary: "",
+		price: 300,
+		summary:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia pellentesque erat et faucibus. Sed ac blandit ipsum. Mauris mollis auctor dictum. Duis in pharetra nibh, eu feugiat tortor.",
 		imageCover: "image.jpg",
 		images: "",
 		startDates: "",

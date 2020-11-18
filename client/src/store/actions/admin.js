@@ -135,7 +135,10 @@ export const addTour = (tour) => {
 					Authorization: token,
 				},
 			})
-			.then((response) => console.log(response))
+			.then((response) => {
+				console.log(response)
+				dispatch(tourAdd(response.data.data))
+			})
 			.catch((error) => console.log(error))
 	}
 }
