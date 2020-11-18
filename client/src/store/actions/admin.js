@@ -137,7 +137,7 @@ export const addTour = (tour) => {
 			})
 			.then((response) => {
 				console.log(response)
-				dispatch(tourAdd(response.data.data))
+				dispatch(tourAdd(response.data.data.data))
 			})
 			.catch((error) => console.log(error))
 	}
