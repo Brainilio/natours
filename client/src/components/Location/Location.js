@@ -18,6 +18,7 @@ const Location = (props) => {
 			center: [lng, lat],
 			zoom: zoom,
 		})
+
 		var marker = new mapboxgl.Marker()
 			.setLngLat([props.location.coordinates[0], props.location.coordinates[1]])
 			.addTo(map)

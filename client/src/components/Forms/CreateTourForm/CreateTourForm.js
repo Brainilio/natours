@@ -4,13 +4,18 @@ import { connect } from "react-redux"
 
 const CreateTourForm = (props) => {
 	const [tour, setTour] = useState({
-		name: "",
+		name: "Fortaleza",
 		duration: "",
 		groupSize: "",
 		difficulty: "easy",
+		startLocation: {
+			description: "",
+			coordinates: [28.978043, -81.598384],
+			address: "",
+		},
 		price: "",
 		summary: "",
-		imageCover: "",
+		imageCover: "image.jpg",
 		images: "",
 		startDates: "",
 	})
@@ -25,11 +30,33 @@ const CreateTourForm = (props) => {
 		})
 	}
 
+	const locationHandler = (e) => {
+		const name = e.target.name
+		const value = e.target.value
+
+		if (name === "coordinates") {
+			let newData = value.split(",")
+
+			setTour({
+				...tour,
+				startLocation: {
+					...tour.startLocation,
+					[name]: [...newData],
+				},
+			})
+		}
+
+		setTour({
+			...tour,
+			startLocation: {
+				...tour.startLocation,
+				[name]: value,
+			},
+		})
+	}
+
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
-
-		if (!tour) console.log("Not everything filled out!")
-
 		props.createTour(tour)
 	}
 
@@ -64,6 +91,27 @@ const CreateTourForm = (props) => {
 				<option value="difficult">Difficult</option>
 			</select>
 			<input
+				type="text"
+				value={tour.startLocation.description}
+				onChange={(e) => locationHandler(e)}
+				name="description"
+				placeholder="description of location?"
+			/>
+			<input
+				type="text"
+				value={tour.startLocation.address}
+				name="address"
+				placeholder="address?"
+				onChange={(e) => locationHandler(e)}
+			/>
+			<input
+				type="text"
+				value={tour.startLocation.coordinates}
+				name="coordinates"
+				placeholder="coordinates? (lang, lat)"
+				onChange={(e) => locationHandler(e)}
+			/>
+			<input
 				type="number"
 				value={tour.price}
 				onChange={(e) => formHandler(e)}
@@ -77,7 +125,7 @@ const CreateTourForm = (props) => {
 				name="summary"
 				placeholder="Summary?"
 			/>
-			<input
+			{/* <input
 				type="file"
 				value={tour.imageCover}
 				onChange={(e) => formHandler(e)}
@@ -93,7 +141,7 @@ const CreateTourForm = (props) => {
 				placeholder="Images?"
 				accept="image/png, image/jpeg"
 				multiple
-			/>
+			/> */}
 			<input
 				type="date"
 				name="startDates"

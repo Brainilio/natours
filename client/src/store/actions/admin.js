@@ -128,7 +128,15 @@ export const deleteUser = (id) => {
 
 export const addTour = (tour) => {
 	return (dispatch) => {
-		console.log("adding tour..." + tour)
+		const token = localStorage.getItem("token")
+		axios
+			.post(`tours/`, tour, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => console.log(response))
+			.catch((error) => console.log(error))
 	}
 }
 
