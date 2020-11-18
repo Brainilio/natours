@@ -43,10 +43,10 @@ export const tourAdd = (tour) => {
 	}
 }
 
-export const tourDelete = (tour) => {
+export const tourDelete = (id) => {
 	return {
 		type: actionTypes.DELETE_TOUR,
-		tour: tour,
+		tour: id,
 	}
 }
 
@@ -145,7 +145,14 @@ export const addTour = (tour) => {
 
 export const deleteTour = (id) => {
 	return (dispatch) => {
-		console.log("deleting tour... with ID of " + id)
+		const token = localStorage.getItem("token")
+		axios
+			.delete(`tours/${id}`, { headers: { Authorization: token } })
+			.then((response) => {
+				dispatch(tourDelete(id))
+				console.log(response)
+			})
+			.catch((error) => console.log(error))
 	}
 }
 

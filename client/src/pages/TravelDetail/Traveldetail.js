@@ -34,7 +34,7 @@ const Traveldetail = (props) => {
 						ratingsQt={props.tour.ratingsQuantity}
 						price={props.tour.price}
 					/>
-					<Description description={props.tour.description} />
+					<Description description={props.tour.summary} />
 					<Guides />
 					<ImageCarousel />
 					<Location location={props.tour.startLocation} />

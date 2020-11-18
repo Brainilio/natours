@@ -68,7 +68,8 @@ const addTour = (state, action) => {
 }
 
 const deleteTour = (state, action) => {
-	return { ...state }
+	let newTours = state.allTours.filter((tour) => tour._id !== action.tour)
+	return { ...state, allTours: newTours }
 }
 
 const editTour = (state, action) => {
