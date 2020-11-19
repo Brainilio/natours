@@ -11,7 +11,7 @@ const Dashboard = (props) => {
 	console.log(props.role)
 
 	useEffect(() => {
-		props.getUserSpecificReview()
+		props.fetchReviews()
 	}, [])
 
 	let adminFunctionalities = null
