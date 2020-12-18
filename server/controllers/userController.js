@@ -1,8 +1,66 @@
+const multer = require('multer');
+const sharp = require('sharp');
 const User = require('../models/userModel');
+
 const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
+// multer configurations
+
+// const multerStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/img/');
+//   },
+//   filename: (req, file, cb) => {
+//     // user-{id}-{timestamp}.{file-extension}
+//     const extension = file.mimetype.split('/')[1];
+
+//     cb(null, `user-${req.user.id}-${Date.now()}.${extension}`);
+//   },
+// });
+
+//  upload to buffer!
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError('This is not an image, please upload images only', 400),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
 // --------- middlewares ---------- //
+
+// Handle file uploading
+exports.uploadUserPhoto = upload.single('photo');
+
+exports.resizeUserPhoto = (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+  // keep image in memory instead of storage
+  sharp(req.file.buffer)
+    .resize(500, 500, {
+      fit: 'cover',
+    })
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/${req.file.filename}`)
+    .catch((error) => console.log(error));
+
+  next();
+};
+
 // Get personal profile;
 exports.getMe = (req, res, next) => {
   req.params.id = req.user.id;
@@ -14,6 +72,9 @@ exports.getMe = (req, res, next) => {
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
+    console.log(req.file);
+    console.log(req.body);
+
     // 1) Create error if user posts password data
     if (req.body.password || req.body.passwordConfirm) {
       return new AppError("You can't change your password here!", 400);
@@ -33,10 +94,13 @@ exports.updateMe = async (req, res, next) => {
       if (allowedFields.includes(el)) newObject[el] = updatedFields[el];
     });
 
+    if (req.file) newObject.photo = req.file.filename;
+
     const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
       new: true,
       runValidators: true,
     });
+
     res.status(200).json({
       status: 'success',
       data: {

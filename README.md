@@ -69,6 +69,7 @@ Docs:
 ## /controllers/...
 
 - Controllers to handle requests & middleware functions
+  - File uploading: This project uses multer to handle file uploading. The Multer middleware function uses a storage and a filter. On top of that, I also use the sharp library to resize images.
 - Aggregator pipeline methods
 - Errorcontorllers to handle global errors, uses the appError class from /utils/... to handle errors, pass in message and errorcode
 
@@ -182,4 +183,3 @@ the protect middleware route makes use of 3 different types of protections: chec
 - _authorization_: Please insert your JWT token in here when you sign up or log in! You must be able to send your jwt token with all your requests in this header.
 - _helmet_: To ensure secure HTTP.
 - _Allow-access-origin_: You're allowed to access the server from multiple devices
-
