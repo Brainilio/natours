@@ -35,10 +35,14 @@ const upload = multer({
 
 // --------- middlewares ---------- //
 
-exports.uploadUserPhoto = upload.single('photo');
+// const uploadUserPhoto = upload.single('photo');
 
 // Upload photo to S3 bucket and modify the request body to add the URL to imagefile
 exports.uploadImageToS3 = (req, res, next) => {
+  if (!req.file) return next();
+
+  upload.single('photo');
+
   const params = {
     Body: req.file.buffer,
     Bucket: 'natours-images',

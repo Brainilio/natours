@@ -21,7 +21,6 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 router.patch(
   '/updateProfile',
   authController.protect,
-  userController.uploadUserPhoto,
   userController.uploadImageToS3,
   userController.updateMe
 );
