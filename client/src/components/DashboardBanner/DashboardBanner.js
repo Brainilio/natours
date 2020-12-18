@@ -1,8 +1,10 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 import person from "../../resource/person.jpg"
+import * as actions from "../../store/actions"
+import { connect } from "react-redux"
 
-const DashboardBanner = () => {
+const DashboardBanner = (props) => {
 	return (
 		<section className="dashboard-page">
 			<div className="dashboard-actions">
@@ -13,11 +15,17 @@ const DashboardBanner = () => {
 				</ul>
 			</div>
 			<div className="dashboard-user">
-				<img src={person} />
+				<img src={props.photo} />
 				<span>Hi, Christian!</span>
 			</div>
 		</section>
 	)
 }
 
-export default DashboardBanner
+const mapStateToProps = (state) => {
+	return {
+		photo: state.auth.photo,
+	}
+}
+
+export default connect(mapStateToProps, null)(DashboardBanner)

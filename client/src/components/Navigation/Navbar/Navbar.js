@@ -34,7 +34,7 @@ const Navbar = (props) => {
 			<div className="side-profile-user">
 				<NavLink to="/logout">Log out</NavLink>
 				<NavLink to="/login">
-					<div className="side-profile-user-image"></div>
+					<img src={props.photo} className="side-profile-user-image" />
 				</NavLink>
 				<span className="side-profile-name">Safe travels, {props.name}</span>
 			</div>
@@ -103,6 +103,7 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		name: state.auth.name,
+		photo: state.auth.photo,
 		isAuthenticated: state.auth.token !== null,
 	}
 }

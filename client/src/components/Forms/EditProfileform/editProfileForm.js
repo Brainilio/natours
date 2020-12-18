@@ -19,7 +19,7 @@ const EditProfileForm = (props) => {
 				placeholder="Email.."
 			></input>
 			<div>
-				<img src={person} />
+				<img src={props.photo} />
 				<input
 					onChange={props.formHandler}
 					type="file"

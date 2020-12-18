@@ -7,37 +7,15 @@ const AppError = require('../utils/appError');
 
 const factoryHandler = require('../utils/factoryHandler');
 
-// aws
-// aws.config.update({
-//   secretAccessKey: process.env.AWS_SECRET_KEY,
-//   accessKeyId: process.env.AWS_KEY_ID,
-//   region: process.env.AWS_REGION,
-// });
-
 const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_KEY,
   accessKeyId: process.env.AWS_KEY_ID,
   region: process.env.AWS_REGION,
 });
 
-// multer configurations
+// multer operations / lifecycle
 
-// MEMORY STORAGE
-//
 const multerStorage = multer.memoryStorage();
-
-// // DISK STORAGE
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/');
-//   },
-//   filename: (req, file, cb) => {
-//     // user-{id}-{timestamp}.{file-extension}
-//     const extension = file.mimetype.split('/')[1];
-
-//     cb(null, `user-${req.user.id}-${Date.now()}.${extension}`);
-//   },
-// });
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -55,9 +33,9 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadUserPhoto = upload.single('photo');
-
 // --------- middlewares ---------- //
+
+exports.uploadUserPhoto = upload.single('photo');
 
 // Upload photo to S3 bucket and modify the request body to add the URL to imagefile
 exports.uploadImageToS3 = (req, res, next) => {

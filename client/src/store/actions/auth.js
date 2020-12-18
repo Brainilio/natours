@@ -8,7 +8,7 @@ export const authStart = () => {
 	}
 }
 
-export const authSuccess = (token, userId, name, email, role) => {
+export const authSuccess = (token, userId, name, email, role, photo) => {
 	return {
 		type: actionTypes.AUTH_SUCCESS,
 		token: token,
@@ -16,6 +16,7 @@ export const authSuccess = (token, userId, name, email, role) => {
 		email: email,
 		name: name,
 		role: role,
+		photo: photo,
 	}
 }
 
@@ -68,6 +69,9 @@ export const auth = (userData, isSignUp) => {
 				let token = response.data.token
 				let role = response.data.data.user.role
 				let userId = response.data.data.user._id
+				let photo = response.data.data.user.photo
+
+				console.log(photo)
 
 				const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
 
@@ -77,9 +81,10 @@ export const auth = (userData, isSignUp) => {
 				localStorage.setItem("email", email)
 				localStorage.setItem("role", role)
 				localStorage.setItem("name", name)
+				localStorage.setItem("photo", photo)
 
 				dispatch(checkAuthTimeOut(3600))
-				dispatch(authSuccess(token, userId, name, email, role))
+				dispatch(authSuccess(token, userId, name, email, role, photo))
 			})
 			.catch((error) => dispatch(authFailed(error)))
 	}
@@ -143,7 +148,9 @@ export const checkAuth = () => {
 				const role = localStorage.getItem("role")
 				const email = localStorage.getItem("email")
 				const name = localStorage.getItem("name")
-				dispatch(authSuccess(token, userId, name, email, role))
+				const photo = localStorage.getItem("photo")
+
+				dispatch(authSuccess(token, userId, name, email, role, photo))
 				dispatch(
 					checkAuthTimeOut(
 						expirationDate.getTime() - new Date().getTime() / 1000

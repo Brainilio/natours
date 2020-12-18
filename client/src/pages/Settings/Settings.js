@@ -66,6 +66,7 @@ const Settings = (props) => {
 					name={newSettings.name}
 					email={newSettings.email}
 					image={newSettings.image}
+					photo={props.photo}
 					formHandler={formHandler}
 					submitHandler={formSubmitHandler}
 				/>
@@ -95,6 +96,7 @@ const Settings = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		currentUser: state.auth.user,
+		photo: state.auth.photo,
 	}
 }
 

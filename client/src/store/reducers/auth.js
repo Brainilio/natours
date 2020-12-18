@@ -7,6 +7,7 @@ const initialState = {
 	name: null,
 	role: null,
 	loading: false,
+	photo: null,
 	error: null,
 	redirect: false,
 	reviews: null,
@@ -26,6 +27,7 @@ const authSuccess = (state, action) => {
 		name: action.name,
 		email: action.email,
 		role: action.role,
+		photo: action.photo,
 		error: null,
 		loading: false,
 	}
