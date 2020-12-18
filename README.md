@@ -69,7 +69,8 @@ Docs:
 ## /controllers/...
 
 - Controllers to handle requests & middleware functions
-  - File uploading: This project uses multer to handle file uploading. The Multer middleware function uses a storage and a filter. On top of that, I also use the sharp library to resize images.
+  - File uploading: This project uses multer to handle file uploading. The Multer middleware function uses a storage and a filter. I also use the sharp library to resize images. For displaying images, I upload the images to a s3 bucket, so that i can fetch the
+    img url in the front-end.
 - Aggregator pipeline methods
 - Errorcontorllers to handle global errors, uses the appError class from /utils/... to handle errors, pass in message and errorcode
 

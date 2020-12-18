@@ -22,7 +22,7 @@ router.patch(
   '/updateProfile',
   authController.protect,
   userController.uploadUserPhoto,
-  userController.resizeUserPhoto,
+  userController.uploadImageToS3,
   userController.updateMe
 );
 

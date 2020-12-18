@@ -1,12 +1,32 @@
 const multer = require('multer');
-const sharp = require('sharp');
-const User = require('../models/userModel');
+// const sharp = require('sharp');
+const aws = require('aws-sdk');
 
+const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+
 const factoryHandler = require('../utils/factoryHandler');
+
+// aws
+// aws.config.update({
+//   secretAccessKey: process.env.AWS_SECRET_KEY,
+//   accessKeyId: process.env.AWS_KEY_ID,
+//   region: process.env.AWS_REGION,
+// });
+
+const s3 = new aws.S3({
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_KEY_ID,
+  region: process.env.AWS_REGION,
+});
 
 // multer configurations
 
+// MEMORY STORAGE
+//
+const multerStorage = multer.memoryStorage();
+
+// // DISK STORAGE
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     cb(null, 'public/img/');
@@ -18,9 +38,6 @@ const factoryHandler = require('../utils/factoryHandler');
 //     cb(null, `user-${req.user.id}-${Date.now()}.${extension}`);
 //   },
 // });
-
-//  upload to buffer!
-const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -38,27 +55,27 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-// --------- middlewares ---------- //
-
-// Handle file uploading
 exports.uploadUserPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = (req, res, next) => {
-  if (!req.file) return next();
+// --------- middlewares ---------- //
 
-  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+// Upload photo to S3 bucket and modify the request body to add the URL to imagefile
+exports.uploadImageToS3 = (req, res, next) => {
+  const params = {
+    Body: req.file.buffer,
+    Bucket: 'natours-images',
+    Key: `user-${req.user.id}-${Date.now()}.jpeg`,
+  };
 
-  // keep image in memory instead of storage
-  sharp(req.file.buffer)
-    .resize(500, 500, {
-      fit: 'cover',
-    })
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/${req.file.filename}`)
-    .catch((error) => new AppError(error.message, 400));
-
-  next();
+  s3.upload(params, async (error, data) => {
+    try {
+      const imagelink = await data.Location;
+      req.body.imagefile = imagelink;
+      next();
+    } catch (err) {
+      return new AppError(error, 500);
+    }
+  });
 };
 
 // Get personal profile;
@@ -72,9 +89,6 @@ exports.getMe = (req, res, next) => {
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
-    console.log(req.body);
-    console.log(req.file);
-
     // 1) Create error if user posts password data
     if (req.body.password || req.body.passwordConfirm) {
       return new AppError("You can't change your password here!", 400);
@@ -94,7 +108,8 @@ exports.updateMe = async (req, res, next) => {
       if (allowedFields.includes(el)) newObject[el] = updatedFields[el];
     });
 
-    if (req.file) newObject.photo = req.file.filename;
+    // grab image file from modified request body (check uploadimagetos3 function) and add it to the user's photo field
+    if (req.body.imagefile) newObject.photo = req.body.imagefile;
 
     const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
       new: true,
