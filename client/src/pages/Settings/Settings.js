@@ -20,6 +20,12 @@ const Settings = (props) => {
 		let label = event.target.name
 		let value = event.target.value
 
+		if (label === "image") {
+			console.log("yes, this is an image!")
+			let image = event.target.files[0]
+			value = image
+		}
+
 		setNewSettings({
 			...newSettings,
 			[label]: value,

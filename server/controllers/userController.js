@@ -56,7 +56,7 @@ exports.resizeUserPhoto = (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/img/${req.file.filename}`)
-    .catch((error) => console.log(error));
+    .catch((error) => new AppError(error.message, 400));
 
   next();
 };
@@ -72,8 +72,8 @@ exports.getMe = (req, res, next) => {
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
-    console.log(req.file);
     console.log(req.body);
+    console.log(req.file);
 
     // 1) Create error if user posts password data
     if (req.body.password || req.body.passwordConfirm) {

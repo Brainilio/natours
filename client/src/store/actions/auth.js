@@ -1,5 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
+import ax from "axios"
 
 export const authStart = () => {
 	return {
@@ -111,9 +112,11 @@ export const authChangeProfile = (userdata) => {
 				})
 				.catch((error) => console.log(error))
 		} else {
-			let data = {}
-			data.name = userdata.name
-			data.email = userdata.email
+			const data = new FormData()
+
+			data.append("name", userdata.name)
+			data.append("email", userdata.email)
+			data.append("photo", userdata.image)
 
 			axios
 				.patch("users/updateProfile", data, {

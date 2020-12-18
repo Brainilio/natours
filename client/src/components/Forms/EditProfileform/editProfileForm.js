@@ -3,7 +3,7 @@ import person from "../../../resource/person.jpg"
 
 const EditProfileForm = (props) => {
 	return (
-		<form>
+		<form encType="multpart/form-data">
 			<input
 				type="text"
 				value={props.name}
@@ -21,11 +21,10 @@ const EditProfileForm = (props) => {
 			<div>
 				<img src={person} />
 				<input
-					value={props.image}
 					onChange={props.formHandler}
 					type="file"
 					name="image"
-					accept="image/png, image/jpeg"
+					accept="image/*"
 				></input>
 			</div>
 			<button onClick={props.submitHandler} type="submit">
