@@ -52,7 +52,7 @@ exports.uploadImageToS3 = (req, res, next) => {
   s3.upload(params, async (error, data) => {
     try {
       const imagelink = await data.Location;
-      req.body.imagefile = imagelink;
+      req.body.photo = imagelink;
       next();
     } catch (err) {
       return new AppError(error, 500);
@@ -71,6 +71,9 @@ exports.getMe = (req, res, next) => {
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
+    console.log(
+      "I'm updating the profile now with the following information: " + req.body
+    );
     // 1) Create error if user posts password data
     if (req.body.password || req.body.passwordConfirm) {
       return new AppError("You can't change your password here!", 400);
@@ -81,7 +84,7 @@ exports.updateMe = async (req, res, next) => {
       ...req.body,
     };
 
-    const allowedFields = ['name', 'email'];
+    const allowedFields = ['name', 'email', 'photo'];
 
     //updated doc
     const newObject = {};
@@ -90,8 +93,10 @@ exports.updateMe = async (req, res, next) => {
       if (allowedFields.includes(el)) newObject[el] = updatedFields[el];
     });
 
+    console.log(req.body);
+
     // grab image file from modified request body (check uploadimagetos3 function) and add it to the user's photo field
-    if (req.body.imagefile) newObject.photo = req.body.imagefile;
+    // if (req.body.imagefile) newObject.photo = req.body.imagefile;
 
     const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
       new: true,
