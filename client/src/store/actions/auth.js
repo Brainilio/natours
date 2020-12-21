@@ -35,6 +35,7 @@ export const authFailed = (error) => {
 
 export const authLogout = () => {
 	localStorage.clear()
+
 	return {
 		type: actionTypes.AUTH_LOGOUT,
 	}
@@ -94,7 +95,11 @@ export const auth = (userData, isSignUp) => {
 
 export const authChangeProfile = (userdata) => {
 	return (dispatch) => {
-		if (userdata.password) {
+		if (
+			userdata.password &&
+			userdata.currentPassword &&
+			userdata.passwordConfirm
+		) {
 			// perform password change
 			console.log("changing password...")
 
@@ -113,15 +118,19 @@ export const authChangeProfile = (userdata) => {
 					},
 				})
 				.then((response) => {
+					console.log(response)
 					dispatch(authLogout())
 				})
 				.catch((error) => console.log(error))
 		} else {
 			const data = new FormData()
 
+			// fix problem here that you send empty field
 			data.append("name", userdata.name)
 			data.append("email", userdata.email)
 			data.append("photo", userdata.image)
+
+			// console.log(data)
 
 			axios
 				.patch("users/updateProfile", data, {

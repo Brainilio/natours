@@ -8,8 +8,8 @@ import DashboardBanner from "../../components/DashboardBanner/DashboardBanner"
 
 const Settings = (props) => {
 	const [newSettings, setNewSettings] = useState({
-		name: props.currentUser,
-		email: props.currentUser,
+		name: "",
+		email: "",
 		currentPassword: "",
 		password: "",
 		passwordConfirm: "",
@@ -21,7 +21,6 @@ const Settings = (props) => {
 		let value = event.target.value
 
 		if (label === "image") {
-			console.log("yes, this is an image!")
 			let image = event.target.files[0]
 			value = image
 		}
@@ -42,6 +41,8 @@ const Settings = (props) => {
 				toSend[name] = newSettings[name]
 			}
 		}
+
+		console.log(toSend)
 
 		props.onSubmitForm(toSend)
 

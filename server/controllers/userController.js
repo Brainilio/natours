@@ -35,28 +35,34 @@ const upload = multer({
 
 // --------- middlewares ---------- //
 
-// const uploadUserPhoto = upload.single('photo');
+// Upload file first to multer storage & filter
+exports.uploadPhoto = upload.single('photo');
 
 // Upload photo to S3 bucket and modify the request body to add the URL to imagefile
 exports.uploadImageToS3 = (req, res, next) => {
+  //No file uploaded? Skip this function completely.
   if (!req.file) return next();
 
-  upload.single('photo');
+  console.log(req.file);
 
+  // Upload the photo to multer to "read" it.
+  // upload.single('photo');
+
+  // params for AWS bucket
   const params = {
     Body: req.file.buffer,
     Bucket: 'natours-images',
     Key: `user-${req.user.id}-${Date.now()}.jpeg`,
   };
 
+  // Upload image to aws
   s3.upload(params, async (error, data) => {
-    try {
-      const imagelink = await data.Location;
-      req.body.photo = imagelink;
-      next();
-    } catch (err) {
+    if (error) {
       return new AppError(error, 500);
     }
+    const imagelink = data.Location;
+    req.body.imagefile = imagelink;
+    next();
   });
 };
 
@@ -71,9 +77,6 @@ exports.getMe = (req, res, next) => {
 //Updating profile
 exports.updateMe = async (req, res, next) => {
   try {
-    console.log(
-      "I'm updating the profile now with the following information: " + req.body
-    );
     // 1) Create error if user posts password data
     if (req.body.password || req.body.passwordConfirm) {
       return new AppError("You can't change your password here!", 400);
@@ -84,23 +87,32 @@ exports.updateMe = async (req, res, next) => {
       ...req.body,
     };
 
-    const allowedFields = ['name', 'email', 'photo'];
+    const allowedFields = ['name', 'email'];
 
     //updated doc
     const newObject = {};
 
     Object.keys(updatedFields).forEach((el) => {
-      if (allowedFields.includes(el)) newObject[el] = updatedFields[el];
+      if (
+        allowedFields.includes(el) &&
+        updatedFields[el] !== 'undefined' &&
+        updatedFields[el] !== null &&
+        updatedFields[el] !== '' &&
+        updatedFields[el] !== undefined
+      )
+        newObject[el] = updatedFields[el];
     });
 
-    console.log(req.body);
-
     // grab image file from modified request body (check uploadimagetos3 function) and add it to the user's photo field
-    // if (req.body.imagefile) newObject.photo = req.body.imagefile;
+
+    if (req.body.imagefile) {
+      newObject.photo = req.body.imagefile;
+    }
+
+    console.log(newObject);
 
     const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
       new: true,
-      runValidators: true,
     });
 
     res.status(200).json({

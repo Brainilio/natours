@@ -2,7 +2,7 @@ import React from "react"
 
 const Loginform = (props) => {
 	return (
-		<form autocomplete="off" className="login-up-form">
+		<form autoComplete="off" className="login-up-form">
 			<span className="login-title">Login</span>
 			<input
 				type="text"
