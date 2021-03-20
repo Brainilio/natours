@@ -54,7 +54,7 @@ const Dashboard = (props) => {
 				</div>
 				<div className="dashboard-user">
 					<img src={props.photo} />
-					<span>Hi, Christian!</span>
+					<span>Hi, {props.userName}!</span>
 				</div>
 			</section>
 
@@ -180,6 +180,7 @@ const Dashboard = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
+		userName: state.auth.name,
 		role: state.auth.role,
 		photo: state.auth.photo,
 		reviews: state.auth.reviews,

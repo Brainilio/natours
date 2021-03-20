@@ -11,6 +11,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const contactRouter = require('./routes/contactRoutes');
 
 // -------------- GLOBAL VARIABLES ---------- //
 
@@ -89,6 +90,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/contact', contactRouter);
 
 //operational error using utility class errorhandler
 app.all('*', (req, res, next) => {

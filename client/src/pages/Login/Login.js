@@ -13,8 +13,8 @@ const Login = (props) => {
 
 	const [isSignUp, setIsSignUp] = useState(false)
 	const [information, setInformation] = useState({
-		email: "",
-		password: "",
+		email: "admin@admin.com",
+		password: "admin123",
 		passwordConfirm: "",
 		image: "",
 	})

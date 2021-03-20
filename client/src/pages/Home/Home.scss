@@ -57,7 +57,14 @@
 			height: 50px;
 			font-size: $subheading;
 			border: 3px solid white;
+			transition: all 0.3s ease-in-out;
+
+			&:hover {
+				background: white;
+				color: black;
+			}
 		}
+
 		.home-landing-button-pointer {
 			width: 3px;
 			height: 30px;
@@ -314,6 +321,15 @@
 					color: color(primary-light);
 					background-color: color(secondary);
 					box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+					transition: all 0.3s ease-in-out;
+
+					&:hover {
+						background-color: rgb(64, 82, 110);
+					}
+
+					&:active {
+						background-color: rgb(25, 30, 39);
+					}
 				}
 			}
 		}

@@ -24,11 +24,20 @@
 		background-size: cover;
 		background-color: color(primary);
 		background-blend-mode: soft-light;
-		background-color: rgb(48, 48, 48);
+		background-color: rgba(48, 48, 48, 0.568);
 		flex-direction: column;
 		justify-content: space-between;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 		cursor: pointer;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		&:active {
+			background-color: rgba(48, 48, 48, 0.788);
+		}
 
 		.travel-card-upper-row {
 			display: flex;
