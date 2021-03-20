@@ -14,7 +14,7 @@ const ReviewCard = (props) => {
 		<div className="review-card">
 			<div className="review-stars">{reviews.map((review) => review)}</div>
 			<div className="review-personal">
-				<img src={person} />
+				<img src={props.user.photo} />
 				<span>{props.user.name}</span>
 			</div>
 			<p>{props.message}</p>

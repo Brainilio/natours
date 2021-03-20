@@ -1,5 +1,11 @@
 export { fetchTours, fetchSingleTour, fetchTopFive } from "./tours"
-export { auth, checkAuth, authLogout, authChangeProfile } from "./auth"
+export {
+	auth,
+	checkAuth,
+	authLogout,
+	authChangeProfile,
+	deactivateAccount,
+} from "./auth"
 export {
 	submitReviews,
 	getUserSpecificReview,

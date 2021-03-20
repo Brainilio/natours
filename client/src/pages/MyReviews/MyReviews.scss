@@ -1,0 +1,25 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.my-reviews-section {
+	min-height: 100vh;
+
+	.user-review {
+		margin: 1em auto;
+		width: 95%;
+		height: 50px;
+		margin-bottom: 1em;
+		display: flex;
+		border: 1px solid rgba(color(primary), 0.5);
+		align-items: center;
+		justify-content: space-between;
+		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+
+		.user-review-tour-name {
+			margin: 0 1em;
+			font-size: $body2;
+			text-align: center;
+		}
+	}
+}

@@ -13,6 +13,7 @@ const Login = (props) => {
 
 	const [isSignUp, setIsSignUp] = useState(false)
 	const [information, setInformation] = useState({
+		name: "User",
 		email: "admin@admin.com",
 		password: "admin123",
 		passwordConfirm: "",
@@ -25,6 +26,11 @@ const Login = (props) => {
 	const formHandler = (event) => {
 		let label = event.target.name
 		let value = event.target.value
+
+		if (label == "image") {
+			let image = event.target.files[0]
+			value = image
+		}
 
 		setInformation({
 			...information,
@@ -55,6 +61,7 @@ const Login = (props) => {
 			<div className="auth-content">
 				{isSignUp ? (
 					<SignupForm
+						name={information.name}
 						email={information.email}
 						password={information.password}
 						passwordConfirm={information.passwordConfirm}

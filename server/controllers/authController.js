@@ -48,6 +48,7 @@ exports.signUp = async (req, res, next) => {
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
       passwordChangedAt: req.body.passwordChangedAt,
+      photo: req.body.imagefile,
     });
     createSendToken(newUser, 201, res);
   } catch (err) {

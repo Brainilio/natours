@@ -102,18 +102,38 @@
 	}
 }
 
+.dashboard-page-admin-panels {
+	margin-top: 2em;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+
+	img {
+		object-fit: cover;
+		width: 175px;
+		height: 175px;
+	}
+}
+
 .dashboard-page-reviews {
 	margin: 3em 0;
 
-	.dashboard-title-header {
+	.reviews-title {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 1em;
 		margin-left: 1em;
 		margin-right: 1em;
-		font-size: $subheading;
-		color: color(secondary);
+		color: black;
+
+		.dashboard-title-header {
+			display: flex;
+
+			font-size: $subheading;
+			color: color(secondary);
+		}
 	}
 
 	.user-review {
@@ -122,7 +142,7 @@
 		height: 50px;
 		margin-bottom: 1em;
 		display: flex;
-		border: 1px solid rgba(color(primary), 0.5);
+		border: 1px solid rgba(color(primary), 0.1);
 		justify-content: space-between;
 		align-items: center;
 		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);

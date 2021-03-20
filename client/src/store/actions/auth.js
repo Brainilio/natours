@@ -1,6 +1,7 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
 import ax from "axios"
+import { useHistory } from "react-router"
 
 export const authStart = () => {
 	return {
@@ -35,7 +36,6 @@ export const authFailed = (error) => {
 
 export const authLogout = () => {
 	localStorage.clear()
-
 	return {
 		type: actionTypes.AUTH_LOGOUT,
 	}
@@ -53,9 +53,15 @@ export const auth = (userData, isSignUp) => {
 	return (dispatch) => {
 		dispatch(authStart())
 
-		userData = {
-			name: "Brainilio",
-			...userData,
+		let data = userData
+
+		if (isSignUp) {
+			data = new FormData()
+			data.append("name", userData.name)
+			data.append("email", userData.email)
+			data.append("password", userData.password)
+			data.append("passwordConfirm", userData.passwordConfirm)
+			data.append("photo", userData.image)
 		}
 
 		console.log(userData)
@@ -63,7 +69,7 @@ export const auth = (userData, isSignUp) => {
 		if (isSignUp) url = "users/signup"
 
 		axios
-			.post(url, userData)
+			.post(url, data)
 			.then((response) => {
 				let name = response.data.data.user.name
 				let email = response.data.data.user.email
@@ -108,8 +114,6 @@ export const authChangeProfile = (userdata) => {
 			data.currentPassword = userdata.currentPassword
 			data.newPassword = userdata.password
 			data.newPasswordConfirm = userdata.passwordConfirm
-
-			console.log(data)
 
 			axios
 				.patch("users/updatePassword", data, {
@@ -167,5 +171,20 @@ export const checkAuth = () => {
 				)
 			}
 		}
+	}
+}
+
+export const deactivateAccount = () => {
+	return (dispatch) => {
+		const token = localStorage.getItem("token")
+		if (!token) dispatch(authLogout())
+		axios
+			.delete("users/deleteUser", {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then(() => dispatch(authLogout()))
+			.catch((error) => console.log(error))
 	}
 }

@@ -13,6 +13,9 @@ import * as actions from "./store/actions/index"
 import { connect } from "react-redux"
 import Users from "./components/Admin/Users/Users"
 import Tours from "./components/Admin/Tours/Tours"
+import MyReviews from "./pages/MyReviews/MyReviews"
+import Statistics from "./pages/Statistics/Statistics"
+import BookedTours from "./pages/BookedTours/BookedTours"
 
 const App = (props) => {
 	useEffect(() => {
@@ -25,6 +28,7 @@ const App = (props) => {
 				<Route path="/" exact component={Home} />
 				<Route path="/Login" component={Login} />
 				<Route path="/tour/:id" component={TravelDetail} />
+				<Route path="/bookedtours" component={BookedTours} />
 				<Route path="*" component={ErrorPage} />
 			</Switch>
 		</>
@@ -39,6 +43,8 @@ const App = (props) => {
 					<Route path="/tour/:id" component={TravelDetail} />
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/settings" component={Settings} />
+					<Route path="/myreviews" component={MyReviews} />
+					<Route path="/bookedtours" component={BookedTours} />
 					<Route path="/logout" component={Logout} />
 					<Route path="*" component={ErrorPage} />
 				</Switch>
@@ -57,6 +63,9 @@ const App = (props) => {
 					<Route path="/users" component={Users} />
 					<Route path="/tours" component={Tours} />
 					<Route path="/settings" component={Settings} />
+					<Route path="/myreviews" component={MyReviews} />
+					<Route path="/bookedtours" component={BookedTours} />
+					<Route path="/statistics" component={Statistics} />
 					<Route path="/logout" component={Logout} />
 					<Route path="*" component={ErrorPage} />
 				</Switch>

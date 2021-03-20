@@ -1,10 +1,10 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
-import person from "../../resource/person.jpg"
-import * as actions from "../../store/actions"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 
-const DashboardBanner = (props) => {
+const DashboardBanner = () => {
+	const { name, photo } = useSelector((state) => state.auth)
+
 	return (
 		<section className="dashboard-page">
 			<div className="dashboard-actions">
@@ -15,17 +15,11 @@ const DashboardBanner = (props) => {
 				</ul>
 			</div>
 			<div className="dashboard-user">
-				<img src={props.photo} />
-				<span>Hi, Christian!</span>
+				<img src={photo} />
+				<span>Hi, {name}!</span>
 			</div>
 		</section>
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		photo: state.auth.photo,
-	}
-}
-
-export default connect(mapStateToProps, null)(DashboardBanner)
+export default DashboardBanner

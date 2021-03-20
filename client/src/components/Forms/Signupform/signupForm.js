@@ -6,6 +6,13 @@ const SignupForm = (props) => {
 			<span className="signup-title">Sign Up</span>
 			<input
 				type="text"
+				value={props.name}
+				onChange={props.formHandler}
+				name="name"
+				placeholder="Name.."
+			></input>
+			<input
+				type="text"
 				value={props.email}
 				onChange={props.formHandler}
 				name="email"
@@ -27,11 +34,10 @@ const SignupForm = (props) => {
 			></input>
 			<label htmlFor="image">Choose a profile picture:</label>
 			<input
-				value={props.image}
 				onChange={props.formHandler}
 				type="file"
 				name="image"
-				accept="image/png, image/jpeg"
+				accept="image/*"
 			></input>
 			<button onClick={props.submitHandler} type="submit">
 				Sign up..

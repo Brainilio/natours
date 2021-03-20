@@ -5,8 +5,10 @@ import ChangePasswordForm from "../../components/Forms/ChangePasswordForm/change
 import * as actions from "../../store/actions"
 import { connect } from "react-redux"
 import DashboardBanner from "../../components/DashboardBanner/DashboardBanner"
+import { useHistory } from "react-router"
 
 const Settings = (props) => {
+	const history = useHistory()
 	const [newSettings, setNewSettings] = useState({
 		name: "",
 		email: "",
@@ -56,7 +58,10 @@ const Settings = (props) => {
 		})
 	}
 
-	const deactivateAccount = (e) => console.log("Deactivating account...")
+	const deactivateAccount = (e) => {
+		props.deactivateAccount()
+		history.push("/login")
+	}
 
 	return (
 		<>
@@ -105,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onSubmitForm: (dataToChange) =>
 			dispatch(actions.authChangeProfile(dataToChange)),
+		deactivateAccount: () => dispatch(actions.deactivateAccount()),
 	}
 }
 

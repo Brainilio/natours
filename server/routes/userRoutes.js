@@ -14,7 +14,12 @@ router.get(
   userController.getUser
 );
 
-router.post('/signup', authController.signUp);
+router.post(
+  '/signup',
+  userController.uploadPhoto,
+  userController.uploadImageToS3,
+  authController.signUp
+);
 router.post('/login', authController.logIn);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);

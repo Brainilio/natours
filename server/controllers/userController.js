@@ -43,16 +43,19 @@ exports.uploadImageToS3 = (req, res, next) => {
   //No file uploaded? Skip this function completely.
   if (!req.file) return next();
 
-  console.log(req.file);
-
   // Upload the photo to multer to "read" it.
   // upload.single('photo');
 
+  let keyForPhoto = 'newUser';
+
+  if (req.user) {
+    keyForPhoto = req.user.id;
+  }
   // params for AWS bucket
   const params = {
     Body: req.file.buffer,
     Bucket: 'natours-images',
-    Key: `user-${req.user.id}-${Date.now()}.jpeg`,
+    Key: `user-${keyForPhoto}-${Date.now()}.jpeg`,
   };
 
   // Upload image to aws
@@ -108,8 +111,6 @@ exports.updateMe = async (req, res, next) => {
     if (req.body.imagefile) {
       newObject.photo = req.body.imagefile;
     }
-
-    console.log(newObject);
 
     const updatedUser = await User.findByIdAndUpdate(req.user.id, newObject, {
       new: true,

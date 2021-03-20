@@ -1,9 +1,14 @@
 import React, { useEffect } from "react"
 import "./Dashboard.scss"
-import person from "../../resource/person.jpg"
-import { NavLink } from "react-router-dom"
+import adminCard1 from "../../resource/adminCard1.svg"
+import adminCard2 from "../../resource/adminCard2.svg"
+import adminCard3 from "../../resource/adminCard3.svg"
+import adminCard4 from "../../resource/adminCard4.svg"
+import { Link, NavLink } from "react-router-dom"
 import * as actions from "../../store/actions/index"
 import { connect } from "react-redux"
+import MyReviews from "../MyReviews/MyReviews"
+import ListForReviews from "../MyReviews/ListForReviews"
 // import regular from "../../resource/venice.jpg"
 // import admin from "../../resource/admin.jpg"
 
@@ -26,11 +31,25 @@ const Dashboard = (props) => {
 				<NavLink to="/users">
 					<li>All users</li>
 				</NavLink>
+				<NavLink to="/statistics">
+					<li>Statistics</li>
+				</NavLink>
 			</>
 		)
 		adminPanels = (
 			<section className="dashboard-page-admin-panels">
-				Admin: statistics, payments, create new tour, view tours
+				<Link to="/tours">
+					<img src={adminCard1} />
+				</Link>
+				<Link to="/statistics">
+					<img src={adminCard2} />
+				</Link>
+				<Link to="/tours">
+					<img src={adminCard3} />
+				</Link>
+				<Link to="/users">
+					<img src={adminCard4} />
+				</Link>
 			</section>
 		)
 	}
@@ -43,7 +62,7 @@ const Dashboard = (props) => {
 						<NavLink to="/settings">
 							<li>Settings</li>
 						</NavLink>
-						<NavLink to="/mytours">
+						<NavLink to="/bookedtours">
 							<li>Booked Tours</li>
 						</NavLink>
 						<NavLink to="/myreviews">
@@ -122,58 +141,14 @@ const Dashboard = (props) => {
 			</section>
 
 			<section className="dashboard-page-reviews">
-				<span className="dashboard-title-header">My Reviews</span>
-
-				{/* TODO: IMPLEMENT GET REVIEWS & DELETE REVIEWS */}
-				<div className="user-review">
-					<span className="user-review-tour-name">
-						<span aria-hidden className="material-icons">
-							location_on
-						</span>
-						Pitburger, Austria
-					</span>
-					<span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-					</span>
+				<div className="reviews-title">
+					<span className="dashboard-title-header">My Reviews</span>
+					<NavLink to="/myreviews" style={{ color: "black" }}>
+						<span className="dashboard-title-view">View all</span>
+					</NavLink>
 				</div>
-
-				<div className="user-review">
-					<span className="user-review-tour-name">
-						<span aria-hidden className="material-icons">
-							location_on
-						</span>
-						Pitburger, Austria
-					</span>
-					<span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-						<span aria-hidden className="material-icons rating">
-							grade
-						</span>
-					</span>
-				</div>
+				<ListForReviews sliceTrue={true} />
 			</section>
-
-			{/* Add condition to check if user.role === admin */}
-			{/* <AdminDashboard /> */}
 		</>
 	)
 }
