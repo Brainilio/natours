@@ -19,13 +19,6 @@ const Users = (props) => {
 					<td>{user.name}</td>
 					<td>{user.role}</td>
 					<td>
-						<button
-							onClick={() => props.editUser({ name: "newname" }, user._id)}
-						>
-							Edit user
-						</button>
-					</td>
-					<td>
 						<label className="switch">
 							<Toggle
 								checked={user.active}
@@ -37,14 +30,17 @@ const Users = (props) => {
 						</label>
 					</td>
 					<td>
-						<button
+						<span
+							style={{ cursor: "pointer", color: "red", textAlign: "center" }}
 							onClick={(event) => {
 								event.preventDefault()
 								props.deleteUser(user._id)
 							}}
+							aria-hidden
+							className="material-icons "
 						>
-							Delete user
-						</button>
+							delete
+						</span>
 					</td>
 				</tr>
 			</tbody>
@@ -59,7 +55,6 @@ const Users = (props) => {
 					<thead>
 						<th>Name</th>
 						<th>Role</th>
-						<th>Update</th>
 						<th>Status</th>
 						<th>Delete</th>
 					</thead>
@@ -81,7 +76,6 @@ const mapDispatchToProps = (dispatch) => {
 		fetchUsers: () => dispatch(actions.fetchUsers()),
 		deleteUser: (id) => dispatch(actions.deleteUser(id)),
 		statuteUser: (status, user) => dispatch(actions.statuteUser(status, user)),
-		editUser: (data, user) => dispatch(actions.editUser(data, user)),
 	}
 }
 

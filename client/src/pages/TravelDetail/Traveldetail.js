@@ -27,7 +27,7 @@ const Traveldetail = (props) => {
 					<button className="detail-page-cta">BOOK NOW</button>
 					<Landing name={props.tour.name} />
 					<DetailInformation
-						startDate={props.tour.startDates[0]}
+						startDate={props.tour.startDates}
 						groupSize={props.tour.groupSize}
 						difficulty={props.tour.difficulty}
 						ratingAvg={props.tour.ratingsAverage}

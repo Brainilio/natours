@@ -1,6 +1,7 @@
 @import "../../../styles/breakpoints.scss";
 @import "../../../styles/colors.scss";
 @import "../../../styles/fontSizes.scss";
+@import "../../../styles/mixins.scss";
 
 nav {
 	position: fixed;
@@ -92,6 +93,7 @@ nav {
 			align-items: center;
 
 			.side-login-button {
+				@include cta-button;
 				font-size: $body2;
 				background: none;
 				color: color(primary-light);
@@ -99,7 +101,13 @@ nav {
 				width: 150px;
 				height: 30px;
 				text-align: center;
+
+				&:hover {
+					background: white;
+					color: color(secondary);
+				}
 			}
+
 			.side-signup-button {
 				margin-top: 2px;
 				border: none;

@@ -3,7 +3,10 @@ import React from "react"
 const Loginform = (props) => {
 	return (
 		<form autoComplete="off" className="login-up-form">
-			<span className="login-title">Login</span>
+			<div className="login-page-text-black">
+				<span className="login-page-title-black">NATOURS</span>
+				<span className="login-title">Login</span>
+			</div>
 			<input
 				type="text"
 				value={props.email}

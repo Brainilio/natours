@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import image from "../../../resource/admin.jpg"
 
 // replace image with the image src
@@ -10,12 +10,11 @@ TODO:
 - Modal for details
 - Modal for editing 
 - Modal for adding 
-- Delete operation
-
 
 */
 
 const TourBar = (props) => {
+	const history = useHistory()
 	return (
 		<div className="admin-dashboard-tour">
 			<span>{props.tour.name}</span>
@@ -23,14 +22,14 @@ const TourBar = (props) => {
 				<span
 					aria-hidden
 					className="material-icons"
-					onClick={() => props.detailHandler()}
+					onClick={() => history.push(`tour/${props.tour._id}`)}
 				>
 					pageview
 				</span>
 				<span
 					aria-hidden
 					className="material-icons"
-					onClick={() => props.editHandler()}
+					onClick={() => props.editHandler(props.tour._id)}
 				>
 					create
 				</span>

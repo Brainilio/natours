@@ -3,7 +3,10 @@ import React from "react"
 const SignupForm = (props) => {
 	return (
 		<form autoComplete="off" className="sign-up-form">
-			<span className="signup-title">Sign Up</span>
+			<div className="login-page-text-black">
+				<span className="login-page-title-black">NATOURS</span>
+				<span className="signup-title">Sign Up</span>
+			</div>
 			<input
 				type="text"
 				value={props.name}

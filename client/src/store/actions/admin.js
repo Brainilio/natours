@@ -1,5 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
+import { fetchSingleTour } from "./tours"
 
 export const loadUsersStart = () => {
 	return {
@@ -161,5 +162,12 @@ export const editTour = (id, data) => {
 		console.log(
 			`Editing tour with id of ${id} with the following data: ${data}`
 		)
+		const token = localStorage.getItem("token")
+		axios
+			.patch(`tours/${id}`, { headers: { Authorization: token } }, data)
+			.then((response) => {
+				dispatch(fetchSingleTour())
+			})
+			.catch((error) => console.log(error))
 	}
 }

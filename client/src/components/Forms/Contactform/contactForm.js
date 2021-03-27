@@ -61,7 +61,7 @@ const ContactForm = () => {
 						placeholder="Your message.."
 						name="message"
 					></textarea>
-					<button type="submit">SUBMIT</button>
+					<button type="submit">Submit</button>
 				</div>
 			)}
 		</form>

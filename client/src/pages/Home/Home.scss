@@ -1,6 +1,7 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
 
 .home-landing {
 	display: flex;
@@ -13,14 +14,12 @@
 	.home-landing-picture {
 		position: sticky;
 		display: block;
-		// filter: grayscale(20%);
 		z-index: -1;
-		opacity: 60%;
 		object-fit: cover;
 		align-self: center;
 		width: 100vw;
-
 		min-height: 100vh;
+		opacity: 60%;
 	}
 
 	.home-landing-text {
@@ -50,18 +49,24 @@
 		justify-content: center;
 
 		.home-landing-button {
+			@include cta-button;
+			font-size: 15px;
+			width: 150px;
+			height: 35px;
+		}
+
+		.home-login-button {
+			@include cta-button;
+			width: 150px;
+			font-size: 15px;
+			height: 35px;
+			margin-top: 1em;
 			background: none;
-			cursor: pointer;
-			color: color(primary-light);
-			width: 170px;
-			height: 50px;
-			font-size: $subheading;
-			border: 3px solid white;
-			transition: all 0.3s ease-in-out;
+			border: 2px solid white;
 
 			&:hover {
 				background: white;
-				color: black;
+				color: color(secondary);
 			}
 		}
 
@@ -261,6 +266,7 @@
 		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 		display: flex;
 		justify-content: space-around;
+		border-radius: 15px;
 
 		form {
 			display: flex;
@@ -287,49 +293,51 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				margin-top: 2em;
+				margin-top: 0.5rem;
 				width: 100%;
 
 				input[type="text"] {
-					border: 1px solid rgba(color(primary), 0.5);
 					width: 80%;
-					margin: 1em 0;
-					height: 20px;
-					outline: none;
-					padding-left: 1em;
+					background: rgb(255, 255, 255);
+					margin: 1rem 0;
+					height: 25px;
+					border: none;
+					border-bottom: 1px solid color(secondary);
+					font-size: 13px;
+					font-weight: 500;
+					transition: all 0.3s ease-in-out;
+
+					&:focus {
+						outline: none;
+						border-bottom: 2px solid rgb(104, 104, 184);
+					}
 				}
 
 				textarea {
 					width: 80%;
 					height: 120px;
 					text-align: start;
-					border: 1px solid rgba(color(primary), 0.5);
+					border: 1px solid rgba(color(secondary), 1);
 					margin: 1em 0;
 					resize: none;
 					outline: none;
 					padding-left: 1em;
 					padding-top: 1em;
+					transition: all 0.3s ease-in-out;
+
+					&:focus {
+						outline: none;
+						border: 2px solid rgb(104, 104, 184);
+					}
 				}
 
 				button {
+					@include cta-button;
 					cursor: pointer;
 					height: 35px;
 					margin: 2em;
-					border: none;
 					width: 85%;
 					outline: none;
-					color: color(primary-light);
-					background-color: color(secondary);
-					box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-					transition: all 0.3s ease-in-out;
-
-					&:hover {
-						background-color: rgb(64, 82, 110);
-					}
-
-					&:active {
-						background-color: rgb(25, 30, 39);
-					}
 				}
 			}
 		}

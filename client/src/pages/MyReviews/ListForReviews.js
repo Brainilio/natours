@@ -26,6 +26,7 @@ const ListForReviews = ({ sliceTrue = false }) => {
 	}
 
 	let cards = []
+
 	rev.map((review) => {
 		let rating = []
 		for (let i = 0; i < review.rating; i++) {
@@ -58,11 +59,7 @@ const ListForReviews = ({ sliceTrue = false }) => {
 			</div>
 		)
 	})
-	return (
-		<section className="my-reviews-section">
-			{sliceTrue ? cards.slice(0, 2).map((c) => c) : cards.map((c) => c)}
-		</section>
-	)
+	return sliceTrue ? cards.slice(0, 2).map((c) => c) : cards.map((c) => c)
 }
 
 export default ListForReviews

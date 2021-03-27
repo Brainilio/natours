@@ -1,6 +1,7 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
 
 .header-title-page-settings {
 	font-size: $subheading;
@@ -46,25 +47,14 @@
 		}
 
 		button {
+			@include cta-button;
 			height: 35px;
 			border: none;
 			width: 85%;
 			outline: none;
 			margin-top: 4em;
 			margin-bottom: 4em;
-			font-size: $body;
-			color: color(primary-light);
-			background-color: color(secondary);
-			box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 			align-self: center;
-
-			&:hover {
-				background-color: rgb(64, 82, 110);
-			}
-
-			&:active {
-				background-color: rgb(25, 30, 39);
-			}
 		}
 	}
 }
@@ -89,25 +79,13 @@
 		}
 
 		button {
+			@include cta-button;
 			height: 35px;
-			border: none;
+
 			width: 85%;
 			outline: none;
 			margin-top: 2em;
 			margin-bottom: 4em;
-			font-size: $body;
-			color: color(primary-light);
-			background-color: color(secondary);
-			box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-			align-self: center;
-
-			&:hover {
-				background-color: rgb(64, 82, 110);
-			}
-
-			&:active {
-				background-color: rgb(25, 30, 39);
-			}
 		}
 	}
 }
@@ -119,10 +97,9 @@
 	// align-items: center;
 
 	button {
+		@include cta-button;
 		height: 35px;
-		border: none;
 		width: 85%;
-		outline: none;
 		margin-top: 2em;
 		margin-bottom: 4em;
 		display: block;
@@ -131,7 +108,6 @@
 		font-size: $body;
 		color: color(primary-light);
 		background-color: color(negative);
-		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 		transition: all 0.3s ease-in-out;
 
 		&:hover {

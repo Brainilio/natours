@@ -1,4 +1,5 @@
 const Tour = require('../models/tourModel');
+const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
@@ -33,7 +34,25 @@ exports.updateTour = factoryHandler.updateOne(Tour);
 exports.createTour = factoryHandler.createOne(Tour);
 
 // delete will be handled by a factory handler in utils/factoryhandler
-exports.deleteTour = factoryHandler.deleteOne(Tour);
+exports.deleteTour = async (req, res, next) => {
+  try {
+    const doc = await Tour.findByIdAndDelete(req.params.id);
+    const reviewsToDelete = await Review.find({
+      tour: req.params.id,
+    }).deleteMany();
+
+    if (!doc || !reviewsToDelete) {
+      return next(new AppError('No document found with that ID', 404));
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    return next(new AppError(err, 400));
+  }
+};
 
 // '/tours-within/:distance/center/:latlng/unit/:unit'
 exports.getToursWithin = async (req, res, next) => {

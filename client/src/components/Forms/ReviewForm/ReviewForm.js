@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Modal from "../../../ui/Modal/Modal"
 import * as actions from "../../../store/actions/index"
 import { connect } from "react-redux"
+import StarPicker from "react-star-picker"
 
 const ReviewForm = (props) => {
 	const [review, setReview] = useState({
@@ -27,8 +28,8 @@ const ReviewForm = (props) => {
 
 	return (
 		<Modal clicked={props.clicked} show={props.show}>
-			<form className="sign-up-form" onSubmit={(e) => formSubmitHandler(e)}>
-				<span className="signup-title">Write your review</span>
+			<form className="review-form" onSubmit={(e) => formSubmitHandler(e)}>
+				<h2 className="review-title">Write your review</h2>
 
 				<input
 					type="text"
@@ -37,13 +38,17 @@ const ReviewForm = (props) => {
 					name="text"
 					placeholder="Write your review.."
 				></input>
-				<select name="rating" onChange={(e) => formHandler(e)}>
+				<StarPicker
+					onChange={(value) => setReview({ ...review, rating: value })}
+					value={review.rating}
+				/>
+				{/* <select name="rating" onChange={(e) => formHandler(e)}>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
-				</select>
+				</select> */}
 				<button onClick={(e) => formSubmitHandler(e)} type="submit">
 					Send review
 				</button>

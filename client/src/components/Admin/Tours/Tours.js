@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { connect } from "react-redux"
+import { connect, useDispatch, useSelector } from "react-redux"
 import "./Tours.scss"
 import * as actions from "../../../store/actions/"
 import Modal from "../../../ui/Modal/Modal"
-import TourDetail from "./TourDetail"
 import TourEdit from "./TourEdit"
 import DashboardBanner from "../../DashboardBanner/DashboardBanner"
 import TourBar from "./TourBar"
@@ -21,14 +20,24 @@ const Tours = (props) => {
 	useEffect(() => {
 		props.fetchTours()
 	}, [])
+	const dispatch = useDispatch()
+	const { currentTour } = useSelector((state) => state.tours)
 
-	const [detail, setDetail] = useState(false)
 	const [edit, setEdit] = useState(false)
 	const [add, setAdd] = useState(false)
+	const [id, setId] = useState(null)
 
-	const detailHandler = () => setDetail((prevstate) => !prevstate)
 	const addHandler = () => setAdd((prevstate) => !prevstate)
-	const editHandler = () => setEdit((prevstate) => !prevstate)
+
+	const editHandler = (givenid) => {
+		if (givenid == null) {
+			setId(null)
+		} else {
+			dispatch(actions.fetchSingleTour(givenid))
+			setId(givenid)
+			setEdit((prevstate) => !prevstate)
+		}
+	}
 
 	let tours = null
 
@@ -37,9 +46,7 @@ const Tours = (props) => {
 			<TourBar
 				key={tour._id}
 				tour={tour}
-				detail={detail}
 				edit={edit}
-				detailHandler={detailHandler}
 				editHandler={editHandler}
 				deleteTour={props.deleteTour}
 			/>
@@ -65,14 +72,10 @@ const Tours = (props) => {
 					<CreateTourForm />
 				</Modal>
 			) : null}
-			{detail ? (
-				<Modal clicked={detailHandler}>
-					<TourDetail />
-				</Modal>
-			) : null}
-			{edit ? (
+
+			{edit && currentTour ? (
 				<Modal clicked={editHandler}>
-					<TourEdit />
+					<TourEdit id={id} />
 				</Modal>
 			) : null}
 		</>
