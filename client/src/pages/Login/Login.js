@@ -4,12 +4,14 @@ import Loginform from "../../components/Forms/Loginform/loginForm"
 import SignupForm from "../../components/Forms/Signupform/signupForm"
 import "./Login.scss"
 import * as actions from "../../store/actions/index"
-import { connect } from "react-redux"
+import { connect, useSelector } from "react-redux"
+import Spinner from "../../components/Spinner/Spinner"
 
 const Login = (props) => {
 	// useEffect(() => {
 	// 	props.tryAutoSignUp()
 	// }, [])
+	const { loading, error } = useSelector((state) => state.auth)
 
 	const [isSignUp, setIsSignUp] = useState(false)
 	const [information, setInformation] = useState({
@@ -59,7 +61,9 @@ const Login = (props) => {
 		<section className="login-page">
 			{authRedirect}
 			<div className="auth-content">
-				{isSignUp ? (
+				{loading ? (
+					<Spinner />
+				) : isSignUp ? (
 					<SignupForm
 						name={information.name}
 						email={information.email}

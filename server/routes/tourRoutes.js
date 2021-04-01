@@ -58,6 +58,9 @@ router
   .patch(
     authController.protect,
     authController.restrictTo('admin'),
+    tourController.uploadPhotos,
+    tourController.uploadCoverImageToS3,
+    tourController.uploadImagesToS3,
     tourController.updateTour
   )
   .delete(

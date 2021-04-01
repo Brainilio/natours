@@ -1,9 +1,99 @@
+const aws = require('aws-sdk');
+const multer = require('multer');
 const Tour = require('../models/tourModel');
 const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 const factoryHandler = require('../utils/factoryHandler');
 
+const s3 = new aws.S3({
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_KEY_ID,
+  region: process.env.AWS_REGION,
+});
+
+// multer operations / lifecycle
+
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError('This is not an image, please upload images only', 400),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
 // ----------- Middleware METHODS -------------- //
+
+// Upload file first to multer storage & filter
+exports.uploadPhotos = upload.fields([
+  { name: 'imageCover', maxCount: 1 },
+  { name: 'images', maxCount: 3 },
+]);
+
+exports.uploadCoverImageToS3 = async (req, res, next) => {
+  try {
+    if (!req.files.imageCover) return next();
+    const keyForPhoto = req.params.id;
+
+    s3.upload(
+      {
+        Body: req.files.imageCover[0].buffer,
+        Bucket: 'natours-images',
+        Key: `tour-${keyForPhoto}-${Date.now()}.jpeg`,
+      },
+      (error, data) => {
+        if (error) {
+          return new AppError(error, 500);
+        }
+        const imageLink = data.Location;
+        req.body.imageCover = imageLink;
+
+        return next();
+      }
+    );
+  } catch (error) {
+    return new AppError(error.message, 400);
+  }
+};
+
+// Upload photo to S3 bucket and modify the request body to add the URL to imagefile
+exports.uploadImagesToS3 = async (req, res, next) => {
+  //No file uploaded? Skip this function completely.
+  if (!req.files.images) return next();
+  const keyForPhoto = req.params.id;
+
+  // // Upload image to aws
+
+  req.body.images = [];
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < req.files.images.length; i++) {
+    // params for AWS bucket
+    const params = {
+      Body: req.files.images[i].buffer,
+      Bucket: 'natours-images',
+      Key: `tour-${keyForPhoto}-${Date.now()}.jpeg`,
+    };
+
+    // // Upload image to aws
+    const pr = s3.upload(params).promise();
+    pr.then((d) => {
+      req.body.images.push(d.Location);
+      if (i === req.files.images.length - 1) {
+        next();
+      }
+    });
+  }
+};
 
 // Write any middleware functions in here
 exports.aliasTopTours = (req, res, next) => {

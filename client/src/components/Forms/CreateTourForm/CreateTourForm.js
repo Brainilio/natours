@@ -61,6 +61,7 @@ const CreateTourForm = (props) => {
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
 		props.createTour(tour)
+		props.addHandler()
 	}
 
 	return (

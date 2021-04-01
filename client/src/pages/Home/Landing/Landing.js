@@ -7,7 +7,8 @@ const Landing = () => {
 		<section className="home-landing">
 			<img
 				src={Background}
-				className="home-landing-picture"
+				className="home-landing-picture-landing-dont-touch"
+				style={{ opacity: "60%" }}
 				alt="backgroundimage"
 			/>
 			<div className="home-landing-text">

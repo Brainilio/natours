@@ -69,7 +69,7 @@ const Tours = (props) => {
 
 			{add ? (
 				<Modal clicked={addHandler}>
-					<CreateTourForm />
+					<CreateTourForm addHandler={addHandler} />
 				</Modal>
 			) : null}
 

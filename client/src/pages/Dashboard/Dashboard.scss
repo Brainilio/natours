@@ -95,6 +95,12 @@
 		justify-content: space-around;
 		align-items: center;
 
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			opacity: 50%;
+		}
+
 		span {
 			font-size: $body2;
 			color: color(primary-light);
@@ -112,7 +118,13 @@
 	img {
 		object-fit: cover;
 		width: 175px;
+
 		height: 175px;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			opacity: 50%;
+		}
 	}
 }
 
@@ -146,6 +158,11 @@
 		justify-content: space-between;
 		align-items: center;
 		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			opacity: 50%;
+		}
 
 		.user-review-tour-name {
 			margin: 0 1em;
