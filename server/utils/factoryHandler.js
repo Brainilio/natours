@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* This is an optional handler to add your http controller methods in if there's
 a lot of repetition */
 
@@ -120,8 +121,15 @@ exports.updateOne = (Model) => async (req, res, next) => {
 // for creating
 exports.createOne = (Model) => async (req, res, next) => {
   try {
+    if (req.body.startLocation) {
+      const newStartLocation = {};
+      // const arrayedBody = req.body.startLocation.split(',');
+      newStartLocation.description = req.body.startLocation[0];
+      newStartLocation.coordinates = req.body.startLocation[1].split(',');
+      newStartLocation.address = req.body.startLocation[2];
+      req.body.startLocation = newStartLocation;
+    }
     const doc = await Model.create(req.body);
-
     res.status(201).json({
       status: 'success',
       data: {

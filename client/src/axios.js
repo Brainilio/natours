@@ -1,7 +1,7 @@
 import axios from "axios"
 // process.env.REACT_APP_API_KEY
 const instance = axios.create({
-	baseURL: process.env.REACT_APP_API_KEY,
+	baseURL: "http://localhost:8000/api/v1/",
 	headers: {
 		Authorization: localStorage.getItem("token"),
 	},

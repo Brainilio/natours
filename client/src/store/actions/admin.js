@@ -130,8 +130,25 @@ export const deleteUser = (id) => {
 export const addTour = (tour) => {
 	return (dispatch) => {
 		const token = localStorage.getItem("token")
+		let formdata = new FormData()
+
+		for (const data in tour) {
+			if (data === "startLocation") {
+				for (const obj in tour[data]) {
+					formdata.append(data, tour[data][obj])
+				}
+			}
+			if (data === "images" && data.length > 1) {
+				for (const img of tour[data]) {
+					formdata.append(data, img)
+				}
+			} else {
+				formdata.append(data, tour[data])
+			}
+		}
+
 		axios
-			.post(`tours/`, tour, {
+			.post(`tours/`, formdata, {
 				headers: {
 					Authorization: token,
 				},

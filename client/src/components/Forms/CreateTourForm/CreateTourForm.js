@@ -1,14 +1,18 @@
 import React, { useState } from "react"
 import * as actions from "../../../store/actions/index"
-import { connect } from "react-redux"
+import { connect, useSelector } from "react-redux"
 
 // WHEN THIS WORKS: REMOVE DEFAULT STATE !!!!!!!!!!!!!!!
 const CreateTourForm = (props) => {
+	const { userId } = useSelector((state) => state.auth)
 	const [tour, setTour] = useState({
 		name: "",
+		coverImage: "",
+		images: [],
 		duration: 8,
 		groupSize: 25,
 		difficulty: "easy",
+		guides: [userId],
 		startLocation: {
 			description:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia pellentesque erat et faucibus.",
@@ -18,8 +22,6 @@ const CreateTourForm = (props) => {
 		price: 300,
 		summary:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia pellentesque erat et faucibus. Sed ac blandit ipsum. Mauris mollis auctor dictum. Duis in pharetra nibh, eu feugiat tortor.",
-		imageCover: "image.jpg",
-		images: "",
 		startDates: "",
 	})
 
@@ -27,10 +29,28 @@ const CreateTourForm = (props) => {
 		const name = e.target.name
 		let value = e.target.value
 
-		setTour({
-			...tour,
-			[name]: value,
-		})
+		if (name == "images") {
+			const newArray = [...tour.images]
+			newArray.push(e.target.files)
+
+			setTour({
+				...tour,
+				[name]: newArray,
+			})
+		} else if (name == "imageCover") {
+			let image = e.target.files[0]
+			value = image
+
+			setTour({
+				...tour,
+				[name]: value,
+			})
+		} else {
+			setTour({
+				...tour,
+				[name]: value,
+			})
+		}
 	}
 
 	const locationHandler = (e) => {
@@ -44,7 +64,7 @@ const CreateTourForm = (props) => {
 				...tour,
 				startLocation: {
 					...tour.startLocation,
-					[name]: [...newData],
+					[name]: newData,
 				},
 			})
 		}
@@ -60,8 +80,15 @@ const CreateTourForm = (props) => {
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
-		props.createTour(tour)
-		props.addHandler()
+		let dataToSend = {}
+		for (const item in tour) {
+			if (tour[item]) dataToSend[item] = tour[item]
+		}
+		if (dataToSend.images) dataToSend.images = dataToSend.images[0]
+
+		console.log(dataToSend)
+		props.createTour(dataToSend)
+		// props.addHandler()
 	}
 
 	return (
@@ -75,6 +102,26 @@ const CreateTourForm = (props) => {
 					onChange={(e) => formHandler(e)}
 					name="name"
 				/>
+			</div>
+
+			<div>
+				<label htmlFor="imageCover">Cover image:</label>
+				<input
+					onChange={(e) => formHandler(e)}
+					type="file"
+					name="imageCover"
+					accept="image/*"
+				></input>
+			</div>
+			<div>
+				<label htmlFor="images">Images (choose up to 3):</label>
+				<input
+					onChange={(e) => formHandler(e)}
+					type="file"
+					name="images"
+					accept="image/*"
+					multiple
+				></input>
 			</div>
 
 			<div>

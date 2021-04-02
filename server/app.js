@@ -52,7 +52,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // BODY PARSER
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-   www-form-urlencoded
 
 // COOKIE PARSER
 app.use(cookieParser());

@@ -29,11 +29,13 @@
 		align-items: center;
 		position: absolute;
 		top: 10%;
+
 		.home-landing-title {
 			font-family: Playfair;
 			font-size: $title;
 			color: color(primary-light);
 		}
+
 		.home-landing-motto {
 			font-size: $subheading;
 			color: color(primary-light);
