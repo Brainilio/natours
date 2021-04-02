@@ -49,6 +49,9 @@ const loadSingleTourFailed = (state, action) => {
 	return { ...state, loadCurrentTour: false, error: action.error }
 }
 
+const stopLoading = (state, action) => {
+	return { ...state, loadTours: false }
+}
 const newReview = (state, action) => {
 	let reviews = [...state.currentReviews]
 	reviews.push(action.review)
@@ -63,8 +66,7 @@ const newReview = (state, action) => {
 const addTour = (state, action) => {
 	let tours = [...state.allTours]
 	let newTour = tours.concat(action.tour)
-
-	return { ...state, allTours: newTour }
+	return { ...state, allTours: newTour, loadTours: false }
 }
 
 const deleteTour = (state, action) => {
@@ -98,6 +100,8 @@ const reducer = (state = initialState, action) => {
 			return deleteTour(state, action)
 		case actionTypes.EDIT_TOUR:
 			return editTour(state, action)
+		case actionTypes.STOP_LOADING:
+			return stopLoading(state, action)
 		default:
 			return state
 	}

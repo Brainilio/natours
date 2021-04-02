@@ -1,6 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
-import { fetchSingleTour } from "./tours"
+import { fetchSingleTour, loadToursStart } from "./tours"
 
 export const loadUsersStart = () => {
 	return {
@@ -56,6 +56,12 @@ export const tourEdit = (data, tour) => {
 		type: actionTypes.EDIT_TOUR,
 		data: data,
 		tour: tour,
+	}
+}
+
+export const stopLoading = () => {
+	return {
+		type: actionTypes.STOP_LOADING,
 	}
 }
 
@@ -129,6 +135,7 @@ export const deleteUser = (id) => {
 
 export const addTour = (tour) => {
 	return (dispatch) => {
+		dispatch(loadToursStart())
 		const token = localStorage.getItem("token")
 		let formdata = new FormData()
 
@@ -138,7 +145,7 @@ export const addTour = (tour) => {
 					formdata.append(data, tour[data][obj])
 				}
 			}
-			if (data === "images" && data.length > 1) {
+			if (data == "images" && tour[data]) {
 				for (const img of tour[data]) {
 					formdata.append(data, img)
 				}
@@ -154,10 +161,9 @@ export const addTour = (tour) => {
 				},
 			})
 			.then((response) => {
-				console.log(response)
 				dispatch(tourAdd(response.data.data.data))
 			})
-			.catch((error) => console.log(error))
+			.catch((error) => dispatch(stopLoading()))
 	}
 }
 

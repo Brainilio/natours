@@ -28,3 +28,5 @@ export const EDIT_USER = "EDIT_USER"
 export const ADD_TOUR = "ADD_TOUR"
 export const DELETE_TOUR = "DELETE_TOUR"
 export const EDIT_TOUR = "EDIT_TOUR"
+
+export const STOP_LOADING = "STOP_LOADING"

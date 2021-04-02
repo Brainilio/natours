@@ -129,6 +129,8 @@ exports.createOne = (Model) => async (req, res, next) => {
       newStartLocation.address = req.body.startLocation[2];
       req.body.startLocation = newStartLocation;
     }
+
+    console.log(req.body);
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',
