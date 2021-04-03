@@ -7,6 +7,11 @@ import TourEdit from "./TourEdit"
 import DashboardBanner from "../../DashboardBanner/DashboardBanner"
 import TourBar from "./TourBar"
 import CreateTourForm from "../../Forms/CreateTourForm/CreateTourForm"
+import {
+	closeModal,
+	openModal,
+	stopLoading,
+} from "../../../store/actions/admin"
 
 /*
 TODO: 
@@ -22,15 +27,21 @@ const Tours = (props) => {
 	}, [])
 	const dispatch = useDispatch()
 	const { currentTour } = useSelector((state) => state.tours)
-
 	const [edit, setEdit] = useState(false)
 	const [add, setAdd] = useState(false)
 	const [id, setId] = useState(null)
 
-	const addHandler = () => setAdd((prevstate) => !prevstate)
+	const addHandler = () => {
+		dispatch(openModal())
+		dispatch(stopLoading())
+		setAdd((prevstate) => !prevstate)
+	}
+
+	useEffect(() => {}, [currentTour])
 
 	const editHandler = (givenid) => {
 		if (givenid == null) {
+			dispatch(stopLoading())
 			setId(null)
 		} else {
 			dispatch(actions.fetchSingleTour(givenid))

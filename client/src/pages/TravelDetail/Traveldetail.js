@@ -25,7 +25,7 @@ const Traveldetail = (props) => {
 			{props.tour ? (
 				<>
 					<button className="detail-page-cta">BOOK NOW</button>
-					<Landing name={props.tour.name} />
+					<Landing name={props.tour.name} background={props.tour.imageCover} />
 					<DetailInformation
 						startDate={props.tour.startDates}
 						groupSize={props.tour.groupSize}
@@ -35,8 +35,8 @@ const Traveldetail = (props) => {
 						price={props.tour.price}
 					/>
 					<Description description={props.tour.summary} />
-					<Guides />
-					<ImageCarousel />
+					<Guides guides={props.tour.guides} />
+					<ImageCarousel images={props.tour.images} />
 					<Location location={props.tour.startLocation} />
 					<Reviews
 						reviews={props.reviews}

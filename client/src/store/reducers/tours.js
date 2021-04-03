@@ -10,6 +10,7 @@ const initialState = {
 	loadBooking: false,
 	isBooking: false,
 	error: null,
+	closeFormModal: false,
 }
 
 // all tours loading
@@ -49,9 +50,6 @@ const loadSingleTourFailed = (state, action) => {
 	return { ...state, loadCurrentTour: false, error: action.error }
 }
 
-const stopLoading = (state, action) => {
-	return { ...state, loadTours: false }
-}
 const newReview = (state, action) => {
 	let reviews = [...state.currentReviews]
 	reviews.push(action.review)
@@ -66,7 +64,7 @@ const newReview = (state, action) => {
 const addTour = (state, action) => {
 	let tours = [...state.allTours]
 	let newTour = tours.concat(action.tour)
-	return { ...state, allTours: newTour, loadTours: false }
+	return { ...state, allTours: newTour, loadTours: false, error: null }
 }
 
 const deleteTour = (state, action) => {
@@ -76,6 +74,22 @@ const deleteTour = (state, action) => {
 
 const editTour = (state, action) => {
 	return { ...state }
+}
+
+const stopLoading = (state, action) => {
+	return { ...state, loadTours: false, error: null }
+}
+
+const addTourError = (state, action) => {
+	return { ...state, loadTours: false, error: action.error }
+}
+
+const closeModal = (state, action) => {
+	return { ...state, closeFormModal: true }
+}
+
+const openModal = (state, action) => {
+	return { ...state, closeFormModal: false }
 }
 
 const reducer = (state = initialState, action) => {
@@ -92,10 +106,16 @@ const reducer = (state = initialState, action) => {
 			return loadSingleTourSuccess(state, action)
 		case actionTypes.LOAD_SINGLE_TOUR_FAIL:
 			return loadSingleTourFailed(state, action)
+		case actionTypes.CLOSE_MODAL:
+			return closeModal(state, action)
+		case actionTypes.OPEN_MODAL:
+			return openModal(state, action)
 		case actionTypes.SUBMIT_REVIEW:
 			return newReview(state, action)
 		case actionTypes.ADD_TOUR:
 			return addTour(state, action)
+		case actionTypes.ADD_TOUR_ERROR:
+			return addTourError(state, action)
 		case actionTypes.DELETE_TOUR:
 			return deleteTour(state, action)
 		case actionTypes.EDIT_TOUR:

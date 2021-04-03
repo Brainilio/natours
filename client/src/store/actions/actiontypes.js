@@ -30,3 +30,6 @@ export const DELETE_TOUR = "DELETE_TOUR"
 export const EDIT_TOUR = "EDIT_TOUR"
 
 export const STOP_LOADING = "STOP_LOADING"
+export const ADD_TOUR_ERROR = "ADD_TOUR_ERROR"
+export const CLOSE_MODAL = "CLOSE_MODAL"
+export const OPEN_MODAL = "OPEN_MODAL"

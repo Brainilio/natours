@@ -13,8 +13,6 @@ import ListForReviews from "../MyReviews/ListForReviews"
 // import admin from "../../resource/admin.jpg"
 
 const Dashboard = (props) => {
-	console.log(props.role)
-
 	useEffect(() => {
 		props.fetchReviews()
 	}, [])

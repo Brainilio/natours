@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { NavLink, useHistory } from "react-router-dom"
 import image from "../../../resource/admin.jpg"
 
@@ -15,6 +15,10 @@ TODO:
 
 const TourBar = (props) => {
 	const history = useHistory()
+
+	useEffect(() => {
+		console.log(props.tour.imageCover)
+	}, [])
 	return (
 		<div className="admin-dashboard-tour">
 			<span>{props.tour.name}</span>
@@ -45,7 +49,7 @@ const TourBar = (props) => {
 				{dayjs(props.tour.startDate).format("D MMM, YYYY")} */}
 			</span>
 
-			<img src={image} />
+			<img src={props.tour.imageCover} alt="background" />
 		</div>
 	)
 }

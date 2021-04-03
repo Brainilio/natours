@@ -44,10 +44,29 @@ export const tourAdd = (tour) => {
 	}
 }
 
+export const tourError = (error) => {
+	return {
+		type: actionTypes.ADD_TOUR_ERROR,
+		error: error,
+	}
+}
+
 export const tourDelete = (id) => {
 	return {
 		type: actionTypes.DELETE_TOUR,
 		tour: id,
+	}
+}
+
+export const closeModal = () => {
+	return {
+		type: actionTypes.CLOSE_MODAL,
+	}
+}
+
+export const openModal = () => {
+	return {
+		type: actionTypes.OPEN_MODAL,
 	}
 }
 
@@ -154,6 +173,8 @@ export const addTour = (tour) => {
 			}
 		}
 
+		console.log(formdata)
+
 		axios
 			.post(`tours/`, formdata, {
 				headers: {
@@ -162,8 +183,13 @@ export const addTour = (tour) => {
 			})
 			.then((response) => {
 				dispatch(tourAdd(response.data.data.data))
+				if (response.status === 201) {
+					dispatch(closeModal())
+				}
 			})
-			.catch((error) => dispatch(stopLoading()))
+			.catch((error) => {
+				dispatch(tourError(error.response.data.messsage))
+			})
 	}
 }
 
@@ -180,17 +206,18 @@ export const deleteTour = (id) => {
 	}
 }
 
-export const editTour = (id, data) => {
+export const editTour = (id, tour) => {
 	return (dispatch) => {
-		console.log(
-			`Editing tour with id of ${id} with the following data: ${data}`
-		)
 		const token = localStorage.getItem("token")
+		console.log(id, tour)
 		axios
-			.patch(`tours/${id}`, { headers: { Authorization: token } }, data)
-			.then((response) => {
-				dispatch(fetchSingleTour())
+			.patch(`tours/${id}`, tour, {
+				headers: { Authorization: token },
 			})
-			.catch((error) => console.log(error))
+			.then((response) => {
+				console.log(response)
+				dispatch(fetchSingleTour(id))
+			})
+			.catch((error) => console.log(error.response))
 	}
 }

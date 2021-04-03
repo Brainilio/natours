@@ -11,8 +11,6 @@ const tourSchema = new mongoose.Schema(
       unique: true,
       maxlength: [40, 'City must have less or equal then 40 characters'],
       minlength: [5, 'City must have more than 10 characters'],
-      // FIXME: THIS VALIDATOR DOESNT WORK WITH SPACES ETC
-      // validate: [validator.isAlpha, "City name must contain characters only!"],
     },
     duration: {
       type: Number,
@@ -74,12 +72,19 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Add at least one picture!'],
     },
-    images: [String],
+    images: {
+      type: [String],
+      validate: [(value) => value.length > 0, 'Add at least one picture!'],
+      required: [true, 'Add at least one picture!'],
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
     },
-    startDates: Date,
+    startDates: {
+      type: Date,
+      required: [true, 'A tour must have a start date!'],
+    },
     slug: String,
     //child referencing in mongoose
     guides: [
@@ -98,7 +103,7 @@ const tourSchema = new mongoose.Schema(
 
 // create new index with price in ascending order and ratingsaverage in descending order
 tourSchema.index({ price: 1, ratingsAverage: -1 });
-tourSchema.index({ startLocation: '2dsphere' });
+tourSchema.index({ 'location.coordinates': '2d' });
 
 // ---------- VIRTUAL METHODS --------- //
 // upon retrieving you'll add this to your json object, you can't touch/manipulate it tho

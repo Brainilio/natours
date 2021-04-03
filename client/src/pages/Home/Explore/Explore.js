@@ -19,7 +19,6 @@ const Explore = (props) => {
 
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
-		console.log("You're searching for:  " + formData)
 		props.onFetchTours(formData)
 	}
 
@@ -31,7 +30,6 @@ const Explore = (props) => {
 		if (value === "All Tours") {
 			props.onFetchTours()
 		}
-		console.log(value)
 	}
 
 	return (

@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
@@ -46,14 +47,16 @@ app.use(function (req, res, next) {
 // LIMIT REQUESTS FROM SAME API
 app.use('/api', limiter);
 
+app.use(cors());
+
 // DEV LOGGING
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
 // BODY PARSER
-app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-   www-form-urlencoded
+// BODY PARSER
+app.use(express.json({ limit: '10kb' }));
 
 // COOKIE PARSER
 app.use(cookieParser());

@@ -59,7 +59,14 @@ const ListForReviews = ({ sliceTrue = false }) => {
 			</div>
 		)
 	})
-	return sliceTrue ? cards.slice(0, 2).map((c) => c) : cards.map((c) => c)
+
+	return cards.length < 1 ? (
+		<span style={{ marginLeft: "1em", marginTop: "1em" }}>No reviews..</span>
+	) : sliceTrue ? (
+		cards.slice(0, 2).map((c) => c)
+	) : (
+		cards.map((c) => c)
+	)
 }
 
 export default ListForReviews

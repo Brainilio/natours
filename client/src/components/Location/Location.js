@@ -8,29 +8,29 @@ const Location = (props) => {
 
 	const [lng, setLng] = useState(props.location.coordinates[0])
 	const [lat, setLat] = useState(props.location.coordinates[1])
-	const [zoom, setZoom] = useState(10)
+	const [zoom, setZoom] = useState(5)
 
 	useEffect(() => {
 		var map = new mapboxgl.Map({
 			container: mapContainer.current,
 			style: "mapbox://styles/mapbox/dark-v10",
-			center: [lat, lng],
+			center: [lng, lat],
 			zoom: zoom,
 		})
 
-		new mapboxgl.Marker().setLngLat([lat, lng]).addTo(map)
+		new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
 
 		// Add navigation control (the +/- zoom buttons)
 		map.addControl(new mapboxgl.NavigationControl(), "top-right")
 
 		map.on("move", () => {
-			setLng(map.getCenter().lng.toFixed(1))
-			setLat(map.getCenter().lat.toFixed(1))
+			setLng(map.getCenter().lat.toFixed(1))
+			setLat(map.getCenter().lng.toFixed(1))
 			setZoom(map.getZoom().toFixed(1))
 		})
 
 		return () => map.remove()
-	}, [])
+	}, [props])
 
 	return (
 		<section className="detail-page-map">

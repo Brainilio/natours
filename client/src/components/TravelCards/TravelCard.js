@@ -13,8 +13,12 @@ const TravelCard = (props) => {
 		)
 	}
 
+	const styles = {
+		background: `url(${props.tour.imageCover}) center/cover`,
+	}
+
 	return (
-		<div className="travel-card">
+		<div className="travel-card" style={styles}>
 			<div className="travel-card-upper-row">
 				<div className="travel-card-price">$ {props.tour.price}-</div>
 				<div className="travel-card-rating">

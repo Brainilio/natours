@@ -77,41 +77,43 @@
 	padding-bottom: 1em;
 	display: flex;
 	flex-direction: column;
-	justify-content: sp;
+	justify-content: space-between;
 	min-height: 500px;
 	height: auto;
 	max-height: 100vh;
 	width: 300px;
 
-	label {
-		width: 40%;
-	}
-
-	input {
-		background: rgb(255, 255, 255);
-		margin: 0.5rem 0;
-		height: 25px;
-		border: none;
-		border-bottom: 1px solid color(secondary);
-		font-size: 13px;
-		font-weight: 500;
-		transition: all 0.3s ease-in-out;
-		width: 50%;
-
-		&:focus {
-			outline: none;
-			border-bottom: 2px solid rgb(104, 104, 184);
+	.inputs {
+		div {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 		}
-	}
 
-	select {
-		width: 50%;
-	}
+		label {
+			width: 40%;
+		}
 
-	div {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		input {
+			background: rgb(255, 255, 255);
+			margin: 0.5rem 0;
+			height: 25px;
+			border: none;
+			border-bottom: 1px solid color(secondary);
+			font-size: 13px;
+			font-weight: 500;
+			transition: all 0.3s ease-in-out;
+			width: 50%;
+
+			&:focus {
+				outline: none;
+				border-bottom: 2px solid rgb(104, 104, 184);
+			}
+		}
+
+		select {
+			width: 50%;
+		}
 	}
 
 	select {

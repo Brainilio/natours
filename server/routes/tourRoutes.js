@@ -60,10 +60,10 @@ router
   .get(tourController.getTour) // reference: ../controllers/authcontroller
   .patch(
     authController.protect,
-    authController.restrictTo('admin'),
-    tourController.uploadPhotos,
-    tourController.uploadCoverImageToS3,
-    tourController.uploadImagesToS3,
+    // authController.restrictTo('admin'),
+    // tourController.uploadPhotos,
+    // tourController.uploadCoverImageToS3,
+    // tourController.uploadImagesToS3,
     tourController.updateTour
   )
   .delete(

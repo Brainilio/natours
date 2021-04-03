@@ -101,7 +101,15 @@ exports.deleteOne = (Model) => async (req, res, next) => {
 // for udpating
 exports.updateOne = (Model) => async (req, res, next) => {
   try {
-    console.log(req.body);
+    if (req.body.startLocation) {
+      const newStartLocation = {};
+      // const arrayedBody = req.body.startLocation.split(',');
+      newStartLocation.description = req.body.startLocation[0];
+      newStartLocation.coordinates = req.body.startLocation[1].split(',');
+      newStartLocation.address = req.body.startLocation[2];
+      req.body.startLocation = newStartLocation;
+    }
+
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -130,7 +138,6 @@ exports.createOne = (Model) => async (req, res, next) => {
       req.body.startLocation = newStartLocation;
     }
 
-    console.log(req.body);
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',
