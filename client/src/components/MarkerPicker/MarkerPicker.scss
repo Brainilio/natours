@@ -1,0 +1,51 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
+
+.location-picker {
+	z-index: 20;
+
+	.location-map {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1em;
+		width: 300px;
+		height: 250px;
+	}
+
+	span {
+		text-align: center;
+		color: color(secondary);
+	}
+
+	.location-buttons {
+		margin-top: 1em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		button {
+			@include cta-button;
+			background-color: #ddd;
+			color: grey;
+
+			&:hover {
+				background-color: rgb(163, 163, 163);
+			}
+		}
+
+		.confirm {
+			@include cta-button;
+			width: 200px;
+			margin-bottom: 15px;
+
+			&:disabled {
+				opacity: 50%;
+				cursor: not-allowed;
+			}
+		}
+	}
+}

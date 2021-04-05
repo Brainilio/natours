@@ -3,6 +3,7 @@ import * as actions from "../../../store/actions/index"
 import { connect, useDispatch, useSelector } from "react-redux"
 import Spinner from "../../Spinner/Spinner"
 import { stopLoading } from "../../../store/actions/admin"
+import MarkerPicker from "../../MarkerPicker/MarkerPicker"
 
 const CreateTourForm = (props) => {
 	const dispatch = useDispatch()
@@ -10,6 +11,7 @@ const CreateTourForm = (props) => {
 	const { loadTours, error, closeFormModal } = useSelector(
 		(state) => state.tours
 	)
+	const [locationPicker, setLocationPicker] = useState(false)
 	const { userId } = useSelector((state) => state.auth)
 	const [tour, setTour] = useState({
 		name: "",
@@ -23,7 +25,7 @@ const CreateTourForm = (props) => {
 			description:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia pellentesque erat et faucibus.",
 			coordinates: [25.792861, -80.234185],
-			address: "10TH LOREM IPSUM STREET, 201012",
+			address: "10th Lorem Ipsum Street, hi",
 		},
 		price: 300,
 		summary:
@@ -35,6 +37,22 @@ const CreateTourForm = (props) => {
 			props.addHandler()
 		}
 	}, [closeFormModal])
+
+	const sendLocation = (location) => {
+		location.coordinates.reverse()
+
+		setTour({
+			...tour,
+			startLocation: {
+				...tour.startLocation,
+				...location,
+			},
+		})
+	}
+
+	const handleLocationPicker = (e) => {
+		setLocationPicker((prevstate) => !prevstate)
+	}
 
 	const formHandler = (e) => {
 		const name = e.target.name
@@ -72,31 +90,6 @@ const CreateTourForm = (props) => {
 		}
 	}
 
-	const locationHandler = (e) => {
-		const name = e.target.name
-		const value = e.target.value
-
-		if (name === "coordinates") {
-			let newData = value.split(",")
-
-			setTour({
-				...tour,
-				startLocation: {
-					...tour.startLocation,
-					[name]: newData,
-				},
-			})
-		}
-
-		setTour({
-			...tour,
-			startLocation: {
-				...tour.startLocation,
-				[name]: value,
-			},
-		})
-	}
-
 	const formSubmitHandler = (e) => {
 		e.preventDefault()
 		let dataToSend = {}
@@ -111,12 +104,18 @@ const CreateTourForm = (props) => {
 
 	return (
 		<form className="create-tour-form" onSubmit={(e) => formSubmitHandler(e)}>
-			<h1>Create new tour:</h1>
+			{locationPicker ? <h1>Pick location: </h1> : <h1>Create new tour:</h1>}
 			<span style={{ color: "red" }} onClick={() => dispatch(stopLoading())}>
 				{error}
 			</span>
 			{loadTours ? (
 				<Spinner />
+			) : locationPicker ? (
+				<MarkerPicker
+					sendLocation={sendLocation}
+					cancel={handleLocationPicker}
+					currentLocation={tour.startLocation}
+				/>
 			) : (
 				<>
 					<div className="inputs">
@@ -184,36 +183,19 @@ const CreateTourForm = (props) => {
 						</div>
 
 						<div>
-							<label htmlFor="description">Description:</label>
-							<input
-								type="text"
-								value={tour.startLocation.description}
-								onChange={(e) => locationHandler(e)}
-								name="description"
-								placeholder="description of location?"
-							/>
-						</div>
-
-						<div>
-							<label htmlFor="address">Address:</label>
-							<input
-								type="text"
-								value={tour.startLocation.address}
-								name="address"
-								placeholder="address?"
-								onChange={(e) => locationHandler(e)}
-							/>
-						</div>
-
-						<div>
-							<label htmlFor="coordinates">Coordinates:</label>
-							<input
-								type="text"
-								value={tour.startLocation.coordinates}
-								name="coordinates"
-								placeholder="coordinates? (lang, lat)"
-								onChange={(e) => locationHandler(e)}
-							/>
+							<label htmlFor="address">Location:</label>
+							{tour.startLocation.address ? (
+								<div style={{ display: "flex", flexDirection: "column" }}>
+									<span>{tour.startLocation.address.slice(0, 8)}...</span>
+									<button onClick={handleLocationPicker}>
+										Get new location
+									</button>
+								</div>
+							) : (
+								<button onClick={handleLocationPicker}>
+									Look for Location
+								</button>
+							)}
 						</div>
 
 						<div>

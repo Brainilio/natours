@@ -122,6 +122,7 @@
 	}
 
 	input[type="submit"] {
+		@include cta-button;
 		border: none;
 		background: color(secondary);
 		color: white;
