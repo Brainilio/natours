@@ -11,6 +11,7 @@ const initialState = {
 	isBooking: false,
 	error: null,
 	closeFormModal: false,
+	hasBookedCurrentTour: false,
 }
 
 // all tours loading
@@ -57,6 +58,10 @@ const newReview = (state, action) => {
 	console.log("Going to add..." + action.review)
 
 	return { ...state, currentReviews: reviews }
+}
+
+const setBookedBoolean = (state, action) => {
+	return { ...state, hasBookedCurrentTour: action.bool }
 }
 
 // TODO: set up all these actions
@@ -122,6 +127,8 @@ const reducer = (state = initialState, action) => {
 			return editTour(state, action)
 		case actionTypes.STOP_LOADING:
 			return stopLoading(state, action)
+		case actionTypes.CAN_BOOK:
+			return setBookedBoolean(state, action)
 		default:
 			return state
 	}

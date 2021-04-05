@@ -32,6 +32,13 @@ export const loadSingleTourStart = () => {
 	}
 }
 
+export const canBook = (bool) => {
+	return {
+		type: actionTypes.CAN_BOOK,
+		bool: bool,
+	}
+}
+
 export const loadSingleTourSuccess = (tour, reviews) => {
 	return {
 		reviews: reviews,
@@ -102,5 +109,13 @@ export const fetchSingleTour = (id) => {
 				)
 			})
 			.catch((error) => dispatch(loadSingleTourFail(error)))
+	}
+}
+
+export const hasBookedTour = (tourid) => {
+	return (dispatch) => {
+		axios
+			.get(`booking/${tourid}/hasBookedTour`)
+			.then((response) => dispatch(canBook(response.data)))
 	}
 }

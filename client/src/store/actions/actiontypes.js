@@ -33,3 +33,5 @@ export const STOP_LOADING = "STOP_LOADING"
 export const ADD_TOUR_ERROR = "ADD_TOUR_ERROR"
 export const CLOSE_MODAL = "CLOSE_MODAL"
 export const OPEN_MODAL = "OPEN_MODAL"
+
+export const CAN_BOOK = "CAN_BOOK"

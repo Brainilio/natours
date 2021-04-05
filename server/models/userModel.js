@@ -32,6 +32,13 @@ const userSchema = new mongoose.Schema({
     minLength: 8,
     select: false,
   },
+  bookings: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Booking',
+    },
+  ],
+
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password!'],
@@ -84,6 +91,14 @@ userSchema.pre('save', function (next) {
 userSchema.methods.validatePassword = async function (formPw, realPw) {
   return await bcrypt.compare(formPw, realPw);
 };
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'bookings',
+  });
+
+  next();
+});
 
 // this function checks if the password is changed after user has received a jwt timestamp
 userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {

@@ -16,6 +16,7 @@ import Tours from "./components/Admin/Tours/Tours"
 import MyReviews from "./pages/MyReviews/MyReviews"
 import Statistics from "./pages/Statistics/Statistics"
 import BookedTours from "./pages/BookedTours/BookedTours"
+import TravelDetailCheckout from "./pages/TravelDetailCheckout/TravelDetailCheckout"
 
 const App = (props) => {
 	useEffect(() => {
@@ -27,7 +28,8 @@ const App = (props) => {
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/Login" component={Login} />
-				<Route path="/tour/:id" component={TravelDetail} />
+				<Route path="/tour/:id" exact component={TravelDetail} />
+				<Route path="/tour/:id/checkout" component={TravelDetailCheckout} />
 				<Route path="/bookedtours" component={BookedTours} />
 				<Route path="*" component={ErrorPage} />
 			</Switch>
@@ -40,7 +42,8 @@ const App = (props) => {
 				<Switch>
 					<Route path="/" exact component={Home} />
 					<Route path="/Login" component={Login} />
-					<Route path="/tour/:id" component={TravelDetail} />
+					<Route path="/tour/:id" exact component={TravelDetail} />
+					<Route path="/tour/:id/checkout" component={TravelDetailCheckout} />
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/settings" component={Settings} />
 					<Route path="/myreviews" component={MyReviews} />
@@ -58,7 +61,8 @@ const App = (props) => {
 				<Switch>
 					<Route path="/" exact component={Home} />
 					<Route path="/Login" component={Login} />
-					<Route path="/tour/:id" component={TravelDetail} />
+					<Route path="/tour/:id" exact component={TravelDetail} />
+					<Route path="/tour/:id/checkout" component={TravelDetailCheckout} />
 					<Route path="/dashboard" component={Dashboard} />
 					<Route path="/users" component={Users} />
 					<Route path="/tours" component={Tours} />

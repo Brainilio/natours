@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
@@ -13,13 +15,14 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const contactRouter = require('./routes/contactRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 
 // -------------- GLOBAL VARIABLES ---------- //
 
 const app = express();
 
 const limiter = rateLimit({
-  max: 1500,
+  max: 8000,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!',
 });
@@ -55,8 +58,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // BODY PARSER
-// BODY PARSER
-app.use(express.json({ limit: '10kb' }));
+
+// Use JSON parser for all non-webhook routes
+app.use((req, res, next) => {
+  if (req.originalUrl === '/api/v1/booking/webhook') {
+    next();
+  } else {
+    bodyParser.json()(req, res, next);
+  }
+});
 
 // COOKIE PARSER
 app.use(cookieParser());
@@ -95,6 +105,7 @@ app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/contact', contactRouter);
+app.use('/api/v1/booking', bookingRouter);
 
 //operational error using utility class errorhandler
 app.all('*', (req, res, next) => {
