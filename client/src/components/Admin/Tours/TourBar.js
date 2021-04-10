@@ -16,9 +16,6 @@ TODO:
 const TourBar = (props) => {
 	const history = useHistory()
 
-	useEffect(() => {
-		console.log(props.tour.imageCover)
-	}, [])
 	return (
 		<div className="admin-dashboard-tour">
 			<span>{props.tour.name}</span>

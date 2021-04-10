@@ -22,10 +22,6 @@ const fulfillOrder = async (session) => {
     const tourId = session.success_url.split('/')[4];
     const price = session.amount_total;
 
-    console.log(session);
-    console.log(userId);
-    console.log(tourId);
-
     await Booking.create({
       tour: tourId,
       user: userId,
@@ -69,6 +65,12 @@ router.get(
   '/:tourid/hasBookedTour',
   authController.protect,
   bookingController.hasBookedTour
+);
+
+router.get(
+  '/bookedTours',
+  authController.protect,
+  bookingController.getBookedTours
 );
 
 module.exports = router;

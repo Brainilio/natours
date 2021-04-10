@@ -13,6 +13,7 @@
 	width: 100vw;
 	height: 10vh;
 	position: fixed;
+	font-weight: 800;
 	bottom: -10px;
 	text-align: center;
 	font-size: $heading;
@@ -30,6 +31,11 @@
 
 	&:active {
 		background-color: rgb(25, 30, 39);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 50%;
 	}
 }
 
@@ -50,7 +56,7 @@
 		font-size: $subheading;
 		position: absolute;
 		color: color(primary-light);
-		top: 10%;
+		top: 5%;
 		left: 5%;
 	}
 

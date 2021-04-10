@@ -6,9 +6,11 @@ import adminCard3 from "../../resource/adminCard3.svg"
 import adminCard4 from "../../resource/adminCard4.svg"
 import { Link, NavLink } from "react-router-dom"
 import * as actions from "../../store/actions/index"
-import { connect } from "react-redux"
-import MyReviews from "../MyReviews/MyReviews"
+import { connect, useDispatch, useSelector } from "react-redux"
 import ListForReviews from "../MyReviews/ListForReviews"
+import { fetchBookedTours } from "../../store/actions/tours"
+import ListBookedTours from "../../components/ListBookedTours/ListBookedTours"
+import TourAdvice from "../../components/TourAdvice/TourAdvice"
 // import regular from "../../resource/venice.jpg"
 // import admin from "../../resource/admin.jpg"
 
@@ -79,63 +81,10 @@ const Dashboard = (props) => {
 
 			<section className="dashboard-page-upcoming-tours">
 				<div className="upcoming-tours-title">
-					<span className="dashboard-title-header">Upcoming tours</span>
+					<span className="dashboard-title-header">Your upcoming tours</span>
 					<span className="dashboard-title-view">View all</span>
 				</div>
-
-				<div className="upcoming-tour">
-					<span>
-						<span aria-hidden className="material-icons">
-							location_on
-						</span>
-						Yosemite USA
-					</span>
-					<span>
-						<span aria-hidden className="material-icons">
-							event
-						</span>
-						October 15, 2020
-					</span>
-					<span>
-						<NavLink to="/"> &gt;</NavLink>
-					</span>
-				</div>
-
-				<div className="upcoming-tour">
-					<span>
-						<span aria-hidden className="material-icons">
-							location_on
-						</span>
-						Yosemite USA
-					</span>
-					<span>
-						<span aria-hidden className="material-icons">
-							event
-						</span>
-						October 15, 2020
-					</span>
-					<span>
-						<NavLink to="/"> &gt;</NavLink>
-					</span>
-				</div>
-
-				<div className="upcoming-tour">
-					<span>
-						<span aria-hidden className="material-icons">
-							location_on
-						</span>
-						Yosemite USA
-					</span>
-					<span>
-						<span aria-hidden className="material-icons">
-							event
-						</span>
-						October 15, 2020
-					</span>
-					<span>
-						<NavLink to="/"> &gt;</NavLink>
-					</span>
-				</div>
+				<ListBookedTours />
 			</section>
 
 			<section className="dashboard-page-reviews">
@@ -146,6 +95,14 @@ const Dashboard = (props) => {
 					</NavLink>
 				</div>
 				<ListForReviews sliceTrue={true} />
+			</section>
+
+			<section className="dashboard-page-advice">
+				<div className="dashboard-page-advice-title">
+					<h1>Prepare for your tour!</h1>
+					<span>Here are the latest tips and tricks for you!</span>
+				</div>
+				<TourAdvice />
 			</section>
 		</>
 	)

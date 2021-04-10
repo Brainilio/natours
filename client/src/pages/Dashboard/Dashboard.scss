@@ -170,3 +170,19 @@
 		}
 	}
 }
+
+.dashboard-page-advice {
+	margin-top: 2em;
+	.dashboard-page-advice-title {
+		h1 {
+			font-size: $subheading;
+			color: color(secondary);
+			margin-left: 1rem;
+		}
+
+		span {
+			margin-left: 1rem;
+			text-align: center;
+		}
+	}
+}

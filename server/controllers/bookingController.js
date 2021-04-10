@@ -6,6 +6,7 @@ const AppError = require('../utils/appError');
 const Tour = require('../models/tourModel');
 const Booking = require('../models/bookingModel');
 
+// Check for duplicate booking here
 exports.getCheckoutSession = async (req, res, next) => {
   try {
     // get currently booked tour
@@ -38,7 +39,6 @@ exports.getCheckoutSession = async (req, res, next) => {
         },
       ],
     });
-
     res.status(200).json({
       session: session,
       image: tour.imageCover,
@@ -51,13 +51,27 @@ exports.getCheckoutSession = async (req, res, next) => {
 };
 
 exports.hasBookedTour = async (req, res, next) => {
+  const booking = await Booking.find({
+    tour: req.params.tourid,
+    user: req.user.id,
+  });
+  if (booking.length < 1) res.status(201).send(false);
+  else {
+    res.status(201).send(true);
+  }
+};
+
+exports.getBookedTours = async (req, res, next) => {
   try {
-    const booking = await Booking.find({
-      tour: req.params.tourid,
+    const bookings = await Booking.find({
       user: req.user.id,
     });
-    if (booking) res.send(true);
+
+    res.status(200).json({
+      status: 'success',
+      bookedTours: bookings,
+    });
   } catch (error) {
-    return res.send(false);
+    return next(new AppError(error.message, 404));
   }
 };

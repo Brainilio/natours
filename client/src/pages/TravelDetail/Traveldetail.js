@@ -3,7 +3,7 @@ import "./Traveldetail.scss"
 import "react-alice-carousel/lib/alice-carousel.css"
 import ReviewForm from "../../components/Forms/ReviewForm/ReviewForm"
 import * as actions from "../../store/actions/index"
-import { connect, useDispatch } from "react-redux"
+import { connect, useDispatch, useSelector } from "react-redux"
 import Location from "../../components/Location/Location"
 import Landing from "./Landing/Landing"
 import DetailInformation from "./DetailInformation/DetailInformation"
@@ -16,13 +16,15 @@ import { hasBookedTour } from "../../store/actions/tours"
 
 const Traveldetail = (props) => {
 	const [reviewForm, setreviewForm] = useState(false)
-	const { hasBookedCurrentTour } = useState((state) => state.tours)
+	const { hasBookedCurrentTour } = useSelector((state) => state.tours)
 	const toggleReviewForm = () => setreviewForm((prevState) => !prevState)
 	const dispatch = useDispatch()
 	useEffect(() => {
-		dispatch(hasBookedTour(props.match.params.id))
+		if (props.isAuthenticated) {
+			dispatch(hasBookedTour(props.match.params.id))
+		}
 		props.onFetchTour(props.match.params.id)
-	}, [])
+	}, [props.match.params.id, hasBookedCurrentTour, props.isAuthenticated])
 
 	return (
 		<>
@@ -30,7 +32,18 @@ const Traveldetail = (props) => {
 				<>
 					{props.isAuthenticated ? (
 						<Link to={`/tour/${props.match.params.id}/checkout`}>
-							<button className="detail-page-cta">BOOK NOW</button>
+							<button
+								className="detail-page-cta"
+								disabled={
+									props.isAuthenticated
+										? hasBookedCurrentTour
+											? true
+											: false
+										: false
+								}
+							>
+								{hasBookedCurrentTour ? "Tour booked" : "Book now"}
+							</button>
 						</Link>
 					) : null}
 					<Landing name={props.tour.name} background={props.tour.imageCover} />

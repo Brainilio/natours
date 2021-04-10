@@ -30,7 +30,7 @@ const Location = (props) => {
 		})
 
 		return () => map.remove()
-	}, [props])
+	}, [props.location.coordinates])
 
 	return (
 		<section className="detail-page-map">

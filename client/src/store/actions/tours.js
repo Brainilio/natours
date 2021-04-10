@@ -54,6 +54,12 @@ export const loadSingleTourFail = (error) => {
 	}
 }
 
+export const getBookedTours = (bookedTours) => {
+	return {
+		type: actionTypes.GET_BOOKED_TOURS,
+		bookedTours: bookedTours,
+	}
+}
 // dispatch functions
 
 export const fetchTours = (config) => {
@@ -114,8 +120,32 @@ export const fetchSingleTour = (id) => {
 
 export const hasBookedTour = (tourid) => {
 	return (dispatch) => {
+		const token = localStorage.getItem("token")
+
 		axios
-			.get(`booking/${tourid}/hasBookedTour`)
-			.then((response) => dispatch(canBook(response.data)))
+			.get(`booking/${tourid}/hasBookedTour`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log(response.data)
+				dispatch(canBook(response.data))
+			})
+			.catch((err) => console.log(err))
+	}
+}
+
+export const fetchBookedTours = () => {
+	return (dispatch) => {
+		const token = localStorage.getItem("token")
+		axios
+			.get("booking/bookedTours", {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => dispatch(getBookedTours(response.data.bookedTours)))
+			.catch((error) => console.log(error))
 	}
 }

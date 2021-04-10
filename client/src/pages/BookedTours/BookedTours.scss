@@ -1,0 +1,58 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+
+.booked-tours-page {
+	.booked-tours-main-content {
+		margin-top: 2em;
+		min-height: 50vh;
+		width: 100%;
+
+		.booked-tours-main-content-title {
+			h1 {
+				font-size: $subheading;
+				color: color(secondary);
+				margin-left: 1rem;
+			}
+
+			span {
+				margin-left: 1rem;
+				text-align: center;
+			}
+		}
+
+		.booked-tours-page-upcoming-tours {
+			margin-top: 1em;
+			margin-bottom: 2em;
+
+			.upcoming-tour {
+				cursor: pointer;
+				background-color: color(primary);
+				margin: 0 auto;
+				background: url("../../resource/sorasak-_UIN-pFfJ7c-unsplash.jpg");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-blend-mode: soft-light;
+				width: 95%;
+				height: 50px;
+				margin-bottom: 1em;
+				box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+
+				transition: all 0.3s ease-in-out;
+
+				&:hover {
+					opacity: 50%;
+				}
+
+				span {
+					font-size: $body2;
+					color: color(primary-light);
+				}
+			}
+		}
+	}
+}

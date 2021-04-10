@@ -12,6 +12,7 @@ const initialState = {
 	error: null,
 	closeFormModal: false,
 	hasBookedCurrentTour: false,
+	bookedTours: null,
 }
 
 // all tours loading
@@ -49,6 +50,10 @@ const loadSingleTourSuccess = (state, action) => {
 
 const loadSingleTourFailed = (state, action) => {
 	return { ...state, loadCurrentTour: false, error: action.error }
+}
+
+const loadBookedTours = (state, action) => {
+	return { ...state, bookedTours: action.bookedTours }
 }
 
 const newReview = (state, action) => {
@@ -129,6 +134,8 @@ const reducer = (state = initialState, action) => {
 			return stopLoading(state, action)
 		case actionTypes.CAN_BOOK:
 			return setBookedBoolean(state, action)
+		case actionTypes.GET_BOOKED_TOURS:
+			return loadBookedTours(state, action)
 		default:
 			return state
 	}
