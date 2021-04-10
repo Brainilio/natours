@@ -11,6 +11,8 @@ import ListForReviews from "../MyReviews/ListForReviews"
 import { fetchBookedTours } from "../../store/actions/tours"
 import ListBookedTours from "../../components/ListBookedTours/ListBookedTours"
 import TourAdvice from "../../components/TourAdvice/TourAdvice"
+import Support from "../../components/Support/Support"
+import NewsArticle from "../../components/NewsArticle/NewsArticle"
 // import regular from "../../resource/venice.jpg"
 // import admin from "../../resource/admin.jpg"
 
@@ -103,6 +105,18 @@ const Dashboard = (props) => {
 					<span>Here are the latest tips and tricks for you!</span>
 				</div>
 				<TourAdvice />
+			</section>
+
+			<section className="dashboard-page-latest-news">
+				<div className="dashboard-page-latest-news-header">
+					<h1>Latest travel news</h1>
+					<span>Lorem ipsum dolor sit amet, consectetur.</span>
+				</div>
+				<NewsArticle />
+			</section>
+
+			<section className="dashboard-page-support">
+				<Support />
 			</section>
 		</>
 	)

@@ -26,16 +26,17 @@
 			background-color: color(secondary);
 		}
 		.travel-advice-single-right {
-			width: 75%;
+			width: 80%;
 			display: flex;
 			flex-direction: column;
 
 			h1 {
+				width: 100%;
 				margin: 0;
 				padding: 0;
 			}
 			p {
-				width: 100%;
+				width: 90%;
 				padding: 0;
 				margin: 0;
 			}

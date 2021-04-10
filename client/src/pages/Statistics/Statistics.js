@@ -1,7 +1,14 @@
 import React from "react"
+import Stats from "../../components/Admin/Stats/Stats"
+import DashboardBanner from "../../components/DashboardBanner/DashboardBanner"
 
 const Statistics = () => {
-	return <div>Stats right here!</div>
+	return (
+		<section className="statistics-page">
+			<DashboardBanner />
+			<Stats />
+		</section>
+	)
 }
 
 export default Statistics

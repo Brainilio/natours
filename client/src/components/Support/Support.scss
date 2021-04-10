@@ -1,0 +1,55 @@
+@import "../../styles/breakpoints.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
+
+.contact-support {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1em;
+	.cs-left {
+		.cs-left-header {
+			h1 {
+				font-size: $subheading;
+				color: color(secondary);
+			}
+			span {
+			}
+		}
+
+		.cs-left-body {
+			display: flex;
+			flex-direction: column;
+			margin-top: 1em;
+
+			div {
+				display: flex;
+				align-items: center;
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				img {
+					width: 25px;
+					height: 25px;
+					margin-right: 1rem;
+				}
+				span {
+					color: color(secondary);
+				}
+			}
+		}
+
+		.cs-left-footer {
+			p {
+				color: #ff7d0d;
+			}
+		}
+	}
+
+	.cs-right {
+		border-radius: 6px;
+		width: 100%;
+		margin: 0 auto;
+		height: 250px;
+		background: url("../../resource/support-photo.png") center / cover;
+	}
+}

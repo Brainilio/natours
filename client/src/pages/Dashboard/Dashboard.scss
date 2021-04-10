@@ -55,7 +55,7 @@
 }
 
 .dashboard-page-upcoming-tours {
-	margin: 3em 0;
+	margin: 1em 0;
 
 	.upcoming-tours-title {
 		display: flex;
@@ -127,8 +127,13 @@
 	}
 }
 
+.dashboard-page-latest-news {
+	display: flex;
+	flex-direction: column;
+}
+
 .dashboard-page-reviews {
-	margin: 3em 0;
+	margin: 1em 0;
 
 	.reviews-title {
 		display: flex;
@@ -183,6 +188,29 @@
 		span {
 			margin-left: 1rem;
 			text-align: center;
+		}
+	}
+}
+
+.dashboard-page-support {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-top: 1em;
+}
+
+.dashboard-page-latest-news {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	.dashboard-page-latest-news-header {
+		margin-bottom: 1em;
+		h1 {
+			font-size: $subheading;
+			color: color(secondary);
+			margin-left: 1rem;
+		}
+		span {
+			margin-left: 1rem;
+			text-align: justify;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
 
 .booked-tour-detail-page {
 	.bt-detail-header {
@@ -19,6 +20,67 @@
 		span {
 			font-size: 18px;
 			font-family: initial;
+		}
+	}
+
+	.bt-detail-main {
+		padding-top: 1em;
+		padding-bottom: 0.5em;
+		margin: 0 auto;
+		margin-bottom: 1em;
+		background-color: white;
+		width: 90%;
+		border-radius: 6%;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+
+		.print-ticket-button {
+			@include cta-button;
+			width: 90%;
+			margin: 1em auto;
+		}
+
+		div {
+			margin: 1rem 0.5rem;
+			text-align: end;
+			display: flex;
+			justify-content: space-between;
+
+			.guides-photos {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				img {
+					border-radius: 50%;
+					object-fit: cover;
+				}
+			}
+		}
+	}
+
+	.bt-detail-footer {
+		padding-left: 1em;
+		padding-right: 1em;
+		margin-bottom: 1em;
+
+		h1 {
+			font-size: $subheading;
+			color: color(secondary);
+		}
+		h1,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	.bt-detail-footer-two {
+		padding-left: 1em;
+		padding-right: 1em;
+		margin-bottom: 1em;
+
+		h1 {
+			font-size: $subheading;
+			color: color(secondary);
 		}
 	}
 }

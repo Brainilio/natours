@@ -15,6 +15,7 @@ const ListBookedTours = (props) => {
 	return bookedTours && bookedTours.length > 1 ? (
 		bookedTours.map((b) => (
 			<div
+				key={b._id}
 				className="upcoming-tour"
 				style={{
 					background: `url(${b.tour.imageCover}) center/cover`,
