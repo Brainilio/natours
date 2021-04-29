@@ -34,7 +34,9 @@ const Explore = (props) => {
 
 	return (
 		<section id="tours" className="home-top-tours">
-			<span className="explore-title">EXPLORE</span>
+			<span className="explore-title">
+				EXPLORE <span>OUR LATEST TOURS</span>
+			</span>
 			<Search
 				value={formData}
 				change={formChangeHandler}

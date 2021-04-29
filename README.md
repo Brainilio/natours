@@ -2,6 +2,13 @@
 
 Server is hosted on: http://ec2-18-192-13-45.eu-central-1.compute.amazonaws.com:8000/api/v1/tours
 
+# Starting the project:
+
+npm install within both the /server and /client directories
+then run npm start within both the /server and /client directories
+install the stripe cli to listen for webhooks (this is necessary for payments to work)
+then run stripe listen
+
 # API ENDPOINTS:
 
 https://documenter.getpostman.com/view/12886145/TVKHUb9Z#849e95fa-6b81-497c-bb76-a61e2c6d4b3c

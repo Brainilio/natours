@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import React from "react"
 import { NavLink } from "react-router-dom"
 import "./TravelCard.scss"
@@ -28,6 +29,10 @@ const TravelCard = (props) => {
 			<NavLink to={`/tour/${props.tour._id}`}>
 				<div className="travel-card-lower-row">
 					<span>{props.tour.name}</span>
+					<span className="tour-date">
+						{dayjs(props.tour.startDate).format("D MMMM, YYYY")}
+					</span>
+					<button className="travel-card-button">Book now</button>
 				</div>
 			</NavLink>
 		</div>

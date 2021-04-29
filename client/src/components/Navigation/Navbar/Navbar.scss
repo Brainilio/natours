@@ -14,6 +14,15 @@ nav {
 	align-items: center;
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 
+	@include screenm {
+		background: none;
+		position: absolute;
+		box-shadow: none;
+		padding-left: 2em;
+		padding-right: 2em;
+		box-sizing: border-box;
+		top: 0.5%;
+	}
 	.nav-title {
 		color: color(primary-light);
 		font-size: $subheading;
@@ -30,11 +39,84 @@ nav {
 		align-items: center;
 		margin-right: 1em;
 
+		@include screenm {
+			display: none;
+		}
+
 		span {
 			margin: 3px 0;
 			width: 25px;
 			height: 2px;
 			background-color: color(primary-light);
+		}
+	}
+
+	.nav-items {
+		display: none;
+
+		@include screenm {
+			display: flex;
+			align-items: center;
+			justify-content: ce;
+		}
+
+		ul {
+			display: flex;
+			color: white;
+			list-style: none;
+			margin-right: 2em;
+
+			li {
+				margin: 0 0.5em;
+			}
+		}
+
+		.side-login {
+			display: flex;
+			.side-login-button {
+				@include cta-button;
+				font-size: $body2;
+				background: none;
+				color: color(primary-light);
+				border: 2px solid color(primary-light);
+				width: 150px;
+				height: 30px;
+				text-align: center;
+
+				&:hover {
+					background: white;
+					color: color(secondary);
+				}
+			}
+
+			.side-signup-button {
+				display: none;
+				margin-top: 2px;
+				border: none;
+				background: none;
+				color: color(primary-light);
+				font-size: $body;
+			}
+		}
+
+		.side-profile-user {
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+			flex-direction: row-reverse;
+
+			.side-profile-user-image {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				object-fit: cover;
+				margin: 0 0.5em;
+			}
+
+			.side-profile-name {
+				font-size: $body2;
+				color: color(primary-light);
+			}
 		}
 	}
 }

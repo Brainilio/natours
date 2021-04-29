@@ -1,6 +1,7 @@
 @import "../../styles/breakpoints.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/fontSizes.scss";
+@import "../../styles/mixins.scss";
 
 .home-cards-layout-section {
 	margin-top: 2em;
@@ -10,77 +11,151 @@
 	width: 100%;
 	height: 100%;
 
-	.travel-card {
-		margin: 1rem auto;
-		width: 90%;
-		justify-self: center;
-		height: 190px;
-		border-radius: 15%;
-		background-color: rgb(129, 129, 129);
+	@include screenm {
+		width: 50%;
+		margin: 0 auto;
+		justify-content: center;
+		gap: 2em;
+		align-items: center;
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-top: 2em;
+		margin-bottom: 2em;
+	}
+}
+
+.travel-card {
+	margin: 1rem auto;
+	width: 90%;
+	justify-self: center;
+	height: 190px;
+	border-radius: 15%;
+	background-color: rgb(129, 129, 129);
+	display: flex;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: color(primary);
+	background-blend-mode: soft-light;
+	background-color: rgba(48, 48, 48, 0.568);
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+
+	@include screenm {
+		width: 280px;
+		height: 375px;
+		box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.555);
+		border-radius: 15px;
+		margin: 0;
+	}
+	&:hover {
+		background-color: rgba(48, 48, 48, 0.897);
+	}
+
+	&:active {
+		background-color: rgba(48, 48, 48, 0.897);
+	}
+
+	.travel-card-upper-row {
 		display: flex;
-
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-color: color(primary);
-		background-blend-mode: soft-light;
-		background-color: rgba(48, 48, 48, 0.568);
-		flex-direction: column;
 		justify-content: space-between;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-		cursor: pointer;
-		transition: all 0.3s ease-in-out;
+		align-items: center;
+		position: relative;
+		height: 50%;
 
-		&:hover {
-			background-color: rgba(48, 48, 48, 0.897);
+		@include screenm {
+			background-image: linear-gradient(
+				rgb(30, 53, 63),
+				rgba(255, 255, 255, 0)
+			);
+			background-blend-mode: multiply;
+			border-radius: inherit;
 		}
 
-		&:active {
-			background-color: rgba(48, 48, 48, 0.897);
-		}
-
-		.travel-card-upper-row {
+		.travel-card-price {
+			color: color(primary-light);
+			position: absolute;
+			border-top-left-radius: 15px;
+			border-bottom-right-radius: 15px;
+			top: 0%;
+			width: 50px;
+			height: 30px;
+			background-color: color(secondary);
 			display: flex;
-			justify-content: space-between;
 			align-items: center;
-			position: relative;
-			height: 50%;
+			justify-content: center;
+			font-size: $body;
 
-			.travel-card-price {
-				color: color(primary-light);
-				position: absolute;
+			@include screenm {
+				height: 50px;
+				width: 80px;
+				font-size: 18px;
 				border-top-left-radius: 15px;
 				border-bottom-right-radius: 15px;
-				top: 0%;
-				width: 50px;
-				height: 30px;
-				background-color: color(secondary);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: $body;
 			}
-			.travel-card-rating {
-				position: absolute;
-				font-size: $body;
-				color: yellow;
-				top: 6%;
-				right: 8%;
+		}
+		.travel-card-rating {
+			position: absolute;
+			font-size: $body;
+			color: yellow;
+			top: 6%;
+			right: 8%;
 
-				span {
-					font-size: 10px;
+			span {
+				font-size: 10px;
+
+				@include screenm {
+					font-size: 18px;
 				}
 			}
 		}
+	}
 
-		.travel-card-lower-row {
-			margin-bottom: 1rem;
-			width: 96%;
-			text-align: Center;
-			span {
-				font-family: Playfair;
-				color: color(primary-light);
-				font-size: $body2;
+	.travel-card-lower-row {
+		margin-bottom: 1rem;
+		width: 96%;
+		text-align: Center;
+
+		@include screenm {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		span {
+			font-family: Playfair;
+			color: color(primary-light);
+			font-size: $body2;
+
+			@include screenm {
+				font-size: $subheading;
+				font-weight: 900;
+			}
+		}
+
+		.tour-date {
+			display: none;
+			@include screenm {
+				display: inline-block;
+
+				margin-bottom: 1em;
+			}
+		}
+
+		.travel-card-button {
+			display: none;
+
+			@include screenm {
+				display: flex;
+				@include cta-button;
+				background: white;
+				color: color(secondary);
+				width: 200px;
+				height: 35px;
 			}
 		}
 	}

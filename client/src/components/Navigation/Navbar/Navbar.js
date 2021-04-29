@@ -22,9 +22,8 @@ const Navbar = (props) => {
 			<NavLink to="/login">
 				<button className="side-login-button">Log in</button>
 			</NavLink>
-
 			<NavLink to="/login">
-				<button className="side-signup-button">or Sign up</button>
+				<button className="side-signup-button">Sign up</button>
 			</NavLink>
 		</div>
 	)
@@ -53,6 +52,27 @@ const Navbar = (props) => {
 					<span></span>
 					<span></span>
 					<span></span>
+				</div>
+
+				<div className="nav-items">
+					<ul>
+						<NavLink to="/#tours">
+							<li className="tour-cta">Tours</li>
+						</NavLink>
+
+						<NavLink to="/#about-us">
+							<li>About us</li>
+						</NavLink>
+
+						<NavLink to="/#our-team">
+							<li>Our team</li>
+						</NavLink>
+
+						<NavLink to="/#contact">
+							<li>Contact us</li>
+						</NavLink>
+					</ul>
+					{authContent}
 				</div>
 			</nav>
 

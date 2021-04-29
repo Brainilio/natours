@@ -10,9 +10,17 @@
 	align-items: center;
 	justify-content: space-around;
 	background-color: color(primary);
+	height: 100vh;
+
+	@include screenm {
+		height: 100vh;
+		flex-direction: row;
+		padding-left: 2em;
+		padding-right: 2em;
+	}
 
 	.home-landing-picture-landing-dont-touch {
-		position: sticky;
+		position: absolute;
 		display: block;
 		z-index: -1;
 		object-fit: cover;
@@ -20,63 +28,145 @@
 		width: 100vw;
 		min-height: 100vh;
 		opacity: 60%;
-	}
 
-	.home-landing-text {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		top: 10%;
-
-		.home-landing-title {
-			font-family: Playfair;
-			font-size: $title;
-			color: color(primary-light);
-		}
-
-		.home-landing-motto {
-			font-size: $subheading;
-			color: color(primary-light);
+		@include screenm {
+			display: none;
 		}
 	}
 
-	.home-landing-cta {
-		position: absolute;
-		bottom: 5%;
+	.home-landing-picture-desktop-landing-dont-touch {
+		display: none;
+		z-index: -1;
+		object-fit: cover;
+		width: 130vw;
+		height: 100vh;
+
+		@include screenm {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	.home-landing-items {
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
+		padding-top: 2em;
+		padding-bottom: 2em;
 
-		.home-landing-button {
-			@include cta-button;
-			font-size: 15px;
-			width: 150px;
-			height: 35px;
+		@include screenm {
+			display: flex;
+			width: 50%;
+			justify-content: center;
 		}
 
-		.home-login-button {
-			@include cta-button;
-			width: 150px;
-			font-size: 15px;
-			height: 35px;
-			margin-top: 1em;
-			background: none;
-			border: 2px solid white;
+		.home-landing-text {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 
-			&:hover {
-				background: white;
-				color: color(secondary);
+			.home-landing-title {
+				font-family: Playfair;
+				font-size: $title;
+				color: color(primary-light);
+
+				@include screenm {
+					font-size: 65px;
+				}
+			}
+
+			.home-landing-motto {
+				font-size: $subheading;
+				color: color(primary-light);
+			}
+
+			p {
+				display: none;
+				font-size: $body2;
+				color: color(primary-light);
+
+				@include screenm {
+					display: block;
+					text-align: center;
+					font-size: 18px;
+				}
 			}
 		}
 
-		.home-landing-button-pointer {
-			width: 3px;
-			height: 30px;
-			margin-top: 10px;
-			background-color: white;
+		.home-landing-cta {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			@include screenm {
+				flex-direction: row;
+				margin-top: 2em;
+			}
+
+			.home-landing-button {
+				@include cta-button;
+				font-size: 15px;
+				width: 150px;
+				height: 35px;
+			}
+
+			.home-login-button {
+				@include cta-button;
+				width: 150px;
+				font-size: 15px;
+				height: 35px;
+				margin-top: 1em;
+				background: none;
+				border: 2px solid white;
+
+				@include screenm {
+					margin-top: 0;
+					margin-left: 1.5em;
+				}
+
+				&:hover {
+					background: white;
+					color: color(secondary);
+				}
+			}
+
+			.home-landing-button-pointer {
+				width: 3px;
+				height: 30px;
+				margin-top: 10px;
+				background-color: white;
+
+				@include screenm {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.home-landing-desktop-projects {
+		width: 50%;
+		height: 100%;
+		display: none;
+
+		@include screenm {
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+		}
+	}
+
+	.home-landing-picture-partners {
+		display: none;
+
+		@include screenm {
+			position: absolute;
+			bottom: 5%;
 		}
 	}
 }
@@ -86,11 +176,29 @@
 	min-height: 20vh;
 	width: 100vw;
 
+	@include screenm {
+		width: 100%;
+		margin: 2em 0;
+	}
+
 	.explore-title {
 		font-size: $title;
 		color: color(primary);
-		margin-left: 1rem;
+		margin-left: 8.5rem;
+
 		font-family: Playfair;
+
+		span {
+			display: none;
+		}
+
+		@include screenm {
+			padding-left: 2.5em;
+
+			span {
+				display: inline-block;
+			}
+		}
 	}
 
 	.explore-search-bar {
@@ -104,6 +212,13 @@
 		height: 40px;
 		background-color: color(primary-dark);
 		border: none;
+
+		@include screenm {
+			margin-top: 1em;
+			width: 63%;
+			background: none;
+			border: 1px solid rgb(134, 134, 134);
+		}
 	}
 
 	.tab-bar {
@@ -113,10 +228,17 @@
 		justify-content: space-between;
 		margin-top: 15px;
 
+		@include screenm {
+			width: 63%;
+
+			margin: 15px auto;
+		}
+
 		.filter span {
 			cursor: pointer;
 			font-size: $body;
 			color: color(primary);
+
 			margin: 0 15px;
 		}
 
@@ -128,6 +250,7 @@
 			font-size: $body;
 			color: color(primary);
 			margin: 0 10px;
+			opacity: 50%;
 		}
 	}
 }
@@ -140,23 +263,61 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	clip-path: polygon(0 40%, 100% 10%, 100% 70%, 0 100%);
+
+	@include screenm {
+		width: 100vw;
+		clip-path: none;
+		margin: 5em 0;
+		height: 450px;
+	}
 }
 
 .about-us {
 	margin-top: 2em;
 
-	.about-us-title {
-		margin-left: 1rem;
-		font-size: $title;
-		color: color(primary);
-		font-family: Playfair;
+	@include screenm {
+		box-sizing: border-box;
+		display: flex;
+		width: 90%;
+		margin: 0 auto;
+		align-items: center;
+		justify-content: space-evenly;
+		padding-left: 2.5em;
+		padding-right: 2.5em;
 	}
 
-	p {
-		margin: 1rem;
-		text-align: justify;
-		font-size: $body;
-		color: color(primary);
+	.about-us-text {
+		display: flex;
+		flex-direction: column;
+
+		.about-us-title {
+			margin-left: 1rem;
+			font-size: $title;
+			color: color(primary);
+			font-family: Playfair;
+
+			@include screenm {
+				margin-left: 0;
+				padding: 0;
+				padding-left: 2em;
+			}
+		}
+
+		p {
+			margin: 1rem;
+			text-align: justify;
+			font-size: $body;
+			color: color(primary);
+
+			@include screenm {
+				margin: 0;
+				padding: 0;
+				font-size: 18px;
+				padding-left: 6em;
+				width: 60%;
+				text-align: left;
+			}
+		}
 	}
 
 	.images-about-us {
@@ -166,6 +327,12 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 12em;
+		border: 3px solid red;
+
+		@include screenm {
+			width: 50%;
+			height: 50%;
+		}
 
 		.image-one-about {
 			position: absolute;
@@ -176,6 +343,11 @@
 			background-size: cover;
 			width: 200px;
 			height: 200px;
+
+			@include screenm {
+				width: 250px;
+				height: 250px;
+			}
 		}
 		.image-two-about {
 			position: absolute;
@@ -187,6 +359,11 @@
 			background-size: cover;
 			width: 200px;
 			height: 200px;
+
+			@include screenm {
+				width: 250px;
+				height: 250px;
+			}
 		}
 	}
 }
@@ -198,8 +375,16 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	clip-path: polygon(0 40%, 100% 10%, 100% 70%, 0 100%);
+	clip-path: polygon(0 40%, 100% 10%, 100% 80%, 0 100%);
 	transform: scaleX(-1);
+
+	@include screenm {
+		width: 100vw;
+		/* Full height */
+		clip-path: none;
+		margin: 5em 0;
+		height: 400px;
+	}
 }
 
 .meet-the-team {
@@ -212,11 +397,22 @@
 		font-size: $title;
 		margin-left: 1rem;
 		font-family: Playfair;
+
+		@include screenm {
+			margin: 0 auto;
+			display: flex;
+			justify-content: center;
+		}
 	}
 
 	p {
 		margin-left: 1rem;
 		font-size: $body;
+
+		@include screenm {
+			text-align: center;
+			font-size: 18px;
+		}
 	}
 
 	.meet-the-team-group {
@@ -225,8 +421,23 @@
 		align-items: center;
 		margin: 5em 0;
 
+		@include screenm {
+			justify-content: center;
+		}
+
+		.meet-the-team-section-one {
+			@include screenm {
+				display: flex;
+			}
+		}
+
 		.meet-the-team-section-two {
 			transform: translateY(35px);
+
+			@include screenm {
+				display: flex;
+				transform: translateY(0);
+			}
 		}
 
 		.single-team-mate {
@@ -240,11 +451,21 @@
 				height: 185px;
 				object-fit: cover;
 				margin: 10px;
+
+				@include screenm {
+					width: 250px;
+					height: 300px;
+					border-radius: 15px;
+				}
 			}
 
 			.single-team-name {
 				font-size: $body;
 				font-family: Playfair;
+
+				@include screenm {
+					font-size: 25px;
+				}
 			}
 		}
 	}
@@ -262,6 +483,10 @@
 	padding: 1em;
 	min-height: 20vh;
 
+	@include screenm {
+		height: 500px;
+	}
+
 	.form-contact-us {
 		width: 90%;
 		background-color: color(primary-light);
@@ -269,6 +494,12 @@
 		display: flex;
 		justify-content: space-around;
 		border-radius: 15px;
+
+		@include screenm {
+			height: 500px auto;
+			width: 380px;
+			box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+		}
 
 		form {
 			display: flex;
