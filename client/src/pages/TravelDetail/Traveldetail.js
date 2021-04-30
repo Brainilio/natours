@@ -23,6 +23,8 @@ const Traveldetail = (props) => {
 	const toggleReviewForm = () => setreviewForm((prevState) => !prevState)
 	const dispatch = useDispatch()
 	useEffect(() => {
+		console.log(window.innerWidth)
+
 		document.addEventListener("scroll", handleDescriptionBox)
 
 		if (props.isAuthenticated) {
@@ -41,16 +43,16 @@ const Traveldetail = (props) => {
 	])
 
 	const handleDescriptionBox = () => {
-		console.log(window.scrollY)
-
-		if (window.scrollY > 480 && window.scrollY < 1000) {
-			descriptionBox.current.style.position = "fixed"
-			descriptionBox.current.style.top = "2em"
-		} else if (window.scrollY >= 900) {
-			descriptionBox.current.style.position = "absolute"
-			descriptionBox.current.style.top = "650px"
-		} else {
-			descriptionBox.current.style.position = "static"
+		if (window.innerWidth > 750) {
+			if (window.scrollY > 480 && window.scrollY < 1000) {
+				descriptionBox.current.style.position = "fixed"
+				descriptionBox.current.style.top = "2em"
+			} else if (window.scrollY >= 900) {
+				descriptionBox.current.style.position = "absolute"
+				descriptionBox.current.style.top = "650px"
+			} else {
+				descriptionBox.current.style.position = "static"
+			}
 		}
 	}
 	return (
