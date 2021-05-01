@@ -16,8 +16,8 @@
 	justify-content: space-between;
 
 	@include screenm {
-		height: 50vh;
-		padding-top: 3em;
+		min-height: 50vh auto;
+		padding-top: 5em;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column-reverse;

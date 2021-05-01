@@ -7,7 +7,9 @@ Server is hosted on: http://ec2-18-192-13-45.eu-central-1.compute.amazonaws.com:
 npm install within both the /server and /client directories
 then run npm start within both the /server and /client directories
 install the stripe cli to listen for webhooks (this is necessary for payments to work)
-then run stripe listen
+then run:
+
+stripe listen --forward-to http://localhost:8000/api/v1/booking/webhook
 
 # API ENDPOINTS:
 

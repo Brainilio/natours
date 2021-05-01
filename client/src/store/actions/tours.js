@@ -145,7 +145,10 @@ export const fetchBookedTours = () => {
 					Authorization: token,
 				},
 			})
-			.then((response) => dispatch(getBookedTours(response.data.bookedTours)))
+			.then((response) => {
+				console.log(response.data)
+				dispatch(getBookedTours(response.data.bookedTours))
+			})
 			.catch((error) => console.log(error))
 	}
 }

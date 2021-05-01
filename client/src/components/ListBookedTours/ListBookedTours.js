@@ -12,7 +12,7 @@ const ListBookedTours = (props) => {
 		dispatch(fetchBookedTours())
 	}, [props])
 
-	return bookedTours && bookedTours.length > 1 ? (
+	return bookedTours && bookedTours.length ? (
 		bookedTours.map((b) => (
 			<div
 				key={b._id}
