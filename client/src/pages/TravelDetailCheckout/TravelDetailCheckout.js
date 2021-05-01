@@ -13,9 +13,7 @@ import successGif from "../../resource/travelsuccess.gif"
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 
-const stripePromise = loadStripe(
-	"pk_test_51IcoGmIJ7tg4yBh4pvuLiv5gDaM2unSLIKehEeG4s8PcE5Y3OClarAKAb3xAYlvmSt1F2zsvkKv9auJc3gGuozQS00P917J56P"
-)
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUB_KEY)
 
 const Message = ({ message, status }) => (
 	<section className="travel-detail-message-page">
@@ -73,28 +71,26 @@ const TravelDetailCheckout = (props) => {
 	const handleClick = async (event) => {
 		setStripeLoading(true)
 		const stripe = await stripePromise
-		const response = await axios
-			.post(
-				`booking/checkout-session/${currentTour.id}?cancelurl=${window.location.href}?canceled=true&successurl=${window.location.href}?success=true`
-			)
-			.catch((err) => setStripeLoading(false))
-
-		const session = await response.data.session
-
-		if (session) {
+		try {
+			axios
+				.post(
+					`booking/checkout-session/${currentTour.id}?cancelurl=${window.location.href}?canceled=true&successurl=${window.location.href}?success=true`
+				)
+				.then((response) => {
+					const session = response.data.session
+					setStripeLoading(false)
+					stripe
+						.redirectToCheckout({
+							sessionId: session.id,
+						})
+						.catch((error) => console.log(error.message))
+				})
+				.catch((err) => setStripeLoading(false))
+		} catch (err) {
 			setStripeLoading(false)
 		}
 
 		// When the customer clicks on the button, redirect them to Checkout.
-		const result = await stripe.redirectToCheckout({
-			sessionId: session.id,
-		})
-
-		if (result.error) {
-			// If `redirectToCheckout` fails due to a browser or network
-			// error, display the localized error message to your customer
-			// using `result.error.message`.
-		}
 	}
 
 	return (
