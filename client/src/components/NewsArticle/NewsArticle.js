@@ -33,7 +33,7 @@ const NewsArticle = () => {
 								</div>
 							</div>
 							<div className="news-article-right-body">
-								<p>{n.description}</p>
+								<p>{n.description}...</p>
 							</div>
 							<div className="news-article-right-footer">
 								<span>{n.source.name}</span>

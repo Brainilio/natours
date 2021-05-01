@@ -43,7 +43,7 @@ const Traveldetail = (props) => {
 	])
 
 	const handleDescriptionBox = () => {
-		if (window.innerWidth > 750) {
+		if (window.innerWidth > 750 && descriptionBox.current) {
 			if (window.scrollY > 480 && window.scrollY < 1000) {
 				descriptionBox.current.style.position = "fixed"
 				descriptionBox.current.style.top = "2em"

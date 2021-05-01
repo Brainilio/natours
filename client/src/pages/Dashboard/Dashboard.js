@@ -81,23 +81,24 @@ const Dashboard = (props) => {
 
 			{adminPanels}
 
-			<section className="dashboard-page-upcoming-tours">
-				<div className="upcoming-tours-title">
-					<span className="dashboard-title-header">Your upcoming tours</span>
-					<span className="dashboard-title-view">View all</span>
-				</div>
-				<ListBookedTours />
-			</section>
-
-			<section className="dashboard-page-reviews">
-				<div className="reviews-title">
-					<span className="dashboard-title-header">My Reviews</span>
-					<NavLink to="/myreviews" style={{ color: "black" }}>
+			<div className="dashboard-page-upcoming-and-reviews">
+				<section className="dashboard-page-upcoming-tours">
+					<div className="upcoming-tours-title">
+						<span className="dashboard-title-header">Your upcoming tours</span>
 						<span className="dashboard-title-view">View all</span>
-					</NavLink>
-				</div>
-				<ListForReviews sliceTrue={true} />
-			</section>
+					</div>
+					<ListBookedTours />
+				</section>
+				<section className="dashboard-page-reviews">
+					<div className="reviews-title">
+						<span className="dashboard-title-header">My Reviews</span>
+						<NavLink to="/myreviews" style={{ color: "black" }}>
+							<span className="dashboard-title-view">View all</span>
+						</NavLink>
+					</div>
+					<ListForReviews sliceTrue={true} />
+				</section>
+			</div>
 
 			<section className="dashboard-page-advice">
 				<div className="dashboard-page-advice-title">

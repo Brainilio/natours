@@ -3,18 +3,33 @@
 @import "../../styles/fontSizes.scss";
 
 .my-reviews-section {
-	min-height: 100vh;
+	min-height: 100vh auto;
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
 
 	.user-review {
 		margin: 1em auto;
 		width: 95%;
 		height: 50px;
 		margin-bottom: 1em;
+		border-radius: 6px;
 		display: flex;
 		border: 1px solid rgba(color(primary), 0.5);
 		align-items: center;
 		justify-content: space-between;
-		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+		background-color: white;
+
+		@include screenm {
+			width: 50%;
+		}
 
 		.user-review-tour-name {
 			margin: 0 1em;

@@ -10,6 +10,11 @@
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 
+	@include screenm {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
 	.travel-advice-single {
 		margin: 0.5rem auto;
 		display: flex;

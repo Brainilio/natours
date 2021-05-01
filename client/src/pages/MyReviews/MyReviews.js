@@ -5,10 +5,12 @@ import "./MyReviews.scss"
 
 const MyReviews = () => {
 	return (
-		<section className="my-reviews-section">
+		<>
 			<DashboardBanner />
-			<ListForReviews />
-		</section>
+			<section className="my-reviews-section">
+				<ListForReviews />
+			</section>
+		</>
 	)
 }
 

@@ -9,6 +9,19 @@
 	margin-left: 1em;
 }
 
+.whole-settings-page {
+	@include screenm {
+		position: relative;
+		background-color: white;
+		z-index: -1;
+		width: 40%;
+		margin: 2em auto;
+		box-sizing: border-box;
+		padding: 3em;
+		border-radius: 18px;
+		box-shadow: 5px 5px 20px rgba(color(primary), 0.2);
+	}
+}
 .edit-profile-section {
 	margin-top: 2em;
 
@@ -68,6 +81,10 @@
 		justify-content: stretch;
 		align-items: center;
 
+		@include screenm {
+			justify-content: space-between;
+		}
+
 		input {
 			border: 1px solid rgba(color(primary), 0.5);
 			background: none;
@@ -92,9 +109,6 @@
 
 .deactivate-profile-section {
 	margin-top: 2em;
-	// display: flex;
-	// flex-direction: column;
-	// align-items: center;
 
 	button {
 		@include cta-button;

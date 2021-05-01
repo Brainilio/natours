@@ -66,35 +66,37 @@ const Settings = (props) => {
 	return (
 		<>
 			<DashboardBanner />
-			<section className="edit-profile-section">
-				<span className="header-title-page-settings">Edit Profile</span>
-				<EditProfileForm
-					name={newSettings.name}
-					email={newSettings.email}
-					image={newSettings.image}
-					photo={props.photo}
-					formHandler={formHandler}
-					submitHandler={formSubmitHandler}
-				/>
-			</section>
-			<hr className="solid" style={{ width: "95%" }} />
-			<section className="changepassword-profile-section">
-				<span className="header-title-page-settings">Change Password</span>
-				<ChangePasswordForm
-					currentPassword={newSettings.currentPassword}
-					password={newSettings.password}
-					passwordConfirm={newSettings.passwordConfirm}
-					formHandler={formHandler}
-					submitHandler={formSubmitHandler}
-				/>
-			</section>
-			<hr className="solid" style={{ width: "95%" }} />
-			<section className="deactivate-profile-section">
-				<span className="header-title-page-settings">Deactivate account</span>
-				<button onClick={(e) => deactivateAccount(e)} type="submit">
-					Deactivate account
-				</button>
-			</section>
+			<div className="whole-settings-page">
+				<section className="edit-profile-section">
+					<span className="header-title-page-settings">Edit Profile</span>
+					<EditProfileForm
+						name={newSettings.name}
+						email={newSettings.email}
+						image={newSettings.image}
+						photo={props.photo}
+						formHandler={formHandler}
+						submitHandler={formSubmitHandler}
+					/>
+				</section>
+				<hr className="solid" style={{ width: "95%" }} />
+				<section className="changepassword-profile-section">
+					<span className="header-title-page-settings">Change Password</span>
+					<ChangePasswordForm
+						currentPassword={newSettings.currentPassword}
+						password={newSettings.password}
+						passwordConfirm={newSettings.passwordConfirm}
+						formHandler={formHandler}
+						submitHandler={formSubmitHandler}
+					/>
+				</section>
+				<hr className="solid" style={{ width: "95%" }} />
+				<section className="deactivate-profile-section">
+					<span className="header-title-page-settings">Deactivate account</span>
+					<button onClick={(e) => deactivateAccount(e)} type="submit">
+						Deactivate account
+					</button>
+				</section>
+			</div>
 		</>
 	)
 }

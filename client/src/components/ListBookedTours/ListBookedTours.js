@@ -34,7 +34,7 @@ const ListBookedTours = (props) => {
 					{dayjs(b.tour.startDate).format("dddd, MMMM D YYYY")}
 				</span>
 				<span>
-					<NavLink to={`/bookedtours/${b._id}`}>&gt;</NavLink>
+					<NavLink to={`/bookedtours/${b._id}`}>Go to Tour &gt;</NavLink>
 				</span>
 			</div>
 		))

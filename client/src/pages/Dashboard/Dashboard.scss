@@ -15,19 +15,40 @@
 	flex-direction: column;
 	justify-content: space-between;
 
+	@include screenm {
+		height: 50vh;
+		padding-top: 3em;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column-reverse;
+		box-sizing: border-box;
+	}
+
 	.dashboard-actions {
 		margin-left: 1em;
 		align-self: baseline;
+
+		@include screenm {
+			align-self: center;
+		}
 
 		ul {
 			list-style: none;
 			margin: 0;
 			padding: 0;
 
+			@include screenm {
+				display: flex;
+			}
+
 			li {
 				color: color(primary-light);
 				font-size: $body2;
 				margin: 10px 0;
+
+				@include screenm {
+					margin: 10px;
+				}
 			}
 		}
 	}
@@ -44,6 +65,11 @@
 			height: 120px;
 			border-radius: 50%;
 			object-fit: cover;
+
+			@include screenm {
+				width: 200px;
+				height: 200px;
+			}
 		}
 
 		span {
@@ -54,6 +80,19 @@
 	}
 }
 
+.dashboard-page-upcoming-and-reviews {
+	@include screenm {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
+}
 .dashboard-page-upcoming-tours {
 	margin: 1em 0;
 
@@ -89,7 +128,8 @@
 		width: 95%;
 		height: 50px;
 		margin-bottom: 1em;
-		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+		border-radius: 6px;
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
@@ -114,12 +154,24 @@
 	align-items: center;
 	justify-items: center;
 
+	@include screenm {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 5em;
+	}
+
 	img {
 		object-fit: cover;
 		width: 175px;
-
 		height: 175px;
 		transition: all 0.3s ease-in-out;
+
+		@include screenm {
+			width: 250px;
+			height: 250px;
+			border-radius: 6px;
+		}
 
 		&:hover {
 			opacity: 50%;
@@ -153,6 +205,8 @@
 	}
 
 	.user-review {
+		background-color: white;
+		border-radius: 6px;
 		margin: 0 auto;
 		width: 95%;
 		height: 50px;
@@ -161,7 +215,7 @@
 		border: 1px solid rgba(color(primary), 0.1);
 		justify-content: space-between;
 		align-items: center;
-		box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
@@ -178,16 +232,35 @@
 
 .dashboard-page-advice {
 	margin-top: 2em;
+
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
+
 	.dashboard-page-advice-title {
 		h1 {
 			font-size: $subheading;
 			color: color(secondary);
 			margin-left: 1rem;
+
+			@include screenm {
+				margin-left: 0;
+			}
 		}
 
 		span {
 			margin-left: 1rem;
 			text-align: center;
+
+			@include screenm {
+				margin-left: 0;
+			}
 		}
 	}
 }
@@ -196,21 +269,50 @@
 	margin-left: 1rem;
 	margin-right: 1rem;
 	margin-top: 1em;
+
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
 }
 
 .dashboard-page-latest-news {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
+
 	.dashboard-page-latest-news-header {
 		margin-bottom: 1em;
 		h1 {
 			font-size: $subheading;
 			color: color(secondary);
 			margin-left: 1rem;
+
+			@include screenm {
+				margin-left: 0;
+			}
 		}
 		span {
 			margin-left: 1rem;
 			text-align: justify;
+
+			@include screenm {
+				margin-left: 0;
+			}
 		}
 	}
 }

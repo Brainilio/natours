@@ -6,10 +6,24 @@
 .admin-tours-section {
 	margin: 3em 0;
 
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
+
 	.admin-tours-title {
 		margin-left: 1rem;
 		color: color(secondary);
 		font-size: $subheading;
+
+		@include screenm {
+			margin-left: 0;
+		}
 	}
 
 	.admin-add-tour {
@@ -17,8 +31,22 @@
 		margin-left: 1em;
 		margin-bottom: 2em;
 		@include cta-button;
+
+		@include screenm {
+			margin-left: 0;
+			width: 250px;
+			height: 40px;
+			font-size: 15px;
+		}
 	}
 
+	.admin-tours-tours-section {
+		@include screenm {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			gap: 3em;
+		}
+	}
 	.admin-dashboard-tour {
 		background-color: color(primary);
 		margin: 0 auto;
@@ -32,6 +60,17 @@
 		justify-content: space-between;
 		align-items: center;
 		transition: all 0.3s ease-in-out;
+
+		@include screenm {
+			width: 250px;
+			height: 250px;
+			flex-direction: column;
+			font-weight: 900;
+			justify-content: space-evenly;
+			border-radius: 10px;
+			margin: 0;
+			border-radius: 10px;
+		}
 
 		&:hover {
 			background-blend-mode: darken;
@@ -91,6 +130,10 @@
 	height: auto;
 	max-height: 100vh;
 	width: 300px;
+
+	@include screenm {
+		width: 450px;
+	}
 
 	.inputs {
 		div {

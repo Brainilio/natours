@@ -28,6 +28,12 @@
 		border-radius: 15px;
 		box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 
+		@include screenm {
+			height: 500px auto;
+			width: 380px;
+			box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+		}
+
 		.login-up-form {
 			display: flex;
 			flex-direction: column;

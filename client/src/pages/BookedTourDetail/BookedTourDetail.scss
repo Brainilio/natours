@@ -4,6 +4,15 @@
 @import "../../styles/mixins.scss";
 
 .booked-tour-detail-page {
+	@include screenm {
+		padding-left: 8em;
+		padding-right: 8em;
+		box-sizing: border-box;
+		margin-right: 0;
+		margin-left: 0;
+		margin-top: 5em;
+		margin-bottom: 5em;
+	}
 	.bt-detail-header {
 		width: 90%;
 		height: 75px;
@@ -17,12 +26,24 @@
 		font-size: 30px;
 		font-family: Playfair;
 
+		@include screenm {
+			width: 100%;
+			height: 200px;
+		}
+
 		span {
 			font-size: 18px;
 			font-family: initial;
 		}
 	}
 
+	.bt-detail-main-and-footer {
+		@include screenm {
+			display: flex;
+			justify-content: space-between;
+			flex-direction: row-reverse;
+		}
+	}
 	.bt-detail-main {
 		padding-top: 1em;
 		padding-bottom: 0.5em;
@@ -33,10 +54,23 @@
 		border-radius: 6%;
 		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 
+		@include screenm {
+			width: 45%;
+			border-radius: 10px;
+			box-sizing: border-box;
+			padding: 1em;
+		}
+
 		.print-ticket-button {
 			@include cta-button;
 			width: 90%;
 			margin: 1em auto;
+
+			@include screenm {
+				width: 100%;
+				height: 50px;
+				font-size: 18px;
+			}
 		}
 
 		div {
@@ -62,6 +96,10 @@
 		padding-right: 1em;
 		margin-bottom: 1em;
 
+		@include screenm {
+			width: 50%;
+		}
+
 		h1 {
 			font-size: $subheading;
 			color: color(secondary);
@@ -70,6 +108,11 @@
 		p {
 			margin: 0;
 			padding: 0;
+		}
+		p {
+			@include screenm {
+				font-size: 18px;
+			}
 		}
 	}
 

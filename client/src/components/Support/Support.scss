@@ -7,7 +7,22 @@
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1em;
+
+	@include screenm {
+		flex-direction: row;
+		justify-content: space-between;
+		height: 500px;
+		margin-top: 2em;
+		width: 100%;
+	}
 	.cs-left {
+		@include screenm {
+			width: 50%;
+			margin-right: 5em;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
 		.cs-left-header {
 			h1 {
 				font-size: $subheading;
@@ -27,6 +42,10 @@
 				align-items: center;
 				margin-top: 1rem;
 				margin-bottom: 1rem;
+
+				@include screenm {
+					margin: 2em 0;
+				}
 				img {
 					width: 25px;
 					height: 25px;
@@ -34,6 +53,10 @@
 				}
 				span {
 					color: color(secondary);
+
+					@include screenm {
+						font-size: 23px;
+					}
 				}
 			}
 		}
@@ -51,5 +74,10 @@
 		margin: 0 auto;
 		height: 250px;
 		background: url("../../resource/support-photo.png") center / cover;
+
+		@include screenm {
+			width: 50%;
+			height: 100%;
+		}
 	}
 }

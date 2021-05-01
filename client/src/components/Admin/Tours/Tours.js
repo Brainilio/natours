@@ -75,20 +75,20 @@ const Tours = (props) => {
 				>
 					Add Tour
 				</button>
-				{tours ? tours : null}
+				<div className="admin-tours-tours-section">{tours ? tours : null}</div>
+
+				{add ? (
+					<Modal clicked={addHandler}>
+						<CreateTourForm addHandler={addHandler} />
+					</Modal>
+				) : null}
+
+				{edit && currentTour ? (
+					<Modal clicked={editHandler}>
+						<TourEdit id={id} />
+					</Modal>
+				) : null}
 			</section>
-
-			{add ? (
-				<Modal clicked={addHandler}>
-					<CreateTourForm addHandler={addHandler} />
-				</Modal>
-			) : null}
-
-			{edit && currentTour ? (
-				<Modal clicked={editHandler}>
-					<TourEdit id={id} />
-				</Modal>
-			) : null}
 		</>
 	)
 }

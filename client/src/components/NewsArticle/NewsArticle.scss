@@ -8,18 +8,35 @@
 	flex-direction: column;
 	width: 90%;
 	margin: 0.5rem auto;
-
 	border-radius: 6px;
-	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+
+	@include screenm {
+		flex-direction: row;
+		width: 100%;
+		height: 350px;
+	}
 
 	.news-article-left {
 		height: 250px;
+
+		@include screenm {
+			width: 50%;
+			height: 100%;
+		}
+
 		img {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 			border-top-left-radius: 6px;
 			border-top-right-radius: 6px;
+
+			@include screenm {
+				border-top-left-radius: 6px;
+				border-bottom-left-radius: 6px;
+				border-top-right-radius: 0px;
+			}
 		}
 	}
 
@@ -30,15 +47,39 @@
 		padding-bottom: 1em;
 		display: flex;
 		flex-direction: column;
+		background-color: white;
+
+		@include screenm {
+			margin: 0;
+			height: 100%;
+			width: 50%;
+			border-top-right-radius: 6px;
+			border-bottom-right-radius: 6px;
+			padding-left: 2em;
+			box-sizing: border-box;
+			padding-right: 2em;
+			padding-top: 1em;
+			justify-content: space-between;
+		}
 
 		.news-article-right-header {
 			display: flex;
 			flex-direction: column;
 
+			@include screenm {
+				flex-direction: row;
+				justify-content: space-between;
+				margin-bottom: -5em;
+			}
+
 			h1 {
 				font-size: $subheading;
 				margin: 0;
 				padding: 0;
+
+				@include screenm {
+					width: 70%;
+				}
 			}
 
 			.news-headline-pill {

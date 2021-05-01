@@ -8,16 +8,34 @@
 		min-height: 50vh;
 		width: 100%;
 
+		@include screenm {
+			padding-left: 8em;
+			padding-right: 8em;
+			box-sizing: border-box;
+			margin-right: 0;
+			margin-left: 0;
+			margin-top: 5em;
+			margin-bottom: 5em;
+		}
+
 		.booked-tours-main-content-title {
 			h1 {
 				font-size: $subheading;
 				color: color(secondary);
 				margin-left: 1rem;
+
+				@include screenm {
+					margin-left: 0rem;
+				}
 			}
 
 			span {
 				margin-left: 1rem;
 				text-align: center;
+
+				@include screenm {
+					margin-left: 0rem;
+				}
 			}
 		}
 
@@ -25,15 +43,31 @@
 			margin-top: 1em;
 			margin-bottom: 2em;
 
+			@include screenm {
+				display: flex;
+				margin-left: 0;
+				width: 100%;
+			}
+
 			.upcoming-tour {
+				@include screenm {
+					width: 250px;
+					height: 250px;
+					flex-direction: column;
+					font-weight: 900;
+
+					justify-content: space-evenly;
+					border-radius: 10px;
+					margin: 0;
+					margin-right: 1em;
+				}
 				cursor: pointer;
 				background-color: color(primary);
 				margin: 0 auto;
-				background: url("../../resource/sorasak-_UIN-pFfJ7c-unsplash.jpg");
 				background-position: center;
 				background-repeat: no-repeat;
 				background-size: cover;
-				background-blend-mode: soft-light;
+				background-blend-mode: darken;
 				width: 95%;
 				height: 50px;
 				margin-bottom: 1em;
@@ -51,6 +85,10 @@
 				span {
 					font-size: $body2;
 					color: color(primary-light);
+
+					@include screenm {
+						font-size: 18px;
+					}
 				}
 			}
 		}
