@@ -6,12 +6,13 @@ import Spinner from "../../components/Spinner/Spinner"
 import dayjs from "dayjs"
 const NewsArticle = () => {
 	const key = process.env.REACT_APP_NEWS_API_KEY
-	const URL = `https://newsapi.org/v2/top-headlines?q=travel&apiKey=${key}`
+	const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+	const URL = `${proxyUrl}https://newsapi.org/v2/top-headlines?q=travel&apiKey=${key}`
 	const [news, setNews] = useState(null)
 
 	useEffect(() => {
 		axios
-			.get(URL)
+			.get(URL, {})
 			.then((response) => {
 				setNews(response.data.articles)
 			})

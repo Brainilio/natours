@@ -9,7 +9,7 @@ then run npm start within both the /server and /client directories
 install the stripe cli to listen for webhooks (this is necessary for payments to work)
 then run:
 
-stripe listen --forward-to http://localhost:8000/api/v1/booking/webhook
+stripe listen --forward-to http://ec2-18-156-171-101.eu-central-1.compute.amazonaws.com:8000/api/v1/booking/webhook
 
 # API ENDPOINTS:
 
