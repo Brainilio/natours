@@ -39,6 +39,7 @@ exports.getCheckoutSession = async (req, res, next) => {
         },
       ],
     });
+    console.log(session);
     res.status(200).json({
       session: session,
       image: tour.imageCover,

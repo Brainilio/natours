@@ -70,9 +70,11 @@ const TravelDetailCheckout = (props) => {
 
 	const handleClick = async (event) => {
 		setStripeLoading(true)
-		const stripe = await stripePromise
+
 		try {
-			axios
+			const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUB_KEY)
+
+			await axios
 				.post(
 					`booking/checkout-session/${currentTour.id}?cancelurl=${window.location.href}?canceled=true&successurl=${window.location.href}?success=true`
 				)

@@ -7,8 +7,9 @@ import dayjs from "dayjs"
 const NewsArticle = () => {
 	const key = process.env.REACT_APP_NEWS_API_KEY
 	const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-	const URL = `${proxyUrl}https://newsapi.org/v2/top-headlines?q=travel&apiKey=${key}`
+	const URL = `https://newsapi.org/v2/top-headlines?q=travel&apiKey=${key}`
 	const [news, setNews] = useState(null)
+	console.log(key)
 
 	useEffect(() => {
 		axios

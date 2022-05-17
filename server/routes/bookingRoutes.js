@@ -7,7 +7,8 @@ const authController = require('../controllers/authController');
 const Booking = require('../models/bookingModel');
 
 const router = express.Router({ mergeParams: true });
-const endpointSecret = 'whsec_Mpydw2Kj5lVLsgUlF4apgH59oHvI8jye';
+const endpointSecret =
+  'whsec_6ed55e7dc8c2123eab0bb5f5c218714fc547e67fedffadcac60965beadafb663';
 
 router.post(
   '/checkout-session/:tourid',

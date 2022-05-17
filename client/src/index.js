@@ -12,10 +12,9 @@ import adminReducer from "./store/reducers/admin"
 import "./index.scss"
 
 //redux tools
-const composeEnhancers =
-	process.env.NODE_ENV === "development"
-		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-		: null || compose
+
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
+
 
 //combine reducers
 const rootReducer = combineReducers({

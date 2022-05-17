@@ -1,7 +1,6 @@
 import * as actionTypes from "./actiontypes"
 import axios from "../../axios"
 import ax from "axios"
-import { useHistory } from "react-router"
 
 export const authStart = () => {
 	return {
@@ -35,6 +34,7 @@ export const authFailed = (error) => {
 }
 
 export const authLogout = () => {
+	console.log("logging out...")
 	localStorage.clear()
 	return {
 		type: actionTypes.AUTH_LOGOUT,
@@ -64,7 +64,6 @@ export const auth = (userData, isSignUp) => {
 			data.append("photo", userData.image)
 		}
 
-		console.log(userData)
 		let url = "users/login"
 		if (isSignUp) url = "users/signup"
 
@@ -77,8 +76,6 @@ export const auth = (userData, isSignUp) => {
 				let role = response.data.data.user.role
 				let userId = response.data.data.user._id
 				let photo = response.data.data.user.photo
-
-				console.log(photo)
 
 				const expirationDate = new Date(new Date().getTime() + 3600 * 1000)
 
@@ -107,7 +104,6 @@ export const authChangeProfile = (userdata) => {
 			userdata.passwordConfirm
 		) {
 			// perform password change
-			console.log("changing password...")
 
 			let data = {}
 
@@ -122,7 +118,6 @@ export const authChangeProfile = (userdata) => {
 					},
 				})
 				.then((response) => {
-					console.log(response)
 					dispatch(authLogout())
 				})
 				.catch((error) => console.log(error))
@@ -133,8 +128,6 @@ export const authChangeProfile = (userdata) => {
 			data.append("name", userdata.name)
 			data.append("email", userdata.email)
 			data.append("photo", userdata.image)
-
-			// console.log(data)
 
 			axios
 				.patch("users/updateProfile", data, {
@@ -152,9 +145,12 @@ export const authChangeProfile = (userdata) => {
 export const checkAuth = () => {
 	return (dispatch) => {
 		const token = localStorage.getItem("token")
-		if (!token) dispatch(authLogout())
-		else {
+
+		if (!token) {
+			dispatch(authLogout())
+		} else {
 			const expirationDate = new Date(localStorage.getItem("expirationDate"))
+
 			if (expirationDate < new Date()) dispatch(authLogout())
 			else {
 				const userId = localStorage.getItem("userid")
@@ -164,11 +160,6 @@ export const checkAuth = () => {
 				const photo = localStorage.getItem("photo")
 
 				dispatch(authSuccess(token, userId, name, email, role, photo))
-				dispatch(
-					checkAuthTimeOut(
-						expirationDate.getTime() - new Date().getTime() / 1000
-					)
-				)
 			}
 		}
 	}
